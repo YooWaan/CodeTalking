@@ -16,8 +16,7 @@ Chap 01
 
 ### concurrency
 
-
-### channel
+- Add option "cflags_cc = -std=c++11" to concurreny CLang.
 
 
 ## Memo
