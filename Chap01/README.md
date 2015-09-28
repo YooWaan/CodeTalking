@@ -5,18 +5,6 @@ Chap 01
 
 
 
-## List
-
-
-### syntax-etc
-
-
-### structs-interface
-
-
-### concurrency
-
-- Add option "cflags_cc = -std=c++11" to concurreny CLang.
 
 
 ## Memo
@@ -34,4 +22,17 @@ Chap 01
 - setup GYP_GENERATORS=ninja gyp hello.gyp --toplevel-dir=. --depth=0
 
 - build ninja
+
+
+
+### concurrency
+
+- Add option "cflags_cc = -std=c++11" to concurreny CLang
+
+.
+### dependecny
+
+- run
+  $ go build github.com/pborman/uuid
+  $ go get github.com/pborman/uuid
 
