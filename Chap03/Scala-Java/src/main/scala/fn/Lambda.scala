@@ -1,7 +1,5 @@
 package fn
 
-
-
 object UNameFunc {
 
   def getClosure() :(() => Int) = {
@@ -14,6 +12,8 @@ object UNameFunc {
   }
 
   def run() {
+    println( "--- Scala ---" )
+
     val n = ((x:Int, y:Int) => {x + y})(3,2)
     println( "calc -> " + n )
 

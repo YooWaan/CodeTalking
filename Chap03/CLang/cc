@@ -1,0 +1,12 @@
+#!/bin/sh
+
+CC=clang++
+#CC=g++
+SUF=.cpp
+IN=${1}${SUF}
+OUT=${1}
+OPT="-std=c++11 ${2}"
+
+rm -rf ${OUT}
+${CC} ${OPT} ${IN} -o ${OUT}
+./${OUT}

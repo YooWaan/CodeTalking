@@ -4,28 +4,20 @@ Chap 03
 
 ## Overview
 
-- Lamba
-- Closure
-- Higher-order function
-- Composite function
-- Monoid
-- Monad
+1. Lamba,Closure
+2. Higher-order function
+3. Composite function
+4. Monoid
+5. Monad
 
 ## Languages
 
-### Haskell
-
-
-### CLang(C++)
-
-
-### Python
-
-
-### GoLang
-
-
-### Scala-Java
+- Haskell 1,
+  - runGhc
+- CLang(C++) 1,
+- Python  1,
+- GoLang  1,
+- Scala-Java  1,
 
 
 ## ラムダ式, 無名関数, クロージャ
