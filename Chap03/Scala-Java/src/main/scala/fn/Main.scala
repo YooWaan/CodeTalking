@@ -7,3 +7,10 @@ object Exec extends App {
   new Lambda().exec()
 
 }
+
+
+object HiExec extends App {
+  HighOrderFunc.run()
+
+  new HighOrder().exec();
+}
