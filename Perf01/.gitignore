@@ -1,0 +1,10 @@
+
+
+bin/
+project/
+target/
+build/
+
+.history
+.cache
+.lib/

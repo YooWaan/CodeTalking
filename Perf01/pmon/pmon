@@ -1,0 +1,21 @@
+#!/bin/sh
+
+ps_format="-o %cpu,%mem,time"
+
+function monitoring_command() {
+    cmd=$1
+    # start command
+    $cmd &
+    sub_pid=$!
+
+    # monitoring ...
+    p_exists=`ps -p $sub_pid $ps_format | wc -l`
+    while [ $p_exists = 2 ]
+    do
+        # print ps columns
+        ps -p $sub_pid $ps_format | tail -n 1 | grep -v CPU
+        p_exists=`ps -p $sub_pid $ps_format | wc -l`
+    done
+}
+
+monitoring_command "$1"
