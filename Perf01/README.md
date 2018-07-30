@@ -1,4 +1,4 @@
-# ±ø∆∞≤Ò
+# ÈÅãÂãï‰ºö
 
 
 ## Entry
@@ -9,21 +9,21 @@
 * Go
 * C++
 * Rust
-* Haskell
+* (TODO) Haskell
 
 
 
 
-## Performance Check Topics
+## Performance Check List
 
 
 ### Calculation
 
 
-### IO
+### IO File/Socket
 
 
-### Synchronized
+### (TODO) Synchronized
 
 
 
