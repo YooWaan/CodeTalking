@@ -1,4 +1,5 @@
-package wc
+// +build wc
+package main
 
 import (
 	"bufio"
@@ -167,9 +168,9 @@ func Parallel(done <-chan struct{}, filename string) ([]Part, error) {
 	}
 
 	//go func() {
-		for p := range ch {
-			parts = append(parts, p)
-		}
+	for p := range ch {
+		parts = append(parts, p)
+	}
 	//}()
 
 	wg.Wait()

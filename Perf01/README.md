@@ -5,7 +5,7 @@
 
 * python
 * Java
-* Scaala
+* Scala
 * Go
 * C++
 * Rust
@@ -19,8 +19,24 @@
 
 ### Calculation
 
+ok: py, java, scala, go
+ng: rust, cpp
 
 ### IO File/Socket
+
+
+wc
+
+ok:  go, java, scala
+ng:  py,  rust, cpp
+
+
+http
+
+ok:  
+ng:  go, py,  rust, cpp, java, scala
+
+
 
 
 ### (TODO) Synchronized
