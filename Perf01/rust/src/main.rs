@@ -1,56 +1,80 @@
 
+use std::vec::Vec;
+use std::ops::Range;
+use std::sync::mpsc;
+use std::thread;
 
-macro_rules! arr_fn {
-    ($size:expr, $func:expr) => {
-        {
-            let func = $func;
-            let mut array: [_; $size] = std::mem::uninitialized();
-            let xs = std::ops::Range {start:1, end:$size + 1};
-            for i in xs {
-                std::ptr::write(&mut array[i-1], func(i));
-            }
-            array
+fn mat(sz: usize, f :fn(usize, usize) -> i32) -> Vec<Vec<i32>> {
+    let mut ret: Vec<Vec<i32>> = Vec::with_capacity(sz);
+    let rs = Range{start:0, end:sz};
+    for i in rs {
+        let xs = Range {start:1, end:sz + 1};
+        let mut col: Vec<i32> = Vec::with_capacity(sz);
+        for x in xs {
+            col.push(f(i+1, x))
         }
-    };
+        ret.push(col)
+    }
+    ret
 }
 
-macro_rules! left {
-    ($N:expr) => {
-        unsafe {
-            let mut mx: [_; $N] = std::mem::uninitialized();
-            let xs = std::ops::Range {start:1, end:$N + 1};
-            //const CSZ: usize = $N - 1;
-            for i in xs {
-                let xf = |_|{ i };
-                // |arg| (i) as i32
-                mx[i-1] = arr_fn!($N, xf);
+fn mul(left:Vec<Vec<i32>>, right:Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    let mut ret = Vec::with_capacity(left.len());
+    for i in 0..left.len() {
+        let mut data = Vec::with_capacity(right.len());
+        for n in 0..right.len() {
+            let mut val :i32 = 0;
+            for m in 0..right.len() {
+                val += left[i][m] * right[m][n];
             }
-            mx
+            data.push(val);
         }
-    };
+        ret.push(data);
+    }
+    ret
 }
 
-macro_rules! right {
-    ($N:expr) => {
-        unsafe {
-            let mut mx: [_; $N] = std::mem::uninitialized();
-            let xs = std::ops::Range {start:1, end:$N + 1};
-            //const CSZ: usize = $N - 1;
-            for i in xs {
-                mx[i-1] = arr_fn!($N, |arg| (arg) as i32);
-            }
-            mx
-        }
-    };
+/*
+fn show(m :Vec<Vec<i32>>) {
+    for r in m {
+        println!("{:?}", r)
+    }
 }
+*/
 
 fn main() {
-    const SZ: usize = 4;
-    //let a: [i32; SZ] = arr_fn!(SZ, |i| (i) as i32);
-    //let xs = std::ops::Range {start:3, end:10};
-    //println!("Hello, world! {:?}", a);
-    let l = left!(SZ);
-    let r = right!(SZ);
-    println!("Hello, world! {:?}", l);
-    println!("{:?}", r);
+    const SZ: usize = 100;
+
+    let mut nums = Vec::with_capacity(SZ);
+    for i in 1..SZ+1 {
+        nums.push(i);
+    }
+
+    let (tx, rx) = mpsc::channel();
+
+    for &n in nums.iter() {
+        let tx = tx.clone();
+        thread::spawn(move || {
+            let row = |r:usize,_:usize| -> i32{ r as i32 };
+            let col = |_:usize,c:usize| -> i32{ c as i32 };
+
+            let size = n;
+
+            let lf = mat(size, row);
+            let rg = mat(size, col);
+            let ans = mul(lf, rg);
+            tx.send(ans.len() == size)
+        });
+    }
+
+    let mut count = 0;
+    for _ in nums.iter() {
+        let rs = rx.recv();
+        match rs {
+            Ok(_) => count += 1,
+            Err(e) => println!("{}", e),
+        }
+    }
+
+    println!("{}", count)
 }
