@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ps_format="-o %cpu,%mem,time"
+ps_format="-o pid,pcpu,size,bsdtime"
 
 function monitoring_command() {
     cmd=$1

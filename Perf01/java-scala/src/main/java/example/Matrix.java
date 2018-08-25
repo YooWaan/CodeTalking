@@ -30,7 +30,7 @@ public class Matrix {
     }
 
     int[][] left(int size) {
-        int[] mat = new int[size];
+        int[][] mat = new int[size][];
         IntStream.range(1, size + 1)
         .forEach(n -> {
             int[] val = new int[size];
@@ -41,7 +41,7 @@ public class Matrix {
     }
 
     int[][] right(int size) {
-        int[] mat = new int[size];
+        int[][] mat = new int[size][];
         IntStream.range(1, size + 1)
         .forEach(n -> {
             mat[n] = IntStream.range(1, size+1).toArray();

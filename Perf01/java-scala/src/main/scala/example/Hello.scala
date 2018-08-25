@@ -13,7 +13,7 @@ object Http {
 
   def serve() {
     val server = HttpServer.create(new InetSocketAddress(8080), 0)
-    server.createContext("/jwc", new WordCounter())
+    server.createContext("/jwc", new WordWebApp())
     server.start()
   }
 }

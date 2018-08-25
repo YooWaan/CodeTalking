@@ -4,3 +4,9 @@ version = "0.1.0"
 authors = ["WooYooWaan <wooyoowaan@gmail.com>"]
 
 [dependencies]
+
+
+[[bin]]
+name = "matrix"
+path = "src/main.rs"
+

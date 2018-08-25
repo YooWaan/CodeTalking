@@ -95,6 +95,6 @@ func run(size int) int {
 }
 
 func main() {
-	cnt := run(10)
+	cnt := run(200)
 	fmt.Println("Count:", cnt)
 }

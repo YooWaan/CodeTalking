@@ -19,8 +19,7 @@
 
 ### Calculation
 
-ok: py, java, scala, go
-ng: rust, cpp
+ok: py, java, scala, go,rust, cpp
 
 ### IO File/Socket
 

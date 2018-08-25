@@ -1,43 +1,60 @@
 package example;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArratList;
-import java.util.concurrent.Executors;
+import java.util.ArrayList;
 import java.util.stream.Stream;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.ExecutionException;
+
+
+import java.nio.CharBuffer;
 import java.nio.charset.Charset;
-import java.nio.ByteBuffer;
+//import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
 class WordCounter {
 
-    public void count(String filename) {
+    public void count(String filename) throws IOException, InterruptedException {
         int alocSize = 4048;
-        Path path = Files.get(filename);
-        ByteBuffer buf = ByteByffer.allocate(alocSize);
-        ExecutorService exec = Exectors.newCachedThreadPool();
+        Path path = Paths.get(filename);
+        CharBuffer buf = CharBuffer.allocate(alocSize);
+        ExecutorService exec = Executors.newCachedThreadPool();
         List<Future<int[]>> results = new ArrayList();
 
         try (BufferedReader rd = Files.newBufferedReader(path)) {
             int size = 0;
+            buf.reset();
             do {
-                size = rd.read(buffer);
-                String s = new String(Arrays.copyOf(buffer.array(), size), Charset.forName("utf-8"));
+                size = rd.read(buf);
+                String s = buf.toString();
                 Future<int[]> future = exec.submit(() -> {
                     return part(s);
                 });
-                resutls.add(future);
+                results.add(future);
             } while (size == alocSize);
         } finally {
             exec.shutdown();
         }
 
-        int[] result = sum(resutls.stream().map(f -> f.get()));
-        System.out.println(Strint.format("%d\t%d\t%d", result[0], result[1], result[2]));
+        int[] result = sum(results.stream().map(this::futureGet));
+        System.out.println(String.format("%d\t%d\t%d", result[0], result[1], result[2]));
+    }
+
+    int[] futureGet(Future<int[]> f) {
+        try {
+            return f.get();
+        } catch (InterruptedException | ExecutionException e) {
+            return new int[]{0,0,0};
+        }
     }
 
     int[] part(String s) {
@@ -59,8 +76,9 @@ class WordCounter {
     int eq(char c, char e) {
         return c == e ? 1 : 0 ;
     }
+
     int wd(char c, char sp, char nl) {
-        if (eq(c, sp)) {
+        if (eq(c, sp) == 1) {
             return 1;
         }
         return eq(c, nl);

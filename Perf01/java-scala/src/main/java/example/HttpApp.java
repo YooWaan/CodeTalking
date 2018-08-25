@@ -8,7 +8,7 @@ import com.sun.net.httpserver.HttpExchange;
 
 
 
-class WordCounter implements HttpHandler {
+class WordWebApp implements HttpHandler {
 
     final int OK = 200;
 
