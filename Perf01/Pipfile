@@ -1,0 +1,12 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+seaborn = ">=0.9.0"
+
+[requires]
+python_version = "3.7"

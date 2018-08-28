@@ -4,9 +4,15 @@ import java.net.InetSocketAddress;
 
 import com.sun.net.httpserver._
 
-object Hello extends App {
-  WC.count("../README.md")
-  //Matrix.calc()
+object SMain extends App {
+  if (args.length == 1) {
+    println("http")
+  } else if (args.length == 2) {
+    Mat.calc(args(0).toInt, args(1).toInt)
+  } else {
+    WC.count("../README.md")
+  }
+
 }
 
 object Http {

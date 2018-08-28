@@ -55,16 +55,19 @@ do_sports: do_prep do_amdar
 	@echo "sports"
 
 do_prep:
-	@mkdir $(RESULT_DIR)
+	@mkdir -p $(RESULT_DIR)
 
 do_amdar: amdar_py amdar_go
 	@echo "amdar"
 
-amdar_py:
+amdar_py: do_prep
 	@bash pmon/pmon 'python3 python/wc.py 100 400' > $(RESULT_DIR)/amdar_py.tsv
 
-amdar_go:
+amdar_go: do_prep
 	@bash pmon/pmon './golang/matrix 100 400' > $(RESULT_DIR)/amdar_go.tsv
+
+amdar_scala: do_prep
+	@bash pmon/pmon 'java -cp ./java-scala/target/scala-2.12/wc-ja-assembly-0.1.0-SNAPSHOT.jar example.SMain 1 400' > $(RESULT_DIR)/amdar_scala.tsv
 
 
 ## --------------------------------------------------------

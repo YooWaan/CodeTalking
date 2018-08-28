@@ -2,11 +2,11 @@ package example
 
 object Mat {
 
-  def calc(): Unit = {
+  def calc(start: Int, end: Int): Unit = {
     //val ans = Array.range(1,1000).map(x => mul(matrix(x), mat(x))).toList
     val ans = scala.collection.parallel.mutable.ParArray
-      .range(1,1000).map(x => mul(matrix(x), mat(x))).toList
-    println(ans.length)
+      .range(start, end).map(x => mul(matrix(x), mat(x))).toList
+    //println(ans.length)
   }
 
   def matrix(size: Int): Array[Array[Int]] = {
