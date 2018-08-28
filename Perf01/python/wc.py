@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 
+import sys
 from concurrent.futures import ThreadPoolExecutor, wait
 from functools import reduce
 
 
 def matrix_calc():
+    start = int(sys.argv[1])
+    end = int(sys.argv[2])
+    
     futures = []
-    with ThreadPoolExecutor(max_workers=4) as e:
-        for i in range(1, 200):
+    with ThreadPoolExecutor(max_workers=8) as e:
+        for i in range(start, end):
             left = matrix(i)
             right = matrix_right(i)
             futures.append(e.submit(matrix_mul, left, right))

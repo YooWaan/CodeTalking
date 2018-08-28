@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+	"strconv"
 	"fmt"
 	"sync"
 )
@@ -56,14 +58,14 @@ func show(m [][]int) {
 	}
 }
 
-func calc(done <-chan struct{}, sz int) []Answer {
+func calc(done <-chan struct{}, start, end int) []Answer {
 	ch := make(chan Answer)
 	var wg sync.WaitGroup
 	as := make([]Answer, 0)
 
 	go func() {
 		defer close(ch)
-		for i := 1; i < sz; i++ {
+		for i := start; i <= end; i++ {
 			wg.Add(1)
 			go func(n int) {
 				v := mul(left(n), right(n))
@@ -87,14 +89,16 @@ func calc(done <-chan struct{}, sz int) []Answer {
 	return as
 }
 
-func run(size int) int {
+func run(start, end int) int {
 	done := make(chan struct{})
 	defer close(done)
-	as := calc(done, size+1)
+	as := calc(done, start, end)
 	return len(as)
 }
 
 func main() {
-	cnt := run(200)
-	fmt.Println("Count:", cnt)
+	start, _ := strconv.Atoi(os.Args[1])
+	end, _ := strconv.Atoi(os.Args[2])
+	run(start, end)
+	//fmt.Println("Count:", cnt)
 }

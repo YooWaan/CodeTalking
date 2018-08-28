@@ -1,5 +1,6 @@
 #!/bin/sh
 
+#ps_format="-o pid,pcpu,size,etime"
 ps_format="-o pid,pcpu,size,bsdtime"
 
 function monitoring_command() {
