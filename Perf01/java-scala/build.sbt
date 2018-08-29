@@ -1,5 +1,7 @@
 import Dependencies._
 
+assemblyJarName in assembly := "java-scala.jar"
+
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(

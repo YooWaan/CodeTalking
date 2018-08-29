@@ -1,7 +1,7 @@
 ## configuration
 
 
-RESULT_DIR=result
+PLOT_DIR=plot-data
 
 
 ## c options
@@ -27,7 +27,7 @@ clean_bin:
 	@cd java-scala && sbt clean
 
 clean_result:
-	@rm -f $(RESULT_DIR)
+	@rm -f $(PLOT_DIR)
 
 
 ## --------------------------------------------------------
@@ -55,22 +55,22 @@ do_sports: do_prep do_amdar
 	@echo "sports"
 
 do_prep:
-	@mkdir -p $(RESULT_DIR)
+	@mkdir -p $(PLOT_DIR)
 
-do_amdar: amdar_py amdar_go
+do_amdar: amdar_py amdar_go amdar_scala
 	@echo "amdar"
 
 amdar_py: do_prep
-	@bash pmon/pmon 'python3 python/wc.py 100 400' > $(RESULT_DIR)/amdar_py.tsv
+	@bash pmon/pmon 'python3 python/wc.py 100 400' > $(PLOT_DIR)/amdar_py.tsv
 
 amdar_go: do_prep
-	@bash pmon/pmon './golang/matrix 100 400' > $(RESULT_DIR)/amdar_go.tsv
+	@bash pmon/pmon './golang/matrix 100 400' > $(PLOT_DIR)/amdar_go.tsv
 
 amdar_scala: do_prep
-	@bash pmon/pmon 'java -cp ./java-scala/target/scala-2.12/wc-ja-assembly-0.1.0-SNAPSHOT.jar example.SMain 1 400' > $(RESULT_DIR)/amdar_scala.tsv
+	@bash pmon/pmon 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.SMain 1 400' > $(PLOT_DIR)/amdar_scala.tsv
 
 
 ## --------------------------------------------------------
 
 graph:
-	@echo "graph"
+	@python pmon/graph.py

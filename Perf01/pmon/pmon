@@ -19,4 +19,23 @@ function monitoring_command() {
     done
 }
 
-monitoring_command "$1"
+function monitoring_py_command() {
+    cmd=$1
+    # start command
+    $cmd &
+    sub_pid=$!
+
+    python -c "
+import time; import subprocess
+start_time = time.time()
+try:
+   while subprocess.check_output('ps -p $sub_pid $ps_format | wc -l', shell=True).decode('utf-8').strip() == '2':
+      print('%s %s' % (time.time()-start_time, subprocess.check_output('ps -p $sub_pid $ps_format | tail -n 1 | grep -v CPU', shell=True).decode('utf-8').rstrip()))
+except:
+   pass
+"
+
+}
+
+# monitoring_command "$1"
+monitoring_py_command "$1"
