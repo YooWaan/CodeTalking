@@ -2,9 +2,11 @@
 #include <iostream>
 #include <memory>
 #include <functional>
+#include <condition_variable>
 #include <thread>
+#include <future>
 #include <mutex>
-#include <vector>
+#include <cstdlib>
 
 
 // g++ -std=c++11 matrix.cpp -o matrix
@@ -51,7 +53,27 @@ void mul(int** left, int** right, int** ans, int size) {
     }
 }
 
-void calc_worker(int size, std::mutex& mtx, int& counter) {
+struct Ctx {
+    std::mutex mtx_;
+    std::condition_variable cond_;
+    int thread_max;
+    int thread_count = 0;
+public:
+    Ctx(int m) : thread_max{m} {}
+    void notify_done() {
+        std::lock_guard<std::mutex> l(mtx_);
+        thread_count--;
+        cond_.notify_one();
+    }
+    void wait_thread() {
+        std::unique_lock<std::mutex> lk(mtx_);
+        //std::cout << "wait ...[" << thread_count << "]" << std::endl;
+        cond_.wait(lk, [this] { return thread_count < thread_max; });
+        thread_count++;
+    }
+};
+
+int calc_worker(int size, Ctx *ctx) {
     auto ln = [] (int r, int c) { return r+1; };
     auto rn = [] (int r, int c) { return c+1; };
     auto zero = [] (int r, int c) { return 0; };
@@ -70,35 +92,38 @@ void calc_worker(int size, std::mutex& mtx, int& counter) {
 
     mul(lp, rp, ap, size);
 
-    //std::cout << "show" << std::endl;
+    //std::cout << "show::" << size << std::endl;
     //show(lp, size); show(rp, size); 
-    show(ap, size);
-    mtx.lock();
-    counter ++;
-    mtx.unlock();
+    //show(ap, size);
+    ctx->notify_done();
+    return 1;
 }
 
+int parallel_matrix(Ctx *ctx, int n, int end) {
+    ctx->wait_thread();
+    auto ret = std::async(calc_worker, n, ctx);
+    if (n < end) {
+        return parallel_matrix(ctx, ++n, end) + ret.get();
+    }
+    return ret.get(); 
+}
+
+void run_matrix(int start, int end) {
+    //Ctx ctx(std::thread::hardware_concurrency());
+    Ctx ctx(8);
+    auto result = parallel_matrix(&ctx, start, end);
+}
 
 int main(int argc, char* argv[]) {
 
-    int size = 3;
-    std::mutex mtx;
-    int counter = 0;
-    std::vector<std::thread> threads(size);
-
-    int i = 1;
-    for (auto& th : threads) {
-        th = std::thread(calc_worker, i++, std::ref(mtx), std::ref(counter));
+    if (argc == 3) {
+        run_matrix(std::atoi(argv[1]), std::atoi(argv[2]));
+    } else {
+        std::cout << "Args:" << argc << std::endl;
+        std::cout << "cmd start end" << std::endl;
+        std::cout << "cmd port" << std::endl;
+        std::cout << "cmd num files ...." << std::endl;
     }
-
-    for (std::thread& th : threads) {
-        th.join();
-    }
-    //std::for_each(threads.begin(), threads.end(), [](std::thread& x) {x.join();});
-
-    mtx.lock();
-    std::cout << "count;" << counter << std::endl;
-    mtx.unlock();
 
     return 0;
 }

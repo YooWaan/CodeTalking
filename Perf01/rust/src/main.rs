@@ -3,6 +3,8 @@ use std::vec::Vec;
 use std::ops::Range;
 use std::sync::mpsc;
 use std::thread;
+use std::env;
+
 
 fn mat(sz: usize, f :fn(usize, usize) -> i32) -> Vec<Vec<i32>> {
     let mut ret: Vec<Vec<i32>> = Vec::with_capacity(sz);
@@ -42,23 +44,26 @@ fn show(m :Vec<Vec<i32>>) {
 }
 */
 
-fn main() {
-    const SZ: usize = 100;
+fn matrix(start :u32, end :u32) -> i32 {
 
+    /*
+    const SZ: usize = 100;
     let mut nums = Vec::with_capacity(SZ);
     for i in 1..SZ+1 {
         nums.push(i);
     }
+    */
 
     let (tx, rx) = mpsc::channel();
+    //for &n in nums.iter() {
 
-    for &n in nums.iter() {
+    for n in start..end+1 {
         let tx = tx.clone();
         thread::spawn(move || {
             let row = |r:usize,_:usize| -> i32{ r as i32 };
             let col = |_:usize,c:usize| -> i32{ c as i32 };
 
-            let size = n;
+            let size = n as usize;
 
             let lf = mat(size, row);
             let rg = mat(size, col);
@@ -68,7 +73,8 @@ fn main() {
     }
 
     let mut count = 0;
-    for _ in nums.iter() {
+    //for _ in nums.iter() {
+    for _ in start..end+1 {
         let rs = rx.recv();
         match rs {
             Ok(_) => count += 1,
@@ -76,5 +82,25 @@ fn main() {
         }
     }
 
-    println!("{}", count)
+    if count == end-start+1 {
+        return 0;
+    }
+    return 1;
+}
+
+fn num(n :Option<&String>) -> u32 {
+    return n.unwrap().parse().unwrap()
+}
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    //println!("{:?}", args);
+    std::process::exit(match args.len() {
+        3 => matrix(num(args.get(1)), num(args.get(2))),
+        _ => {
+            println!("cmd start end\ncmd port \ncmd num files...");
+            0
+        }
+    });
 }

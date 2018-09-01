@@ -12,34 +12,20 @@ def matrix_calc():
     futures = []
     with ThreadPoolExecutor(max_workers=8) as e:
         for i in range(start, end):
-            left = matrix(i)
-            right = matrix_right(i)
-            futures.append(e.submit(matrix_mul, left, right))
+            futures.append(e.submit(matrix_mul, matrix(i), matrix_right(i)))
 
-        result = wait(futures)
-        # print(len(result.done))
-
-
+    result = wait(futures)
+    return len(result.done)
+        
 def matrix(size):
     return [[i for n in range(i, i+size) ] for i in range(1, size+1)]
 
-    '''
-    num = lambda x: x if x <= size else size*2 - x
-    return [[num(n) for n in range(i, i+size) ] for i in range(1, size+1)]
-    '''
-
 def matrix_right(size):
     return [[n for n in range(1, size+1)] for i in range(1, size+1)]
-    '''
-    num = lambda x: x if x > 0 else -1 * x + 2
-    return [[num(n-size) for n in reversed(range(i+1, i+size+1))] for i in reversed(range(1, size+1))]
-    '''
-
 
 def matrix_mul(m1, m2):
     sz = len(m1)
-    return [reduce(lambda x,y: x+y ,[m1[n][i] * m2[i][n] for n in range(0,sz)]) for i in range(0, sz)]
-
+    return [[reduce(lambda x,y: x+y ,[m1[i][m] * m2[m][n] for m in range(0,sz)]) for n in range(0,sz)] for i in range(0, sz)]
 
 def show_matrix(mat):
     print('-----------------------')

@@ -4,16 +4,23 @@ import java.util.stream.IntStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class Matrix {
 
-    public void calc() {
-        long start = System.nanoTime();
-        IntStream.range(1, 100)
-        .forEach(sz -> {
+    public static void main(String[] args) {
+        if (args.length == 3) {
+            new Matrix().calc(Integer.valueOf(args[1]).intValue(), Integer.valueOf(args[2]).intValue());
+        }
+    }
+
+    public void calc(int start, int end) {
+        long cnt = IntStream.range(start, end)
+        .mpa(sz -> {
             int[] ans = mul(left(sz), right(sz));
-        });
-        System.out.println("Time:" + (System.nanoTime() - start) / 1000 + " msec");
+            return ans.length;
+        }).count();
+        //System.out.println("Time:" + (System.nanoTime() - start) / 1000 + " msec");
     }
 
     int[] mul(int[][] left, int[][] right) {
