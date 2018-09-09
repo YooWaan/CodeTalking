@@ -1,7 +1,11 @@
 #!/bin/sh
 
-#ps_format="-o pid,pcpu,size,etime"
-ps_format="-o pid,pcpu,size,bsdtime"
+
+
+# for mac
+ps_format="-o pid,pcpu,rss,etime"
+# ubuntu
+#ps_format="-o pid,pcpu,size,bsdtime"
 
 function monitoring_command() {
     cmd=$1

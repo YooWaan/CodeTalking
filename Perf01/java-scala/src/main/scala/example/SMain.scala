@@ -10,9 +10,9 @@ object SMain extends App {
   } else if (args.length == 2) {
     Mat.calc(args(0).toInt, args(1).toInt)
   } else {
-    WC.count("../README.md")
+    WC.run(args(0).toInt, args.drop(1))
+    //WC.count("../README.md")
   }
-
 }
 
 object Http {

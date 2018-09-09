@@ -4,8 +4,11 @@ import java.nio.ByteBuffer
 import java.nio.file.{Files, Paths, StandardOpenOption}
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.concurrent.Callable;
+import java.util.concurrent.{Executors, ExecutorService, Future};
 
-import scala.util.{Try, Success, Failure}
+import scala.util.{Try, Success, Failure};
+import scala.concurrent.ExecutionContext;
 
 object WC {
 
@@ -25,25 +28,39 @@ object WC {
     }
   }
 
-  def count(filename: String): Unit = {
+  def run(times: Int, files: Array[String]): Unit = {
+    Array.range(0, times).map(i => {
+      val idx = i % files.length
+      files(idx)
+    }).foreach(count(_))
+  }
+
+  def count(filename: String): (Int,Int,Int) = {
     val alocSize = 4048
     val path = Paths.get(filename)
-
-    println(filename + " ===> "  + path)
-
     val buffer = ByteBuffer.allocate(alocSize)
-    tryResource(Files.newByteChannel(path, StandardOpenOption.READ))(_.close()) { rc =>
-      var size = 0
-      do {
-        size = rc.read(buffer)
-        val s = new String(Arrays.copyOf(buffer.array(), size), Charset.forName("utf-8"))
-        println("ss:" + s)
+    var futures: List[Future[(Int,Int,Int)]] = List()
+    val es =ExecutionContext.fromExecutorService(Executors.newCachedThreadPool())
 
-        val (ch, wd, lf) = countup(s)
-        println("ch:" + ch + ", w:"+ wd + ", lf:" + lf)
-
-      } while(size == alocSize)
+    try {
+      tryResource(Files.newByteChannel(path, StandardOpenOption.READ))(_.close()) { rc =>
+        var size = 0
+        do {
+          size = rc.read(buffer)
+          val s = new String(Arrays.copyOf(buffer.array(), size), Charset.forName("utf-8"))
+          val c = new Callable[(Int,Int,Int)]() {
+            def call(): (Int,Int,Int) = {
+              return countup(s)
+            }
+          }
+          futures =  es.submit(c) :: futures
+        } while(size == alocSize)
+      }
+    } finally {
+      es.shutdown()
     }
+
+    futures.map(_.get()).reduce((a,b) => (a._1 + b._1, a._2 + b._1, a._3 + b._3))
   }
 
   def countup(ss: String): (Int, Int, Int) /* ch, word, line */ = {
@@ -63,7 +80,6 @@ object WC {
       //println(">" + c)
       return 1
     }
-    println("SS: " + ss.length() + ", " + ss.getBytes.length)
     return ss
       .map(c => (chP(c), wdC(c, ' ', '\n'), eqC(c, '\n')))
       .reduceLeft(rd)

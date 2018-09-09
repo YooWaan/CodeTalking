@@ -2,12 +2,16 @@
 
 
 PLOT_DIR=plot-data
-AMDAR_RANGE=100 250
+AMDAR_RANGE=10 250
 
 ## c options
 
 GCC=g++
 C_OPT=-std=c++11 -pthread
+
+## scala java
+
+JAR=./java-scala/target/scala-2.12/java-scala.jar
 
 ## targets
 
@@ -17,7 +21,7 @@ dev: build do_sports graph
 
 ## --------------------------------------------------------
 
-clean: clean_bin
+clean: clean_bin clean_graph
 	@echo "clean"
 
 
@@ -29,10 +33,12 @@ clean_bin:
 clean_result:
 	@rm -f $(PLOT_DIR)
 
+clean_graph:
+	@rm -f *.png
 
 ## --------------------------------------------------------
 
-build: bin_cpp bin_rust jar_sbt bin_go
+build: bin_cpp bin_rust bin_go jar_sbt
 	@echo "build"
 
 
@@ -57,28 +63,31 @@ do_sports: do_prep do_amdar
 do_prep:
 	@mkdir -p $(PLOT_DIR)
 
-do_amdar: amdar_py amdar_go amdar_scala
+do_amdar: amdar_py amdar_go amdar_scala amdar_cpp amdar_rust
 	@echo "amdar"
 
 amdar_py: do_prep
 	@bash pmon/pmon 'python3 python/wc.py $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_py.tsv
 
 amdar_go: do_prep
-	@bash pmon/pmon './golang/matrix 100 200' > $(PLOT_DIR)/amdar_go.tsv
+	@bash pmon/pmon './golang/matrix $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_go.tsv
 
 amdar_scala: do_prep
-	@bash pmon/pmon 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.SMain $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_scala.tsv
+	@bash pmon/pmon 'java -cp $(JAR) example.SMain $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_scala.tsv
 
 amdar_java: do_prep
-	@bash pmon/pmon 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.Matrix $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_scala.tsv
+	@bash pmon/pmon 'java -cp $(JAR) example.Matrix $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_java.tsv
 
 amdar_cpp: do_prep
-	@bash pmon/pmon './cpp/matrix 100 200' > $(PLOT_DIR)/amdar_cpp.tsv
+	@bash pmon/pmon './cpp/matrix $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_cpp.tsv
 
 amdar_rust: do_prep
-	@bash pmon/pmon './rust/target/install/bin/matrix 100 200'  > $(PLOT_DIR)/amdar_rust.tsv
+	@bash pmon/pmon './rust/target/install/bin/matrix $(AMDAR_RANGE)'  > $(PLOT_DIR)/amdar_rust.tsv
 
 ## --------------------------------------------------------
 
 graph:
-	@python pmon/graph.py
+	@python pmon/graph.py 'cpu%' amdar_cpu.png plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv
+	@python pmon/graph.py 'cpu%' amdar_cpu_py.png plot-data/amdar_py.tsv
+	@python pmon/graph.py 'mem(kb)' amdar_mem.png plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv
+	@python pmon/graph.py 'mem(kb)' amdar_mem_py.png plot-data/amdar_py.tsv

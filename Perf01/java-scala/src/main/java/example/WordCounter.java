@@ -6,12 +6,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.ExecutionException;
-
+import java.util.stream.Stream;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -21,7 +22,29 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-class WordCounter {
+public class WordCounter {
+
+    public static void main(String[] args) {
+        if (args.length <= 1) {
+            System.out.println("args:" + args.length + "cmd start end\ncmd port\ncmd num files");
+        } else {
+            List<String> files = Arrays.stream(args).collect(Collectors.toList());
+            new WordCounter()
+                .run(Integer.valueOf(files.remove(0)).intValue(), files);
+        }
+    }
+
+    public void run(int times, List<String> files) {
+        IntStream.range(0, times)
+            .forEach(i -> {
+                    try {
+                        count(files.get(i % files.size()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+    }
+
 
     public void count(String filename) throws IOException, InterruptedException {
         int alocSize = 4048;

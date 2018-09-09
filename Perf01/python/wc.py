@@ -1,55 +1,55 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from concurrent.futures import ThreadPoolExecutor, wait
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, wait
 from functools import reduce
 
 
-def matrix_calc():
-    start = int(sys.argv[1])
-    end = int(sys.argv[2])
-    
-    futures = []
-    with ThreadPoolExecutor(max_workers=8) as e:
-        for i in range(start, end):
-            futures.append(e.submit(matrix_mul, matrix(i), matrix_right(i)))
+def wd(ss):
+    is_word = True
+    ch_cnt = len(ss)
+    wd_cnt = 0
+    lf_cnt = 0
+    for i, c in enumerate(ss):
+        if c == ' ':
+            is_word = True
+        elif c == '\n' or c == '\r':
+            lf_cnt += 1
+        else:
+            if is_word:
+                wd_cnt += 1
+                is_word = False
 
-    result = wait(futures)
-    return len(result.done)
-        
-def matrix(size):
-    return [[i for n in range(i, i+size) ] for i in range(1, size+1)]
-
-def matrix_right(size):
-    return [[n for n in range(1, size+1)] for i in range(1, size+1)]
-
-def matrix_mul(m1, m2):
-    sz = len(m1)
-    return [[reduce(lambda x,y: x+y ,[m1[i][m] * m2[m][n] for m in range(0,sz)]) for n in range(0,sz)] for i in range(0, sz)]
-
-def show_matrix(mat):
-    print('-----------------------')
-    for m in mat:
-        print(','.join(map(str, m)))
-    print('-----------------------')
+    return ch_cnt, wd_cnt, lf_cnt
 
 
+def count(fp):
+    with ThreadPoolExecutor(max_workers=32) as e:
+        futures = []
+        size = 4096
+        i = 0
+        with open(fp, 'rb') as fin:
+            while i != -1:
+                by = fin.read(size)
+                futures.append(e.submit(wd, by.decode('utf-8')))
+                if len(by) == size:
+                    fin.seek(size * i)
+                    i += 1
+                else:
+                    i = -1
 
-def count():
+        result = wait(futures)
+        return reduce(lambda x,y: (x[0]+y[0], x[1]+y[1], x[2]+y[2]), [rs.result() for rs in result.done])
 
-    with open('README.md', 'rb') as fin:
+def wc_cmd():
+    times = int(sys.argv[1])
+    files = sys.argv[2:]
 
-        print('tel {}'.format(fin.tell()))
-
-        by = fin.read(255)
-        print('len {} {}'.format(len(by), str(by)))
-
-        fin.seek(255)
-        print('tel {}'.format(fin.tell()))
-        by = fin.read(255)
-        print('len {} {}'.format(len(by), str(by)))
+    for i in range(1, times+1):
+        idx = i % len(files)
+        r = count(files[idx])
+        print(r)
 
 
-matrix_calc()
+wc_cmd()
 
-#

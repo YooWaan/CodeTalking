@@ -61,15 +61,21 @@ struct Ctx {
 public:
     Ctx(int m) : thread_max{m} {}
     void notify_done() {
-        std::lock_guard<std::mutex> l(mtx_);
-        thread_count--;
-        cond_.notify_one();
+      if (thread_max == 0) {
+        return;
+      }
+      std::lock_guard<std::mutex> l(mtx_);
+      thread_count--;
+      cond_.notify_one();
     }
     void wait_thread() {
-        std::unique_lock<std::mutex> lk(mtx_);
-        //std::cout << "wait ...[" << thread_count << "]" << std::endl;
-        cond_.wait(lk, [this] { return thread_count < thread_max; });
-        thread_count++;
+      if (thread_max == 0) {
+        return;
+      }
+      std::unique_lock<std::mutex> lk(mtx_);
+      //std::cout << "wait ...[" << thread_count << "]" << std::endl;
+      cond_.wait(lk, [this] { return thread_count < thread_max; });
+      thread_count++;
     }
 };
 
@@ -109,13 +115,12 @@ int parallel_matrix(Ctx *ctx, int n, int end) {
 }
 
 void run_matrix(int start, int end) {
-    //Ctx ctx(std::thread::hardware_concurrency());
-    Ctx ctx(8);
-    auto result = parallel_matrix(&ctx, start, end);
+  //Ctx ctx(std::thread::hardware_concurrency());
+  Ctx ctx(8);
+  auto result = parallel_matrix(&ctx, start, end);
 }
 
 int main(int argc, char* argv[]) {
-
     if (argc == 3) {
         run_matrix(std::atoi(argv[1]), std::atoi(argv[2]));
     } else {

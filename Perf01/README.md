@@ -21,14 +21,14 @@
 
 ok: py, java, scala, go,rust, cpp
 
-### IO File/Socket
+### Read File
 
 
-wc
+ok:  go, java, scala, py
+ng:  rust, cpp
 
-ok:  go, java, scala
-ng:  py,  rust, cpp
 
+### IO Socket
 
 http
 

@@ -10,3 +10,7 @@ authors = ["WooYooWaan <wooyoowaan@gmail.com>"]
 name = "matrix"
 path = "src/main.rs"
 
+[[bin]]
+name = "wc"
+path = "src/wc.rs"
+

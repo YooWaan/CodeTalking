@@ -5,7 +5,6 @@ use std::sync::mpsc;
 use std::thread;
 use std::env;
 
-
 fn mat(sz: usize, f :fn(usize, usize) -> i32) -> Vec<Vec<i32>> {
     let mut ret: Vec<Vec<i32>> = Vec::with_capacity(sz);
     let rs = Range{start:0, end:sz};
