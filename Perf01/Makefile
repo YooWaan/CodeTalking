@@ -1,5 +1,6 @@
 ## configuration
 
+OS=`uname | tr [A-Z] [a-z]`
 
 PLOT_DIR=plot-data
 AMDAR_RANGE_PY=10 120
@@ -89,5 +90,6 @@ amdar_rust: do_prep
 ## --------------------------------------------------------
 
 graph:
-	@python pmon/graph.py 'cpu%' amdar_cpu.png plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv plot-data/amdar_py.tsv
-	@python pmon/graph.py 'mem(kb)' amdar_mem.png plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv plot-data/amdar_py.tsv
+	@echo $(OS)
+	@python pmon/graph.py 'cpu%' amdar_cpu_$(OS).png plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv plot-data/amdar_py.tsv
+	@python pmon/graph.py 'mem(kb)' amdar_mem_$(OS).png plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv plot-data/amdar_py.tsv
