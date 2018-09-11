@@ -2,7 +2,8 @@
 
 
 PLOT_DIR=plot-data
-AMDAR_RANGE=10 250
+AMDAR_RANGE_PY=10 120
+AMDAR_RANGE=10 400
 
 ## c options
 
@@ -15,8 +16,8 @@ JAR=./java-scala/target/scala-2.12/java-scala.jar
 
 ## targets
 
-all: clean build do_sports graph
-dev: build do_sports graph
+all: dev graph
+dev: clean build do_sports
 
 
 ## --------------------------------------------------------
@@ -63,11 +64,12 @@ do_sports: do_prep do_amdar
 do_prep:
 	@mkdir -p $(PLOT_DIR)
 
-do_amdar: amdar_py amdar_go amdar_scala amdar_cpp amdar_rust
+
+do_amdar: amdar_py amdar_go amdar_scala amdar_java amdar_cpp amdar_rust
 	@echo "amdar"
 
 amdar_py: do_prep
-	@bash pmon/pmon 'python3 python/wc.py $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_py.tsv
+	@bash pmon/pmon 'python3 python/matrix.py $(AMDAR_RANGE_PY)' > $(PLOT_DIR)/amdar_py.tsv
 
 amdar_go: do_prep
 	@bash pmon/pmon './golang/matrix $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_go.tsv
@@ -87,7 +89,5 @@ amdar_rust: do_prep
 ## --------------------------------------------------------
 
 graph:
-	@python pmon/graph.py 'cpu%' amdar_cpu.png plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv
-	@python pmon/graph.py 'cpu%' amdar_cpu_py.png plot-data/amdar_py.tsv
-	@python pmon/graph.py 'mem(kb)' amdar_mem.png plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv
-	@python pmon/graph.py 'mem(kb)' amdar_mem_py.png plot-data/amdar_py.tsv
+	@python pmon/graph.py 'cpu%' amdar_cpu.png plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv plot-data/amdar_py.tsv
+	@python pmon/graph.py 'mem(kb)' amdar_mem.png plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv plot-data/amdar_py.tsv

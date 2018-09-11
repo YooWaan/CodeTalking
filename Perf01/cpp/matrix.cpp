@@ -64,6 +64,7 @@ public:
       if (thread_max == 0) {
         return;
       }
+
       std::lock_guard<std::mutex> l(mtx_);
       thread_count--;
       cond_.notify_one();
@@ -72,17 +73,27 @@ public:
       if (thread_max == 0) {
         return;
       }
+
       std::unique_lock<std::mutex> lk(mtx_);
-      //std::cout << "wait ...[" << thread_count << "]" << std::endl;
+      //std::cout << "wait ...[" << thread_count << "] < max" << thread_max  << std::endl;
       cond_.wait(lk, [this] { return thread_count < thread_max; });
       thread_count++;
+      //std::cout << "count up [" << thread_count << "]" << std::endl;
     }
 };
 
+
+int lfn(int r, int c) { return r+1; };
+int rfn(int r, int c) { return c+1; };
+int zfn(int r, int c) { return 0; };
+
+
 int calc_worker(int size, Ctx *ctx) {
+  /*    std::cout << "start::" << size << std::endl;
     auto ln = [] (int r, int c) { return r+1; };
     auto rn = [] (int r, int c) { return c+1; };
     auto zero = [] (int r, int c) { return 0; };
+*/
 
     std::unique_ptr<int*[]> lmx(new int*[size]);
     std::unique_ptr<int*[]> rmx(new int*[size]);
@@ -92,10 +103,11 @@ int calc_worker(int size, Ctx *ctx) {
     auto rp = rmx.get();
     auto ap = ans.get();
 
-    mem(&lp, size, ln);
-    mem(&rp, size, rn);
-    mem(&ap, size, zero);
+    mem(&lp, size, lfn);
+    mem(&rp, size, rfn);
+    mem(&ap, size, zfn);
 
+    //std::cout << "calc::" << size << std::endl;
     mul(lp, rp, ap, size);
 
     //std::cout << "show::" << size << std::endl;
@@ -106,8 +118,9 @@ int calc_worker(int size, Ctx *ctx) {
 }
 
 int parallel_matrix(Ctx *ctx, int n, int end) {
+  //std::cout << "para start >" << n << "," << end << std::endl;
     ctx->wait_thread();
-    auto ret = std::async(calc_worker, n, ctx);
+    auto ret = std::async(std::launch::async, calc_worker, n, ctx);
     if (n < end) {
         return parallel_matrix(ctx, ++n, end) + ret.get();
     }
@@ -116,7 +129,8 @@ int parallel_matrix(Ctx *ctx, int n, int end) {
 
 void run_matrix(int start, int end) {
   //Ctx ctx(std::thread::hardware_concurrency());
-  Ctx ctx(8);
+  Ctx ctx(16);
+  //std::cout << start << end << std::endl;
   auto result = parallel_matrix(&ctx, start, end);
 }
 
