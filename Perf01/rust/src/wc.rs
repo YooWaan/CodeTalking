@@ -8,9 +8,10 @@ use std::io::SeekFrom;
 use std::sync::mpsc;
 use std::thread;
 
-fn countup(s: &str) -> (i32, i32, i32) {
+fn countup(b: &[u8]) -> Result<(i32, i32, i32), i32> {
+    let s = std::str::from_utf8(b).unwrap();
     println!("{}", s);
-    (0, 0, 0)
+    Ok((1, 1, 1))
 }
 
 
@@ -21,22 +22,22 @@ fn word_count(file: &String) -> i32  {
     let mut done = false;
     let mut i: i64 = 0;
     let (tx, rx) = mpsc::channel();
-    let mut buffer = [0; 10];
 
     while !done {
-        match f.read(&mut buffer[..]) {
+        let mut buffer = [0; 10];
+        let sz: usize = match f.read(&mut buffer[..]) {
             Result::Ok(sz) => {
-                let s = std::str::from_utf8(&buffer).unwrap();
                 let tx = tx.clone();
                 thread::spawn(move || {
-                    tx.send(countup(s))
+                    tx.send(countup(&buffer));
                 });
-                done = sz != 10;
+                sz
             },
             Result::Err(_) => panic!("failed read file"),
-        }
+        };
 
-        if (!done) {
+        done = sz != 10;
+        if (done == false) {
             match f.seek(SeekFrom::Current(size * i)) {
                 Result::Ok(_) => i += 1,
                 Result::Err(_) => panic!("failed read file"),
@@ -48,7 +49,7 @@ fn word_count(file: &String) -> i32  {
     for _ in 0..i {
         let rs = rx.recv();
         match rs {
-            Ok(wc) => data.push(wc),
+            Ok(wc) => data.push(wc.unwrap()),
             Err(e) => println!("{}", e),
         }
     }
