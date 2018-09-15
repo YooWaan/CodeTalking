@@ -8,49 +8,56 @@ use std::io::SeekFrom;
 use std::sync::mpsc;
 use std::thread;
 
-fn countup(b: &[u8]) -> Result<(i32, i32, i32), i32> {
-    let s = std::str::from_utf8(b).unwrap();
-    println!("{}", s);
-    Ok((1, 1, 1))
-}
 
+fn countup(i:i64, b: &[u8]) -> (i32, i32, i32) {
+    let s = std::str::from_utf8(b).unwrap();
+    println!("[{}]{}",i, s);
+    let cs = s.chars();
+    let cnt = cs.fold((0,0,0, false), |t, ch| {
+
+        match (ch, t.3) {
+            ('\n', _) => (t.0, t.1, t.2+1, false),
+            (' ', true) => (t.0+1, t.1+1, t.2, false),
+            (' ', false) => (t.0+1, t.1, t.2, t.3),
+            _ => (t.0+1, t.1, t.2, true),
+        }
+    });
+    (cnt.0, cnt.1, cnt.2)
+}
 
 fn word_count(file: &String) -> i32  {
     let mut f = File::open(file).unwrap();
 
-    let size: i64 = 10;
+    let size: i64 = 30;
     let mut done = false;
     let mut i: i64 = 0;
     let (tx, rx) = mpsc::channel();
 
     while !done {
-        let mut buffer = [0; 10];
+        //let mut buffer: [u8; 30] = [0; 30];
+        let mut buffer : Box<[u8]> = Box::new([0; 30]);
         let sz: usize = match f.read(&mut buffer[..]) {
             Result::Ok(sz) => {
                 let tx = tx.clone();
                 thread::spawn(move || {
-                    tx.send(countup(&buffer));
+                    tx.send(countup(i, &buffer));
                 });
                 sz
             },
             Result::Err(_) => panic!("failed read file"),
         };
 
-        done = sz != 10;
-        if (done == false) {
-            match f.seek(SeekFrom::Current(size * i)) {
-                Result::Ok(_) => i += 1,
-                Result::Err(_) => panic!("failed read file"),
-            }
+        done = sz != 30;
+        if done == false {
+            i += 1;
         }
     }
 
     let mut data: Vec<(i32,i32,i32)> = Vec::with_capacity(i as usize);
     for _ in 0..i {
-        let rs = rx.recv();
-        match rs {
-            Ok(wc) => data.push(wc.unwrap()),
-            Err(e) => println!("{}", e),
+        match rx.recv() {
+            Ok(wc) => data.push(wc),
+            Err(_) => panic!("failed recv data"),
         }
     }
 
