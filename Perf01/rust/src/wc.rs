@@ -3,26 +3,22 @@ use std::vec::Vec;
 use std::result::Result;
 use std::fs::File;
 use std::io::Read;
-use std::io::Seek;
-use std::io::SeekFrom;
 use std::sync::mpsc;
 use std::thread;
 
 
-fn countup(i:i64, b: &[u8]) -> (i32, i32, i32) {
+fn countup(i:i64, b: &[u8]) -> (i32, i32, i32, bool) {
     let s = std::str::from_utf8(b).unwrap();
-    println!("[{}]{}",i, s);
+    //println!("[{}]{}",i, s);
     let cs = s.chars();
-    let cnt = cs.fold((0,0,0, false), |t, ch| {
-
+    return cs.fold((b.len() as i32, 0,0, false), |t, ch| {
         match (ch, t.3) {
             ('\n', _) => (t.0, t.1, t.2+1, false),
-            (' ', true) => (t.0+1, t.1+1, t.2, false),
-            (' ', false) => (t.0+1, t.1, t.2, t.3),
-            _ => (t.0+1, t.1, t.2, true),
+            (' ', true) => (t.0, t.1+1, t.2, false),
+            (' ', false) => (t.0, t.1, t.2, t.3),
+            _ => (t.0, t.1, t.2, true),
         }
     });
-    (cnt.0, cnt.1, cnt.2)
 }
 
 fn word_count(file: &String) -> i32  {
@@ -36,21 +32,17 @@ fn word_count(file: &String) -> i32  {
     while !done {
         //let mut buffer: [u8; 30] = [0; 30];
         let mut buffer : Box<[u8]> = Box::new([0; 30]);
-        let sz: usize = match f.read(&mut buffer[..]) {
-            Result::Ok(sz) => {
-                let tx = tx.clone();
-                thread::spawn(move || {
-                    tx.send(countup(i, &buffer));
-                });
-                sz
-            },
+        let rr = f.read(&mut buffer[..]);
+        let sz: usize = match rr {
+            Result::Ok(sz) => sz,
             Result::Err(_) => panic!("failed read file"),
         };
-
-        done = sz != 30;
-        if done == false {
-            i += 1;
-        }
+        let tx = tx.clone();
+        thread::spawn(move || {
+            tx.send(countup(i, &buffer[..sz]));
+        });
+        i += 1;
+        done = sz != size as usize;
     }
 
     let mut data: Vec<(i32,i32,i32)> = Vec::with_capacity(i as usize);
@@ -62,7 +54,7 @@ fn word_count(file: &String) -> i32  {
     }
 
     let cnt = data.iter().fold((0,0,0), |total,x| (total.0 + x.0, total.1 + x.1, total.2 + x.2));
-    println!("{:?}", cnt);
+    //println!("{:?}", cnt);
     return 0;
 }
 
