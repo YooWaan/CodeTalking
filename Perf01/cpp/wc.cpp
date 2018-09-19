@@ -6,7 +6,7 @@
 #include <vector>
 #include <memory>
 #include <cstring>
- 
+#include <cstdlib> 
 
 
 #define OK 0
@@ -71,7 +71,7 @@ int count(char* filename) {
         return ERR;
     }
 
-    int bufsize = 10;    
+    int bufsize = 2048;
 
     std::vector<std::future<Count>> futures;
     std::unique_ptr<char[]> buffer(new char [bufsize]);
@@ -111,13 +111,10 @@ int count(char* filename) {
         }
     }
 
-    std::cout << "B;" << cnt.bytes << ",W:" << cnt.words << ",L:" << cnt.lines << std::endl;
+    std::cerr << "B;" << cnt.bytes << ",W:" << cnt.words << ",L:" << cnt.lines << std::endl;
 
     return OK;    
 }
-
-
-
 
 
 int main(int argc, char* argv[]) {
@@ -125,14 +122,12 @@ int main(int argc, char* argv[]) {
         std::cout << "cmd times files...." << std::endl;
         return 1;
     }
-    for (int i = 2; i < argc ; i++) {
-        printf("file=%s\n", argv[i]);
-        count(argv[i]);
+    auto times = std::atoi(argv[1]);
+    for (int n = 0; n < times; n++) {
+      auto idx = (n % (argc-2)) + 2;
+      //printf("file=%s\n", argv[idx]);
+      count(argv[idx]);
     }
 
     return 0;
 }
-
-
-
-

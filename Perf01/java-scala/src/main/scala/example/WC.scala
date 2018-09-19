@@ -29,6 +29,7 @@ object WC {
   }
 
   def run(times: Int, files: Array[String]): Unit = {
+    //println("times===>" + times + ", " + files)
     Array.range(0, times).map(i => {
       val idx = i % files.length
       files(idx)
@@ -80,8 +81,9 @@ object WC {
       //println(">" + c)
       return 1
     }
+    //println(ss)
     return ss
       .map(c => (chP(c), wdC(c, ' ', '\n'), eqC(c, '\n')))
-      .reduceLeft(rd)
+      .reduce(rd)
   }
 }

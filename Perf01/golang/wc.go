@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strconv"
 	"sync"
 	"unicode"
 	"unicode/utf8"
@@ -25,8 +26,9 @@ func (c *Count) Add(a Count) {
 	c.Bytes += a.Bytes
 }
 
-func (c *Count) UpLine() { c.Lines += 1 }
-func (c *Count) UpWord() { c.Words += 1 }
+func (c *Count) UpLine()        { c.Lines += 1 }
+func (c *Count) UpWord()        { c.Words += 1 }
+func (c *Count) String() string { return fmt.Sprintf("%d\t%d\t%d\n", c.Bytes, c.Words, c.Lines) }
 
 type Part struct {
 	Count
@@ -106,31 +108,30 @@ func Run(filename string) (FileCount, error) {
 	return count, nil
 }
 
-func RunParallel(filename string) FileCount {
+func RunParallel(filename string) (FileCount, error) {
 	done := make(chan struct{})
 	defer close(done)
 
 	count := FileCount{FileName: filename}
 	if parts, err := Parallel(done, filename); err != nil {
 		fmt.Errorf("%s : [%v]\n", filename, err)
+		return count, err
 	} else {
 		for _, p := range parts {
 			count.Add(p.Count)
 		}
 	}
-	return count
+	return count, nil
 }
 
 func Parallel(done <-chan struct{}, filename string) ([]Part, error) {
-	ch := make(chan Part)
 
 	fp, err := os.Open(filename)
 	if err != nil {
-		close(ch)
 		return nil, err
 	}
+	ch := make(chan Part)
 	defer func() {
-		close(ch)
 		fp.Close()
 	}()
 
@@ -147,16 +148,14 @@ func Parallel(done <-chan struct{}, filename string) ([]Part, error) {
 		}
 
 		wg.Add(1)
-		data := buf[:n]
-		pageCount := page
-		go func() {
-			part := CountUp(pageCount, data)
+		go func(pcnt uint64, buf []byte) {
+			defer wg.Done()
+			part := CountUp(pcnt, buf)
 			select {
 			case ch <- part:
 			case <-done:
 			}
-			wg.Done()
-		}()
+		}(page, buf[:n])
 		page += 1
 
 		if err == io.EOF {
@@ -167,12 +166,25 @@ func Parallel(done <-chan struct{}, filename string) ([]Part, error) {
 		}
 	}
 
-	//go func() {
+
+	go func() {
+		wg.Wait()
+		close(ch)
+	}()
+
 	for p := range ch {
 		parts = append(parts, p)
 	}
-	//}()
 
-	wg.Wait()
 	return parts, nil
+}
+
+func main() {
+	times, _ := strconv.Atoi(os.Args[1])
+	files := os.Args[2:]
+	for i := 0; i < times; i++ {
+		idx := i % len(files)
+		result, _ := RunParallel(files[idx])
+		fmt.Fprintf(os.Stderr, "i=>%d file=%s, result=%v\n", i, files[idx], result)
+	}
 }

@@ -24,7 +24,7 @@ fn countup(i:i64, b: &[u8]) -> (i32, i32, i32, bool) {
 fn word_count(file: &String) -> i32  {
     let mut f = File::open(file).unwrap();
 
-    let size: i64 = 30;
+    let size: i64 = 2048;
     let mut done = false;
     let mut i: i64 = 0;
     let (tx, rx) = mpsc::channel();
@@ -45,7 +45,7 @@ fn word_count(file: &String) -> i32  {
         done = sz != size as usize;
     }
 
-    let mut data: Vec<(i32,i32,i32)> = Vec::with_capacity(i as usize);
+    let mut data: Vec<(i32,i32,i32,bool)> = Vec::with_capacity(i as usize);
     for _ in 0..i {
         match rx.recv() {
             Ok(wc) => data.push(wc),
@@ -54,7 +54,7 @@ fn word_count(file: &String) -> i32  {
     }
 
     let cnt = data.iter().fold((0,0,0), |total,x| (total.0 + x.0, total.1 + x.1, total.2 + x.2));
-    //println!("{:?}", cnt);
+    eprintln!("{:?}", cnt);
     return 0;
 }
 
@@ -72,9 +72,6 @@ fn word_counts(mut args: Vec<String>) -> i32 {
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-
-    println!("{:?}", args);
-
     std::process::exit(match args.len() {
         3 | 4 | 5 | 6 | 7 | 8 | 9 => word_counts(args),
         _ => {

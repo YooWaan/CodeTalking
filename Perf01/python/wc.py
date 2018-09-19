@@ -24,7 +24,7 @@ def wd(ss):
 
 
 def count(fp):
-    with ThreadPoolExecutor(max_workers=32) as e:
+    with ThreadPoolExecutor(max_workers=16) as e:
         futures = []
         size = 4096
         i = 0
@@ -48,7 +48,7 @@ def wc_cmd():
     for i in range(1, times+1):
         idx = i % len(files)
         r = count(files[idx])
-        print(r)
+        sys.stderr.write('{}'.format(r))
 
 
 wc_cmd()

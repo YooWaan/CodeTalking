@@ -55,7 +55,7 @@ public class WordCounter {
 
         try (BufferedReader rd = Files.newBufferedReader(path)) {
             int size = 0;
-            buf.reset();
+            //buf.reset();
             do {
                 size = rd.read(buf);
                 String s = buf.toString();

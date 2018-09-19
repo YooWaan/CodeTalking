@@ -8,12 +8,12 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 def read_files(files):
-    print('fils {}'.format(files))
     plot_df = None
     for f in files:
+        print('file {}'.format(f))
         df = pd.read_csv(f, delimiter='\s+', header=None).rename(columns={0:'sec', 1:'pid', 2:'cpu%', 3:'mem(kb)', 4:'etime'})
-        hue = pd.Series([f for n in range(1, len(df.index)+1)])
-        df['name'] = hue
+        name = f[f.rfind('_')+1:f.rfind('.')]
+        df['name'] = pd.Series([name for n in range(1, len(df.index)+1)])
         plot_df = df if plot_df is None else pd.concat([plot_df, df])
 
     return plot_df
