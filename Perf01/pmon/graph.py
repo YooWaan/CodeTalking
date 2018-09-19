@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 
 def read_files(files):
     plot_df = None
+    print('files {}'.format(files))
     for f in files:
-        print('file {}'.format(f))
         df = pd.read_csv(f, delimiter='\s+', header=None).rename(columns={0:'sec', 1:'pid', 2:'cpu%', 3:'mem(kb)', 4:'etime'})
         name = f[f.rfind('_')+1:f.rfind('.')]
         df['name'] = pd.Series([name for n in range(1, len(df.index)+1)])

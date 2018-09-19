@@ -33,7 +33,10 @@ object WC {
     Array.range(0, times).map(i => {
       val idx = i % files.length
       files(idx)
-    }).foreach(count(_))
+    }).foreach(fpath => {
+      val cnt = count(fpath)
+      System.err.println("" + cnt._1 + "\t"+ cnt._2 + "\t" + cnt._3)
+    })
   }
 
   def count(filename: String): (Int,Int,Int) = {
@@ -41,7 +44,8 @@ object WC {
     val path = Paths.get(filename)
     val buffer = ByteBuffer.allocate(alocSize)
     var futures: List[Future[(Int,Int,Int)]] = List()
-    val es =ExecutionContext.fromExecutorService(Executors.newCachedThreadPool())
+    //val es =ExecutionContext.fromExecutorService(Executors.newCachedThreadPool())
+    val es =ExecutionContext.fromExecutorService(Executors.newFixedThreadPool(12))
 
     try {
       tryResource(Files.newByteChannel(path, StandardOpenOption.READ))(_.close()) { rc =>
@@ -49,6 +53,7 @@ object WC {
         do {
           size = rc.read(buffer)
           val s = new String(Arrays.copyOf(buffer.array(), size), Charset.forName("utf-8"))
+          buffer.clear()
           val c = new Callable[(Int,Int,Int)]() {
             def call(): (Int,Int,Int) = {
               return countup(s)
@@ -81,7 +86,6 @@ object WC {
       //println(">" + c)
       return 1
     }
-    //println(ss)
     return ss
       .map(c => (chP(c), wdC(c, ' ', '\n'), eqC(c, '\n')))
       .reduce(rd)

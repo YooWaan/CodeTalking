@@ -69,7 +69,7 @@ public class WordCounter {
         }
 
         int[] result = sum(results.stream().map(this::futureGet));
-        System.out.println(String.format("%d\t%d\t%d", result[0], result[1], result[2]));
+        System.err.println(String.format("%d\t%d\t%d", result[0], result[1], result[2]));
     }
 
     int[] futureGet(Future<int[]> f) {

@@ -3,17 +3,17 @@
 OS=`uname | tr [A-Z] [a-z]`
 
 PLOT_DIR=plot-data
-AMDAR_RANGE_PY=10 120
+AMDAR_RANGE_PY=50 120
 AMDAR_RANGE=10 400
 
-WC_FILES=test-data/poem.txt test-data/500kb.txt test-data/big.txt
-WC_ARGS_PY=10 $(WC_FILES)
+WC_FILES=test-data/big.txt test-data/poem.txt test-data/500kb.txt
 WC_ARGS=50 $(WC_FILES)
 
 AMDAR_PLOT_FILES=plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_rust.tsv plot-data/amdar_scala.tsv plot-data/amdar_java.tsv plot-data/amdar_py.tsv
-WC_PLOT_FILES=plot-data/wc_cpp.tsv plot-data/wc_go.tsv plot-data/wc_rust.tsv  plot-data/wc_java.tsv plot-data/wc_py.tsv
+WC_PLOT_FILES_EXCLUDE_SCALA=plot-data/wc_cpp.tsv plot-data/wc_go.tsv plot-data/wc_rust.tsv plot-data/wc_java.tsv plot-data/wc_py.tsv
+WC_PLOT_FILES=$(WC_PLOT_FILES_EXCLUDE_SCALA) plot-data/wc_scala.tsv
 
-#plot-data/wc_scala.tsv
+#
 
 ## c options
 
@@ -78,7 +78,7 @@ do_prep:
 
 run_py: do_prep
 	@bash pmon/pmon 'python3 python/matrix.py $(AMDAR_RANGE_PY)' > $(PLOT_DIR)/amdar_py.tsv
-	@bash pmon/pmon 'python3 python/wc.py $(WC_ARGS_PY)' > $(PLOT_DIR)/wc_py.tsv
+	@bash pmon/pmon 'python3 python/wc.py 6 $(WC_FILES)' > $(PLOT_DIR)/wc_py.tsv
 
 run_go: do_prep
 	@bash pmon/pmon './golang/matrix $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_go.tsv
@@ -86,7 +86,7 @@ run_go: do_prep
 
 run_scala: do_prep
 	@bash pmon/pmon 'java -cp $(JAR) example.SMain $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_scala.tsv
-	@bash pmon/pmon 'java -cp $(JAR) example.SMain $(WC_ARGS)' > $(PLOT_DIR)/wc_scala.tsv
+	@bash pmon/pmon 'java -cp $(JAR) example.SMain 25 $(WC_FILES)' > $(PLOT_DIR)/wc_scala.tsv
 
 run_java: do_prep
 	@bash pmon/pmon 'java -cp $(JAR) example.Matrix $(AMDAR_RANGE)' > $(PLOT_DIR)/amdar_java.tsv
@@ -107,5 +107,5 @@ graph:
 	@python pmon/graph.py 'cpu%' amdar_cpu_$(OS).png $(AMDAR_PLOT_FILES)
 	@python pmon/graph.py 'mem(kb)' amdar_mem_$(OS).png $(AMDAR_PLOT_FILES)
 	@python pmon/graph.py 'cpu%' wc_cpu_$(OS).png $(WC_PLOT_FILES)
-	@python pmon/graph.py 'mem(kb)' wc_mem_$(OS).png $(WC_PLOT_FILES)
+	@python pmon/graph.py 'mem(kb)' wc_mem_$(OS).png $(WC_PLOT_FILES_EXCLUDE_SCALA)
 

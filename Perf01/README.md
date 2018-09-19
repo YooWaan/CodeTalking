@@ -58,6 +58,7 @@ Rust
 
 ## Hardware Info
 
+```
 Hardware:
 
     Hardware Overview:
@@ -75,4 +76,30 @@ Hardware:
       SMC Version (system): 1.76f0
       Serial Number (system): C07JH05RDJD2
       Hardware UUID: 48862FF2-0DD0-541F-8A3D-265F17048E24
+```
 
+## Performance
+
+### Linux
+
+#### amdar
+
+cpu usage
+
+![amdar_cpu_linux](result/amdar_cpu_linux.png)
+
+
+memory usage
+
+![amdar_cpu_linux](result/amdar_mem_linux.png)
+
+#### word count
+
+cpu usage
+
+![wc_cpu_linux](result/wc_cpu_linux.png)
+
+
+memory usage
+
+![wc_cpu_linux](result/wc_mem_linux.png)
