@@ -13,7 +13,7 @@ AMDAR_PLOT_FILES=plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_
 WC_PLOT_FILES_EXCLUDE_SCALA=plot-data/wc_cpp.tsv plot-data/wc_go.tsv plot-data/wc_rust.tsv plot-data/wc_java.tsv plot-data/wc_py.tsv
 WC_PLOT_FILES=$(WC_PLOT_FILES_EXCLUDE_SCALA) plot-data/wc_scala.tsv
 
-HT_PLOT_FILES=plot-data/ht_rust.tsv
+HT_PLOT_FILES=plot-data/ht_py.tsv plot-data/ht_go.tsv plot-data/ht_rust.tsv
 
 #
 
