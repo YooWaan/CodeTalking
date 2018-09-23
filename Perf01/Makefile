@@ -56,6 +56,7 @@ build: bin_cpp bin_rust bin_go jar_sbt
 bin_cpp:
 	@cd cpp && $(GCC) $(C_OPT) matrix.cpp -o matrix
 	@cd cpp && $(GCC) $(C_OPT) wc.cpp -o wc
+	@cd cpp && $(GCC) $(C_OPT) httpd.cpp -o httpd
 
 bin_rust:
 	@cd rust && cargo install --root target/install
@@ -66,6 +67,7 @@ jar_sbt:
 bin_go:
 	@cd golang && go build -o matrix matrix.go 
 	@cd golang && go build -o wc wc.go 
+	@cd golang && go build -o httpd httpd.go 
 
 
 ## --------------------------------------------------------
