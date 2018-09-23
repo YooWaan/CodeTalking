@@ -14,3 +14,6 @@ path = "src/main.rs"
 name = "wc"
 path = "src/wc.rs"
 
+[[bin]]
+name = "httpd"
+path = "src/httpd.rs"

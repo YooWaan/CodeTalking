@@ -1,7 +1,5 @@
 #!/bin/sh
 
-
-
 # for mac
 ps_format="-o pid,pcpu,rss,etime"
 # ubuntu
@@ -28,6 +26,8 @@ function monitoring_py_command() {
     # start command
     $cmd &
     sub_pid=$!
+
+    trap "kill ${sub_pid}" SIGINT SIGTERM
 
     python -c "
 import time; import subprocess

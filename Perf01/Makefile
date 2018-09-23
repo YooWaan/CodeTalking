@@ -13,6 +13,8 @@ AMDAR_PLOT_FILES=plot-data/amdar_cpp.tsv plot-data/amdar_go.tsv plot-data/amdar_
 WC_PLOT_FILES_EXCLUDE_SCALA=plot-data/wc_cpp.tsv plot-data/wc_go.tsv plot-data/wc_rust.tsv plot-data/wc_java.tsv plot-data/wc_py.tsv
 WC_PLOT_FILES=$(WC_PLOT_FILES_EXCLUDE_SCALA) plot-data/wc_scala.tsv
 
+HT_PLOT_FILES=plot-data/ht_rust.tsv
+
 #
 
 ## c options
@@ -102,12 +104,24 @@ run_rust: do_prep
 	@bash pmon/pmon './rust/target/install/bin/matrix $(AMDAR_RANGE)'  > $(PLOT_DIR)/amdar_rust.tsv
 	@bash pmon/pmon './rust/target/install/bin/wc 1000 $(WC_FILES)'  > $(PLOT_DIR)/wc_rust.tsv
 
+#
+# bash pmon/pmon 'python3 python/httpd.py' > plot-data/ht_py.tsv
+# bash pmon/pmon './golang/httpd' > plot-data/ht_go.tsv
+# bash pmon/pmon 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.SMain 1000' > plot-data/ht_scala.tsv
+#
+# bash pmon/pmon './rust/target/install/bin/httpd' > plot-data/ht_rust.tsv
+#
+
+
+
 ## --------------------------------------------------------
 
 graph:
 	@echo $(OS)
-	@python pmon/graph.py 'cpu%' amdar_cpu_$(OS).png $(AMDAR_PLOT_FILES)
-	@python pmon/graph.py 'mem(kb)' amdar_mem_$(OS).png $(AMDAR_PLOT_FILES)
-	@python pmon/graph.py 'cpu%' wc_cpu_$(OS).png $(WC_PLOT_FILES)
-	@python pmon/graph.py 'mem(kb)' wc_mem_$(OS).png $(WC_PLOT_FILES_EXCLUDE_SCALA)
+	#@python pmon/graph.py 'cpu%' amdar_cpu_$(OS).png $(AMDAR_PLOT_FILES)
+	#@python pmon/graph.py 'mem(kb)' amdar_mem_$(OS).png $(AMDAR_PLOT_FILES)
+	#@python pmon/graph.py 'cpu%' wc_cpu_$(OS).png $(WC_PLOT_FILES)
+	#@python pmon/graph.py 'mem(kb)' wc_mem_$(OS).png $(WC_PLOT_FILES_EXCLUDE_SCALA)
+	@python pmon/graph.py 'cpu%' ht_cpu_$(OS).png $(HT_PLOT_FILES)
+	@python pmon/graph.py 'mem(kb)' ht_mem_$(OS).png $(HT_PLOT_FILES)
 
