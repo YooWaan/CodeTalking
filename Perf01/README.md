@@ -24,18 +24,15 @@ ok: py, java, scala, go,rust, cpp
 ### Read File
 
 
-ok:  go, java, scala, py
-ng:  rust, cpp
+ok:  go, java, scala, py, rust, cpp
 
 
 ### IO Socket
 
 http
 
-ok:  
-ng:  go, py,  rust, cpp, java, scala
-
-
+ok: py, java, cpp, scala, go
+ng: rust
 
 
 ### (TODO) Synchronized
