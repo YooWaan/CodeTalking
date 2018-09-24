@@ -9,13 +9,14 @@ import java.util.Arrays;
 import java.util.concurrent.Callable;
 import java.util.concurrent.{Executors, ExecutorService, Future};
 
-import com.sun.net.httpserver._
+//import com.sun.net.httpserver.HttpHandler;
+//import com.sun.net.httpserver.HttpServer;
 
 import scala.concurrent.ExecutionContext;
 
 object SMain extends App {
   if (args.length == 1) {
-    Httpd.serve();
+    HttpApp.serve(new WCHttp())
   } else if (args.length == 2) {
     Mat.calc(args(0).toInt, args(1).toInt)
   } else {
@@ -34,6 +35,7 @@ class WCHttp extends WordWebApp {
 
     var futures: List[Future[(Int,Int,Int)]] = List()
     var size = 0
+    var readSz = 0
 
     try {
       do {
@@ -44,8 +46,9 @@ class WCHttp extends WordWebApp {
             return countup(s)
           }
         }
+        readSz += size
         futures =  es.submit(c) :: futures
-      } while(size == alocSize)
+      } while(readSz < contentLength)
 
     } finally {
       in.close();
@@ -58,6 +61,9 @@ class WCHttp extends WordWebApp {
   }
 
   def countup(ss: String): (Int, Int, Int) /* ch, word, line */ = {
+    def eqC(c: Char, e: Char): Int = {
+      return if (c == e) 1 else 0
+    }
     def wdC(c: Char, e1: Char, e2: Char): Int = {
       if (c == e1) {
         return 1
@@ -76,13 +82,4 @@ class WCHttp extends WordWebApp {
       .reduce(rd)
   }
 
-}
-
-object Httpd {
-
-  def serve() {
-    val server = HttpServer.create(new InetSocketAddress(5100), 0)
-    server.createContext("/", new WCHttp())
-    server.start()
-  }
 }

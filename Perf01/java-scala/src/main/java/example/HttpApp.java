@@ -22,10 +22,15 @@ import com.sun.net.httpserver.HttpExchange;
 public class HttpApp {
 
     public static void main(String[] args) throws IOException {
+        serve(new WordWebApp());
+    }
+
+    public static void serve(HttpHandler handler) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(5100), 0);
-        server.createContext("/", new WordWebApp());
+        server.createContext("/", handler);
         server.start();
     }
+
 }
 
 class WordWebApp implements HttpHandler {
@@ -35,9 +40,13 @@ class WordWebApp implements HttpHandler {
     public void handle(HttpExchange ex) throws IOException {
         try {
             Integer length = Integer.valueOf(ex.getRequestHeaders().getFirst("Content-Length"));
+            if (length == 0) {
+                length = Integer.valueOf(ex.getRequestHeaders().getFirst("Content-length"));
+            }
             byte[] body = count(ex.getRequestBody(), length);
             
             ex.sendResponseHeaders(OK, body.length);
+            ex.getResponseHeaders().set("Connection", "close");
             try (OutputStream out = ex.getResponseBody()) {
                 out.write(body);
             }

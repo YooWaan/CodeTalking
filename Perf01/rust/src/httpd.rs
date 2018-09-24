@@ -3,9 +3,9 @@ use std::net::{TcpStream, TcpListener};
 use std::io::{Read,Write};
 use std::sync::mpsc;
 use std::thread;
-use std::sync::atomic::{self, AtomicUsize, Ordering};
+//use std::sync::atomic::{self, AtomicUsize, Ordering};
 
-static COUNTER: AtomicUsize = AtomicUsize::new(0);
+//static COUNTER: AtomicUsize = AtomicUsize::new(0);
 
 
 fn countup(b: &[u8]) -> (i32, i32, i32, bool) {
@@ -58,16 +58,15 @@ fn handle_client(mut stream: TcpStream) {
     let content = format!("{}\t{}\t{}", cnt.0, cnt.1, cnt.2);
     let res = format!("HTTP/1.1 200 OK\r\nContent-Type: text/plan; charset=UTF-8\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}", content.len(), content);
 
-    let sended = match stream.write(res.as_bytes()) {
-        Ok(sz) => sz,
-        Err(e) => {
-            println!("Failed sending response: {}", e);
-            0
-        },
+    match stream.write(res.as_bytes()) {
+        Ok(_) => {},
+        Err(e) => println!("Failed sending response: {}", e),
     };
+    /*
     if sended > 0 {
         COUNTER.fetch_add(1, atomic::Ordering::SeqCst);
     }
+    */
 }
 
 pub fn main() {
@@ -81,10 +80,11 @@ pub fn main() {
             }
             Err(_) => { panic!("connection failed") }
         };
-
+        /*
         let c = COUNTER.load(Ordering::Relaxed);
         if c >= 1000 {
             break;
         }
+        */
     }
 }

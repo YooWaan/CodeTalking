@@ -31,7 +31,7 @@ fn word_count(file: &String) -> i32  {
 
     while !done {
         //let mut buffer: [u8; 30] = [0; 30];
-        let mut buffer : Box<[u8]> = Box::new([0; 30]);
+        let mut buffer : Box<[u8]> = Box::new([0; 2048]);
         let rr = f.read(&mut buffer[..]);
         let sz: usize = match rr {
             Result::Ok(sz) => sz,
@@ -64,6 +64,7 @@ fn word_counts(mut args: Vec<String>) -> i32 {
     for n in 0..times {
         let i = n % args.len();
         //println!("n {}, i {} ==> {:?}", n, i, args.get(i));
+        eprintln!("n {}, i {} ==> {:?}", n, i, args.get(i));
         word_count(args.get(i).unwrap());
     }
     return 0;

@@ -99,6 +99,7 @@ typedef struct {
 Count char_count(char* buffer, int len) {
   Count c = {0, 0, 0};
   bool inword = false;
+  //std::cout << "...... start ......." << std::endl;
   for (int i =0; i < len ;i++) {
     c.bytes++;
     if (buffer[i] == ' ') {
@@ -112,6 +113,7 @@ Count char_count(char* buffer, int len) {
       inword = true;
     }
   }
+  //std::cout << "...... done ......." << std::endl;
   return c;
 }
 
@@ -129,11 +131,12 @@ char* endOfHeader(char* header, int len) {
 }
 
 int toLength(char* found) {
+  //std::cout << "##Header>" << found << std::endl;
   auto ch = strtok(found, " \r\n");
   //std::cout << ">>>>>>CT" << ch << std::endl;
   if (ch != NULL) {
     ch = strtok(NULL, " \r\n");
-    //std::cout << ">>>>>>NXT" << ch << std::endl;
+    //std::cout << ">>>>>>NXT:" << ch << std::endl;
     return atoi(ch);
   }
   return 0;
@@ -152,11 +155,15 @@ int contentLength(char* header) {
 
 Count word_count(int conn, int readLength, int contentLen) {
   Count c = {0, 0, 0};
+  //std::cout << "Con:" << conn << '[' << contentLen << "] read[" << readLength << "]------------------------------" << std::endl;
   if (contentLen >0 && contentLen <= readLength) {
     return c;
   }
-  char buf[100];
-  int n = recv(conn, &buf, sizeof(buf) - 1, 0);
+  int buf_size = contentLen == 0 ? 100 : 2048;
+  std::unique_ptr<char[]> buffer(new char[buf_size]);
+  auto buf = buffer.get();
+
+  int n = recv(conn, buf, buf_size - 1, 0);
   if (n < 0) {
     Err("recv error");
     return c;
@@ -164,7 +171,7 @@ Count word_count(int conn, int readLength, int contentLen) {
   if (n == 0) {
     return c;
   }
-  buf[std::min(n+1, 99)] = NULL;
+  buf[std::min(n+1, buf_size-1)] = 0;
 
   //std::cout << '[' << contentLen << "]------------------------------" << std::endl;
   //std::cout << buf << std::endl;

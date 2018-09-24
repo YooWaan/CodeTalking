@@ -1,57 +1,52 @@
-# 運動会
+# Compare Language
 
 
-## Entry
+## Language
 
 * python
 * Java
 * Scala
-* Go
+* Golang
 * C++
 * Rust
 * (TODO) Haskell
 
-
-
-
 ## Performance Check List
 
+### Matrix Calculation
 
-### Calculation
+N x N の行列積計算処理を start から end まで並列処理
 
-ok: py, java, scala, go,rust, cpp
+```
+for n in start ... end:
+  thread matrix[n][n] x matrix[n][n]
+```
 
 ### Read File
 
+wcコマンドと同じような処理（厳密に実装していない）を作成して、
+引数で指定したファイルを順次読み込んで、wc 処理を実行
 
-ok:  go, java, scala, py, rust, cpp
-
+```
+files = [file1, file2, file3 ... ]
+for n in 0 ... end :
+   thread word_count file[n % files.length]
+```
 
 ### IO Socket
 
-http
+POSTでテキストファイルを送信して、wc 処理を結果を返す
+webapp に ab (apache becnh)を実行
 
-ok: py, java, cpp, scala, go
-ng: rust
+```
+httpd:
+  "/" http_request > word_count > http_response
+```
 
-
-### (TODO) Synchronized
-
-
-
-
-
-
-
-## Reference
-
-
-
-Rust
-
-* https://rust-lang-ja.github.io/the-rust-programming-language-ja/1.6/book/concurrency.html
-
-
+```
+# client
+$ ab -p word_count.txt http://.....
+```
 
 ## Hardware Info
 
@@ -79,7 +74,7 @@ Hardware:
 
 ### Linux
 
-#### amdar
+#### Matrix Calculation
 
 cpu usage
 
@@ -100,3 +95,26 @@ cpu usage
 memory usage
 
 ![wc_cpu_linux](result/wc_mem_linux.png)
+
+
+### MacOS
+
+cpu usage
+
+![amdar_cpu_linux](result/amdar_cpu_darwin.png)
+
+
+memory usage
+
+![amdar_cpu_linux](result/amdar_mem_darwin.png)
+
+#### word count
+
+cpu usage
+
+![wc_cpu_linux](result/wc_cpu_darwin.png)
+
+
+memory usage
+
+![wc_cpu_linux](result/wc_mem_darwin.png)

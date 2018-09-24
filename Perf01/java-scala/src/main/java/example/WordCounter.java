@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Collectors;
 
 import java.nio.CharBuffer;
-import java.nio.charset.Charset;
+//import java.nio.charset.Charset;
 //import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -50,15 +50,20 @@ public class WordCounter {
         int alocSize = 4048;
         Path path = Paths.get(filename);
         CharBuffer buf = CharBuffer.allocate(alocSize);
-        ExecutorService exec = Executors.newCachedThreadPool();
+        //ExecutorService exec = Executors.newCachedThreadPool();
+        ExecutorService exec = Executors.newFixedThreadPool(16);
         List<Future<int[]>> results = new ArrayList();
+
+        //System.err.println(">>> file:" + filename);
 
         try (BufferedReader rd = Files.newBufferedReader(path)) {
             int size = 0;
-            //buf.reset();
             do {
+                buf.clear();
                 size = rd.read(buf);
-                String s = buf.toString();
+                char[] cs = buf.array();
+                String s = new String(Arrays.copyOf(cs, cs.length));
+                //System.err.println(s);
                 Future<int[]> future = exec.submit(() -> {
                     return part(s);
                 });
@@ -81,11 +86,15 @@ public class WordCounter {
     }
 
     int[] part(String s) {
-        return sum(s.chars()
-        .mapToObj(i -> {
-            char ch = s.charAt(i);
-            return new int[]{1, wd(ch, ' ', '\n'), eq(ch, '\n')};
-        }));
+        final int[] ret = new int[]{0, 0, 0};
+        s.chars()
+        .forEach(i -> {
+                char ch = s.charAt(i);
+                ret[0] += 1;
+                ret[1] += wd(ch, ' ', '\n');
+                ret[2] += eq(ch, '\n');
+            });
+        return ret;
     }
 
     int[] sum(Stream<int[]> s) {
