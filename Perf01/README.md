@@ -70,6 +70,18 @@ Hardware:
       Hardware UUID: 48862FF2-0DD0-541F-8A3D-265F17048E24
 ```
 
+```
+Linux Mint
+
+model name	: Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz
+processor	: 0
+processor	: 1
+processor	: 2
+processor	: 3
+MemTotal:       10753172 kB
+
+```
+
 ## Performance
 
 ### Linux
