@@ -99,9 +99,10 @@ run_wc: do_prep
 	@bash pmon/pmon './rust/target/install/bin/wc $(WC_ARGS)'  > $(PLOT_DIR)/wc_rust.tsv
 
 run:
-	#@bash pmon/pmon 'java -cp $(JAR) example.SMain 25 $(WC_FILES)' > $(PLOT_DIR)/wc_scala.tsv
-	@bash pmon/pmon 'java -cp $(JAR) example.WordCounter 100 $(WC_FILES)' > $(PLOT_DIR)/wc_java.tsv
+	@bash pmon/pmon 'java -cp $(JAR) example.SMain $(WC_ARGS)' > $(PLOT_DIR)/wc_scala.tsv
+	# @bash pmon/pmon 'java -cp $(JAR) example.WordCounter 100 $(WC_FILES)' > $(PLOT_DIR)/wc_java.tsv
 	#@bash pmon/pmon './rust/target/install/bin/wc 100 $(WC_FILES)'  > $(PLOT_DIR)/wc_rust.tsv
+	@bash pmon/pmon 'python3 python/wc.py 50 $(WC_FILES)' > $(PLOT_DIR)/wc_py.tsv
 
 #
 # bash pmon/pmon './golang/httpd' > plot-data/ht_go.tsv
@@ -136,4 +137,19 @@ graph_http:
 	@python pmon/graph.py 'mem(kb)' ht_mem_no_jvm_$(OS).png $(HT_PLOT_NO_JVM)
 	@python pmon/graph.py 'mem(kb)' ht_mem_jvm_$(OS).png $(HT_PLOT_JVM)
 	@python pmon/graph.py 'mem(kb)' ht_mem_all_$(OS).png $(HT_PLOT_FILES)
+
+
+
+## --------------------------------------------------------------
+
+
+checkup:
+	@bash pmon/line.sh
+	@bash pmon/checkup.sh plot-data/linux/amdar_*
+	@bash pmon/checkup.sh plot-data/linux/wc_*
+	@bash pmon/checkup.sh plot-data/linux/ht_*
+
+
+
+
 
