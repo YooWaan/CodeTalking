@@ -9,7 +9,19 @@
 * Golang
 * C++
 * Rust
-* (TODO) Haskell
+* (TODO) Haskell, erlang
+
+
+## Requirements Tools
+
+- jdk
+- sbt
+- cargo (rust)
+- gcc or others
+- make
+- go
+- python (and requirements.txt packages for graph.png)
+
 
 ## Performance Check List
 
@@ -82,7 +94,7 @@ MemTotal:       10753172 kB
 
 ```
 
-## Performance
+## Performance Result
 
 ### Linux
 
@@ -130,3 +142,19 @@ cpu usage
 memory usage
 
 ![wc_cpu_linux](result/wc_mem_darwin.png)
+
+
+## Each Language Profile
+
+
+### python
+
+cProfile
+
+### java
+
+- jhat, jstack, jps, hprof
+
+### golang
+
+go tool pprof

@@ -104,6 +104,10 @@ run:
 	#@bash pmon/pmon './rust/target/install/bin/wc 100 $(WC_FILES)'  > $(PLOT_DIR)/wc_rust.tsv
 	@bash pmon/pmon 'python3 python/wc.py 50 $(WC_FILES)' > $(PLOT_DIR)/wc_py.tsv
 
+
+
+
+
 #
 # bash pmon/pmon './golang/httpd' > plot-data/ht_go.tsv
 # bash pmon/pmon 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.SMain 1000' > plot-data/ht_scala.tsv
@@ -114,6 +118,26 @@ run:
 #
 # ab -n 1000 -c 10 -p ./test-data/500kb.txt http://127.0.0.1:5100/
 #
+
+
+## --------------------------------------------------------
+
+
+flame:
+	#@sh ./flame.sh 'python3 python/wc.py 6 $(WC_FILES)'
+	#@sh ./flame.sh 'py-matrix' 'python3 python/matrix.py $(AMDAR_RANGE_PY)'
+	@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 100 -c 4 -p ./test-data/500kb.txt'
+
+
+
+# dtrace
+
+
+
+
+## --------------------------------------------------------
+
+# each lang profilex
 
 
 
