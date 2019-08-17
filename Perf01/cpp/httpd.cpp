@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <queue>
 #include <future>
+#include <functional>
 
 #define Err(comm) std::cerr << (comm) << std::endl;
 #define OK 0

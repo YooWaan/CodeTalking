@@ -1,0 +1,3 @@
+[submodule "Perf01/docs/polyglot-see-golang/themes/hugo-webslides"]
+	path = Perf01/docs/polyglot-see-golang/themes/hugo-webslides
+	url = https://github.com/rcjach/hugo-webslides.git

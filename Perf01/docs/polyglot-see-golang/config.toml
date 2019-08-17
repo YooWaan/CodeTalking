@@ -1,0 +1,25 @@
+baseURL = "/"
+theme = "hugo-webslides"
+languageCode = "ja-jp"
+title = "POLYGLOTな視点"
+
+[params]
+  author = "YooWaan"
+  homepage = "yoowaan.github.io"
+  customcss = ["/css/style.css"]
+
+[params.webslides]
+  banner = false
+  slideshow = true
+  vertical = false
+  autoslide = false
+  changeOnClick = false
+  disableLoop = false
+  minWheelDelta = 40
+  disableNavigateOnScroll = false
+  scrollWait = 450
+  slideOffset = 50
+  hideIndex = false
+
+[blackfriday]
+extensionsmask = ["autoHeaderIds"]
