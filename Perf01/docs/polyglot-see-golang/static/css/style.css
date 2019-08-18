@@ -4,3 +4,9 @@
  color: white;
  opacity: 0.95;
 }
+
+.no-border {
+  border: none;
+}
+
+.no-border th, .no-border td { border: none; }

@@ -12,9 +12,13 @@ weight = 1
 
 ## Call for Proposals
 
-* Go Conference Spring 2019 があった
-* Call for Proposals があった。２件応募したら、１件通って、１件落ちた（そらそうだ）
-* 落ちた方は話たいなぁ
+|||v
+
+- **Event** Go Conference Spring 2019 があった
+- **Speak** Call for Proposals があった。２件応募したら、１件通って、１件落ちた（そらそうだ）
+- **Sad** 落ちた方は話たいなぁ
+
+|||
 
 <!-- : .aligncenter -->![PaperCall](/img/papercall.png)
 
@@ -28,7 +32,7 @@ weight = 1
 ---
 <!-- : .wrap -->
 
-## Polyglot
+<!--: .content-center --><h2>Polyglot</h2>
 
 * Polyglot
   * [polyglot になろう !!](https://speakerdeck.com/januswel/polyglot-ninarou)
@@ -38,3 +42,30 @@ weight = 1
   * 複数の言語処理系で実行できるひとつのプログラムのこと
 * 一般的なの
   * 数カ国後を話せる人
+
+---
+<!--: .wrap -->
+
+## ReCap
+
+<!-- : .flexblock -->
+- {{< flexblock "Cfp" 2 >}}
+<span>call for proposals</span>
+ネタを消化しないと
+{{< /flexblock >}}
+
+- {{< flexblock "Golang" 2 >}}
+<span>efficiency</span>
+本当にいいのか？
+{{< /flexblock >}}
+
+- {{< flexblock "Polyglot" 2 >}}
+<span>ちょっと言語触れるなぁ<span>
+比較してみよう
+{{< /flexblock >}}
+
+<div class="aligncenter">
+<p class="text-data">▼</p>
+</div>
+
+## 何(LinuxProcess)を どう(HowTo)見る をお話していきます

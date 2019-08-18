@@ -32,6 +32,48 @@ date: 2019-08-17T13:37:13+09:00
 
 <!--: .text-data -->  Data text
 
+---
+<!--: .wrap .content-center -->
+
+## List
+
+<ul class="flexblock specs">
+  <li>
+    <div>
+      <h2>
+      {{< svg "fa-long-arrow-right" >}}
+        Navigation with arrow keys and slide counter
+      </h2>
+      Fade transition to all slides.
+    </div>
+  </li>
+  <li>
+    <div>
+      <h2>{{< svg "fa-link" >}}
+        Permalinks
+      </h2>
+      Go to a specific slide. URL: #slide=number
+    </div>
+  </li>
+  <li>
+    <div>
+      <h2>
+        {{< svg "fa-text-height" >}}
+        Vertical rhythm
+      </h2>
+      Use multiples of 8.
+    </div>
+  </li>
+</ul>
+
+---
+
+## svg
+
+
+- {{< svg "fa-ship" >}}, {{< svg "fa-shield" >}}, {{< svg "fa-square" >}}, {{< svg "fa-server" >}}, {{< svg "fa-user-secret" >}}
+
+- {{< svg "fa-ship" >}}
 
 ---
 
