@@ -6,7 +6,7 @@ title = "POLYGLOTな視点"
 [params]
   author = "YooWaan"
   homepage = "yoowaan.github.io"
-  customcss = ["/css/style.css"]
+  customcss = ["/css/style.css", "https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css"]
 
 [params.webslides]
   banner = false
