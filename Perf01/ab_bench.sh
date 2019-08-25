@@ -1,8 +1,9 @@
 #!/bin/sh
 
 kind=$1
-outfile=out-${kind}.perf
-foldfile=fold-${kind}.perf
+perfdir="perf-data"
+outfile=./${perfdir}/out-${kind}.perf
+foldfile=./${perfdir}/fold-${kind}.perf
 httpd=$2
 bench_args=$3
 

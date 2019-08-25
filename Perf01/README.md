@@ -21,6 +21,7 @@
 - make
 - go
 - python (and requirements.txt packages for graph.png)
+- apache2-utils
 
 
 ## Performance Check List

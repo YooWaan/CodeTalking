@@ -8,6 +8,12 @@ weight = 3
 <!-- : .text-intro -->Process / Memory / Network:
 
 ---
+
+
+![](http://www.brendangregg.com/Perf/linux_perf_tools_full.svg)
+
+
+---
 <!--: .wrap -->
 
 ## Process

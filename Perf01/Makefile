@@ -20,6 +20,8 @@ HT_PLOT_FILES=$(HT_PLOT_NO_JVM) $(HT_PLOT_JVM)
 
 #
 
+PLANGS=py go rust cpp java scala
+
 ## c options
 
 GCC=g++
@@ -33,11 +35,11 @@ JAR=./java-scala/target/scala-2.12/java-scala.jar
 
 all: dev graph
 dev: clean build exec_langs
-
+prep_env: dl
 
 ## --------------------------------------------------------
 
-clean: clean_bin clean_graph
+clean: clean_bin clean_graph clean_flamegraph
 	@echo "clean"
 
 
@@ -51,6 +53,21 @@ clean_result:
 
 clean_graph:
 	@rm -f *.png
+
+clean_flamegraph:
+	@rm -f *.pl
+
+## --------------------------------------------------------
+
+
+dl: dl_framegraph
+
+dl_framegraph:
+	@echo "dl: framegraph"
+	curl -o flamegraph.pl https://raw.githubusercontent.com/brendangregg/FlameGraph/master/flamegraph.pl
+	curl -o stackcollapse.pl https://raw.githubusercontent.com/brendangregg/FlameGraph/master/stackcollapse.pl
+	curl -o stackcollapse-perf.pl https://raw.githubusercontent.com/brendangregg/FlameGraph/master/stackcollapse-perf.pl
+	chmod +x *.pl
 
 ## --------------------------------------------------------
 
@@ -125,8 +142,32 @@ run:
 
 flame:
 	#@sh ./flame.sh 'python3 python/wc.py 6 $(WC_FILES)'
-	#@sh ./flame.sh 'py-matrix' 'python3 python/matrix.py $(AMDAR_RANGE_PY)'
-	@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 100 -c 4 -p ./test-data/500kb.txt'
+	@sh ./flame.sh 'py-matrix' 'python3 python/matrix.py $(AMDAR_RANGE_PY)'
+	#@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 100 -c 4 -p ./test-data/500kb.txt'
+
+
+flame_go:
+	@sh ./flame.sh 'go-matrix' './golang/matrix $(AMDAR_RANGE)'
+	@sh ./flame.sh 'go-wc' './golang/wc $(WC_ARGS)'
+	#@sh ./ab_bench.sh 'gohttpd' 'golang/httpd' '-n 10000 -c 4 -p ./test-data/500kb.txt'
+
+flame_scala:
+	@sh ./flame.sh 'scala-matrix' 'java -cp $(JAR) example.SMain $(AMDAR_RANGE)'
+	@sh ./flame.sh 'scala-wc' 'java -cp $(JAR) example.SMain 25 $(WC_FILES)'
+
+flame_java:
+	@sh ./flame.sh 'java-matrix' 'java -cp $(JAR) example.Matrix $(AMDAR_RANGE)'
+	@sh ./flame.sh 'java-wc'  'java -cp $(JAR) example.WordCounter $(WC_ARGS)'
+
+flame_cpp:
+	@sh ./flame.sh 'cpp-matrix' './cpp/matrix $(AMDAR_RANGE)'
+	@sh ./flame.sh 'cpp-wc' './cpp/wc $(WC_ARGS)'
+
+flame_rust:
+	@sh ./flame.sh 'rust-matrix' './rust/target/install/bin/matrix $(AMDAR_RANGE)'
+	@sh ./flame.sh 'rust-wc' './rust/target/install/bin/wc $(WC_ARGS)'
+
+
 
 
 
@@ -161,6 +202,28 @@ graph_http:
 	@python pmon/graph.py 'mem(kb)' ht_mem_no_jvm_$(OS).png $(HT_PLOT_NO_JVM)
 	@python pmon/graph.py 'mem(kb)' ht_mem_jvm_$(OS).png $(HT_PLOT_JVM)
 	@python pmon/graph.py 'mem(kb)' ht_mem_all_$(OS).png $(HT_PLOT_FILES)
+
+graph_langs: graph_matrix_langs graph_wc_langs graph_ht_langs
+	@echo "each langs"
+
+
+graph_matrix_langs:
+	@for f in $(PLANGS); do \
+		python pmon/graph.py 'cpu%' $${f}_matrix_cpu_$(OS).png plot-data/$(OS)/amdar_$${f}.tsv; \
+		python pmon/graph.py 'mem(kb)' $${f}_matrix_mem_$(OS).png plot-data/$(OS)/amdar_$${f}.tsv; \
+	done
+
+graph_wc_langs:
+	@for f in $(PLANGS); do \
+		python pmon/graph.py 'cpu%' $${f}_wc_cpu_$(OS).png plot-data/$(OS)/wc_$${f}.tsv; \
+		python pmon/graph.py 'mem(kb)' $${f}_wc_mem_$(OS).png plot-data/$(OS)/wc_$${f}.tsv; \
+	done
+
+graph_ht_langs:
+	@for f in $(PLANGS); do \
+		python pmon/graph.py 'cpu%' $${f}_ht_cpu_$(OS).png plot-data/$(OS)/ht_$${f}.tsv; \
+		python pmon/graph.py 'mem(kb)' $${f}_ht_mem_$(OS).png plot-data/$(OS)/ht_$${f}.tsv; \
+	done
 
 
 
