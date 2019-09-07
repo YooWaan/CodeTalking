@@ -16,7 +16,7 @@ WC_PLOT_FILES=$(WC_PLOT_FILES_EXCLUDE_JVM) $(WC_PLOT_FILES_JVM)
 
 HT_PLOT_JVM=plot-data/ht_scala.tsv plot-data/ht_java.tsv
 HT_PLOT_NO_JVM=plot-data/ht_cpp.tsv plot-data/ht_go.tsv plot-data/ht_rust.tsv plot-data/ht_py.tsv
-HT_PLOT_FILES=$(HT_PLOT_NO_JVM) $(HT_PLOT_JVM) 
+HT_PLOT_FILES=$(HT_PLOT_NO_JVM) $(HT_PLOT_JVM)
 
 #
 
@@ -86,9 +86,9 @@ jar_sbt:
 	@cd java-scala && sbt assembly
 
 bin_go:
-	@cd golang && go build -o matrix matrix.go 
-	@cd golang && go build -o wc wc.go 
-	@cd golang && go build -o httpd httpd.go 
+	@cd golang && go build -o matrix matrix.go
+	@cd golang && go build -o wc wc.go
+	@cd golang && go build -o httpd httpd.go
 
 
 ## --------------------------------------------------------
@@ -160,7 +160,7 @@ flame_java:
 	@sh ./flame.sh 'java-wc'  'java -cp $(JAR) example.WordCounter $(WC_ARGS)'
 
 flame_cpp:
-	@sh ./flame.sh 'cpp-matrix' './cpp/matrix $(AMDAR_RANGE)'
+	#@sh ./flame.sh 'cpp-matrix' './cpp/matrix $(AMDAR_RANGE)'
 	@sh ./flame.sh 'cpp-wc' './cpp/wc $(WC_ARGS)'
 
 flame_rust:
@@ -235,8 +235,3 @@ checkup:
 	@bash pmon/checkup.sh plot-data/linux/amdar_*
 	@bash pmon/checkup.sh plot-data/linux/wc_*
 	@bash pmon/checkup.sh plot-data/linux/ht_*
-
-
-
-
-

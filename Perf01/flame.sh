@@ -10,9 +10,10 @@ cmd=$2
 hertz=99
 
 perf_kernel() {
-	$cmd &
-	pid=$!
-	sudo perf record -F $hertz -a -g -p $pid
+#	$cmd &
+#	pid=$!
+#	sudo perf record -F $hertz -a -g -p $pid
+	sudo perf record -F 99 -a -g -- $cmd
 	sudo perf script > $outfile
 
 	# fold out
@@ -49,8 +50,8 @@ stackcnt_mem() {
 	sudo $scnt -p $pid -U c:malloc
 }
 
-echo "perf_mem: ${kind}"
-perf_mem
+#echo "perf_mem: ${kind}"
+# perf_mem
 #stackcnt_mem
 echo "perf_kernel: ${kind}"
 perf_kernel

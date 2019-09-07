@@ -126,8 +126,6 @@ def mul(m1: Array[Array[Int]], m2: Array[Array[Int]]): Array[Int] = {
 
 ## <i class="icon-cplusplus"></i> C++
 
-<script src="http://gist-it.appspot.com/https://github.com/YooWaan/CodeTalking/blob/PF/Perf01/cpp/matrix.cpp"></script>
-
 
 ### CPU/ Mem Usage
 
@@ -141,8 +139,6 @@ def mul(m1: Array[Array[Int]], m2: Array[Array[Int]]): Array[Int] = {
 ---
 
 ## <i class="icon-java"></i> Java
-
-<script src="http://gist-it.appspot.com/https://github.com/YooWaan/CodeTalking/blob/PF/Perf01/java-scala/src/main/java/example/Matrix.java"></script>
 
 
 ### CPU/ Mem Usage
@@ -158,7 +154,6 @@ def mul(m1: Array[Array[Int]], m2: Array[Array[Int]]): Array[Int] = {
 
 ## <i class="icon-python"></i> Python
 
-<script src="http://gist-it.appspot.com/https://github.com/YooWaan/CodeTalking/blob/PF/Perf01/python/matrix.py"></script>
 
 
 ### CPU/ Mem Usage
@@ -174,7 +169,6 @@ def mul(m1: Array[Array[Int]], m2: Array[Array[Int]]): Array[Int] = {
 
 ## <i class="icon-scala"></i> Scala
 
-<script src="http://gist-it.appspot.com/https://github.com/YooWaan/CodeTalking/blob/PF/Perf01/java-scala/src/main/scala/example/Mat.java"></script>
 
 
 ### CPU/ Mem Usage
@@ -190,7 +184,6 @@ def mul(m1: Array[Array[Int]], m2: Array[Array[Int]]): Array[Int] = {
 
 ## <i class="icon-rust"></i> Rust
 
-<script src="http://gist-it.appspot.com/https://github.com/YooWaan/CodeTalking/blob/PF/Perf01/rust/src/main.rs"></script>
 
 
 ### CPU/ Mem Usage
@@ -205,8 +198,6 @@ def mul(m1: Array[Array[Int]], m2: Array[Array[Int]]): Array[Int] = {
 ---
 
 ## <i class="icon-go"></i> Golang
-
-<script src="http://gist-it.appspot.com/https://github.com/YooWaan/CodeTalking/blob/PF/Perf01/golang/matrix.go"></script>
 
 
 ### CPU/ Mem Usage
@@ -224,14 +215,14 @@ def mul(m1: Array[Array[Int]], m2: Array[Array[Int]]): Array[Int] = {
 ## Result Table
 
 <!--: no-border -->
-| Lang                           | Lines   | libs   | Matrix | Runtime(sec) | CPU(%)   | Mem(mb)  | Point | Rank |
-| ------------------------------ | ------- | ------ | ------ | ------------ | -------- | -------- | ----- | ---- |
+|              Lang              | Lines   | libs   | Matrix | Runtime(sec) | CPU(%)   | Mem(mb)  | Point | Rank |
+|:------------------------------:| ------- | ------ | ------ | ------------ | -------- | -------- | ----- | ---- |
 | <i class="icon-cplusplus"></i> | 107 (5) | 🤔(3)  | 🤔(3)  | 11   (5)     | 323  (5) | 263  (2) | 23    | 6    |
-| <i class="icon-java"></i>      | 64 (3)  | 🦸 (1) | 😀(2)  | 4.9   (3)    | 417 (3)  | 87  (1)  | 13    | 1    |
-| <i class="icon-python"></i>    | 36 (2)  | 🦸 (1) | 🦸 (1) | 11     (6)   | 180  (6) | 45   (6) | 22    | 5    |
-| <i class="icon-scala"></i>     | 20 (1)  | 🦸 (1) | 😀(2)  | 1.36  (2)    | 260  (4) | 635  (5) | 15    | 3    |
-| <i class="icon-rust"></i>      | 87 (4)  | 😀 (2) | 😀(2)  | 1.20 (1)     | 731 (1)  | 518  (4) | 14    | 2    |
-| <i class="icon-go"></i>        | 155 (6) | 😀 (2) | 😀(2)  | 6.4   (4)    | 425 (2)  | 480  (3) | 19    | 4    |
+|   <i class="icon-java"></i>    | 64 (3)  | 🦸 (1) | 😀(2)  | 4.9   (3)    | 417 (3)  | 87  (1)  | 13    | 1    |
+|  <i class="icon-python"></i>   | 36 (2)  | 🦸 (1) | 🦸 (1) | 11     (6)   | 180  (6) | 45   (6) | 22    | 5    |
+|   <i class="icon-scala"></i>   | 20 (1)  | 🦸 (1) | 😀(2)  | 1.36  (2)    | 260  (4) | 635  (5) | 15    | 3    |
+|   <i class="icon-rust"></i>    | 87 (4)  | 😀 (2) | 😀(2)  | 1.20 (1)     | 731 (1)  | 518  (4) | 14    | 2    |
+|    <i class="icon-go"></i>     | 89 (6) | 😀 (2) | 😀(2)  | 6.4   (4)    | 425 (2)  | 480  (3) | 19    | 4    |
 
 ---
 

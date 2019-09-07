@@ -24,6 +24,13 @@ weight: 2
 パフォーマンス計測と一緒の枠組み
 
 ---
+<!-- : .wrap  -->
+
+## 青いところは、基本扱えない
+
+<!--: .aligncenter -->![](/img/arch.png)
+
+---
 <!--: fullscreen .card-50 -->
 
 {{< div class="flex-content" >}}

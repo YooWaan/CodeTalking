@@ -8,6 +8,15 @@ weight = 3
 <!-- : .text-intro -->Process / Memory / Network:
 
 ---
+<!-- : .wrap  -->
+
+
+
+
+<!--: .aligncenter -->
+![](http://www.brendangregg.com/perf_events/perf_events_map.png)
+
+---
 
 
 ![](http://www.brendangregg.com/Perf/linux_perf_tools_full.svg)
@@ -18,15 +27,24 @@ weight = 3
 
 ## Process
 
+
+<!--: .aligncenter -->![](/img/process.png)
+
+
 ---
 <!--: .wrap -->
 
 ## Memory
 
+<!--: .aligncenter -->![](/img/mem.png)
+
+
 ---
 <!--: .wrap -->
 
 ## Networks
+
+<!--: .aligncenter -->![](/img/network.png)
 
 
 ---
