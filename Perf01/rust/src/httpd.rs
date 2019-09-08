@@ -10,7 +10,7 @@ use std::thread;
 
 fn countup(b: &[u8]) -> (i32, i32, i32, bool) {
     let s = std::str::from_utf8(b).unwrap();
-    //println!("[{}]{}",i, s);
+    //println!("{}", s);
     let cs = s.chars();
     return cs.fold((b.len() as i32, 0,0, false), |t, ch| {
         match (ch, t.3) {
@@ -57,11 +57,12 @@ fn handle_client(mut stream: TcpStream) {
     let cnt = data.iter().fold((0,0,0), |total,x| (total.0 + x.0, total.1 + x.1, total.2 + x.2));
     let content = format!("{}\t{}\t{}", cnt.0, cnt.1, cnt.2);
     let res = format!("HTTP/1.1 200 OK\r\nContent-Type: text/plan; charset=UTF-8\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}", content.len(), content);
-
+    //println!("{}", res);
     match stream.write(res.as_bytes()) {
         Ok(_) => {},
         Err(e) => println!("Failed sending response: {}", e),
     };
+    stream.flush().unwrap();
     /*
     if sended > 0 {
         COUNTER.fetch_add(1, atomic::Ordering::SeqCst);
