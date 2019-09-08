@@ -18,6 +18,10 @@ HT_PLOT_JVM=plot-data/ht_scala.tsv plot-data/ht_java.tsv
 HT_PLOT_NO_JVM=plot-data/ht_cpp.tsv plot-data/ht_go.tsv plot-data/ht_rust.tsv plot-data/ht_py.tsv
 HT_PLOT_FILES=$(HT_PLOT_NO_JVM) $(HT_PLOT_JVM)
 
+AB_ARGS_PY=-n 100 -c 4 -p ./test-data/500kb.txt
+AB_ARGS=-n 10000 -c 4 -p ./test-data/500kb.txt
+
+
 #
 
 PLANGS=py go rust cpp java scala
@@ -115,11 +119,13 @@ run_wc: do_prep
 	@bash pmon/pmon './cpp/wc $(WC_ARGS)' > $(PLOT_DIR)/wc_cpp.tsv
 	@bash pmon/pmon './rust/target/install/bin/wc $(WC_ARGS)'  > $(PLOT_DIR)/wc_rust.tsv
 
-run:
-	@bash pmon/pmon 'java -cp $(JAR) example.SMain $(WC_ARGS)' > $(PLOT_DIR)/wc_scala.tsv
-	# @bash pmon/pmon 'java -cp $(JAR) example.WordCounter 100 $(WC_FILES)' > $(PLOT_DIR)/wc_java.tsv
-	#@bash pmon/pmon './rust/target/install/bin/wc 100 $(WC_FILES)'  > $(PLOT_DIR)/wc_rust.tsv
-	@bash pmon/pmon 'python3 python/wc.py 50 $(WC_FILES)' > $(PLOT_DIR)/wc_py.tsv
+run_http:
+	#@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 20 -c 4 -p ./test-data/500kb.txt' 1 '$(PLOT_DIR)/http_py.tsv'
+	#@sh ./ab_bench.sh 'gohttpd' 'golang/httpd' '$(AB_ARGS)' 1 '$(PLOT_DIR)/http_go.tsv'
+	#@sh ./ab_bench.sh 'javahttpd' 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.HttpApp 10000' '$(AB_ARGS)' 2 '$(PLOT_DIR)/http_java.tsv'
+	#@sh ./ab_bench.sh 'scalahttpd' 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.SMain 10000' '$(AB_ARGS)' 2 '$(PLOT_DIR)/http_scala.tsv'
+	#@sh ./ab_bench.sh 'rusthttpd' './rust/target/install/bin/httpd' '$(AB_ARGS)' 1 '$(PLOT_DIR)/http_rust.tsv'
+	@sh ./ab_bench.sh 'cpphttpd' './cpp/httpd' '$(AB_ARGS)' 1 '$(PLOT_DIR)/http_cpp.tsv'
 
 
 
@@ -143,13 +149,22 @@ run:
 flame:
 	#@sh ./flame.sh 'python3 python/wc.py 6 $(WC_FILES)'
 	@sh ./flame.sh 'py-matrix' 'python3 python/matrix.py $(AMDAR_RANGE_PY)'
-	#@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 100 -c 4 -p ./test-data/500kb.txt'
+	#@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 100 -c 4 -p ./test-data/500kb.txt' 0
+
+flame_http:
+	#@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 100 -c 4 -p ./test-data/500kb.txt' 1 yes
+	#@sh ./ab_bench.sh 'gohttpd' 'golang/httpd' '$(AB_ARGS)' 1 yes
+	@sh ./ab_bench.sh 'javahttpd' 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.HttpApp 10000' '$(AB_ARGS)' 2 yes
+	@sh ./ab_bench.sh 'scalahttpd' 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.SMain 10000' '$(AB_ARGS)' 2 yes
+	@sh ./ab_bench.sh 'rusthttpd' 'rust/target/install/bin/httpd' '$(AB_ARGS)' 1 yes
+	@sh ./ab_bench.sh 'cpphttpd' 'cpp/httpd' '$(AB_ARGS)' 1 yes
+
 
 
 flame_go:
 	@sh ./flame.sh 'go-matrix' './golang/matrix $(AMDAR_RANGE)'
 	@sh ./flame.sh 'go-wc' './golang/wc $(WC_ARGS)'
-	#@sh ./ab_bench.sh 'gohttpd' 'golang/httpd' '-n 10000 -c 4 -p ./test-data/500kb.txt'
+	#@sh ./ab_bench.sh 'gohttpd' 'golang/httpd' '-n 10000 -c 4 -p ./test-data/500kb.txt' 0
 
 flame_scala:
 	@sh ./flame.sh 'scala-matrix' 'java -cp $(JAR) example.SMain $(AMDAR_RANGE)'

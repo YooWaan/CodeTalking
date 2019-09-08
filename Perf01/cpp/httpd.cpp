@@ -59,7 +59,7 @@ public:
   }
 
   template<class F, class... Args>
-  auto submit(F&& f, Args&&... args) 
+  auto submit(F&& f, Args&&... args)
     -> std::future<typename std::result_of<F(Args...)>::type>
   {
     using return_type = typename std::result_of<F(Args...)>::type;
@@ -67,7 +67,7 @@ public:
     auto task = std::make_shared< std::packaged_task<return_type()> >(
             std::bind(std::forward<F>(f), std::forward<Args>(args)...)
         );
-        
+
     std::future<return_type> res = task->get_future();
     {
       std::unique_lock<std::mutex> lock(mtx_);
@@ -265,7 +265,7 @@ int main() {
     return -1;
   }
 
-  Executor exec(4, 1000);
+  Executor exec(4, 10000);
 
   while (!exec.stop) {
     //std::cout << "######## accept...." << std::endl;
