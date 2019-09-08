@@ -4,6 +4,8 @@ weight: 7
 
 <!-- : .text-data -->Multi Threading
 
+<!-- : .text-intro -->Matrix multiply  :: Report
+
 
 ---
 <!--: .wrap -->
@@ -214,7 +216,7 @@ def mul(m1: Array[Array[Int]], m2: Array[Array[Int]]): Array[Int] = {
 
 ## Result Table
 
-<!--: no-border -->
+
 |              Lang              | Lines   | libs   | Matrix | Runtime(sec) | CPU(%)   | Mem(mb)  | Point | Rank |
 |:------------------------------:| ------- | ------ | ------ | ------------ | -------- | -------- | ----- | ---- |
 | <i class="icon-cplusplus"></i> | 107 (5) | 🤔(3)  | 🤔(3)  | 11   (5)     | 323  (5) | 263  (2) | 23    | 6    |
