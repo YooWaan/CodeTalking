@@ -25,6 +25,7 @@ AB_ARGS=-n 10000 -c 4 -p ./test-data/500kb.txt
 #
 
 PLANGS=py go rust cpp java scala
+# PLANGS=rust cpp
 
 ## c options
 
@@ -120,12 +121,12 @@ run_wc: do_prep
 	@bash pmon/pmon './rust/target/install/bin/wc $(WC_ARGS)'  > $(PLOT_DIR)/wc_rust.tsv
 
 run_http:
-	#@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 20 -c 4 -p ./test-data/500kb.txt' 1 '$(PLOT_DIR)/http_py.tsv'
-	#@sh ./ab_bench.sh 'gohttpd' 'golang/httpd' '$(AB_ARGS)' 1 '$(PLOT_DIR)/http_go.tsv'
-	#@sh ./ab_bench.sh 'javahttpd' 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.HttpApp 10000' '$(AB_ARGS)' 2 '$(PLOT_DIR)/http_java.tsv'
-	#@sh ./ab_bench.sh 'scalahttpd' 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.SMain 10000' '$(AB_ARGS)' 2 '$(PLOT_DIR)/http_scala.tsv'
-	#@sh ./ab_bench.sh 'rusthttpd' './rust/target/install/bin/httpd' '$(AB_ARGS)' 1 '$(PLOT_DIR)/http_rust.tsv'
-	@sh ./ab_bench.sh 'cpphttpd' './cpp/httpd' '$(AB_ARGS)' 1 '$(PLOT_DIR)/http_cpp.tsv'
+	#@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 20 -c 4 -p ./test-data/500kb.txt' 1 '$(PLOT_DIR)/ht_py.tsv'
+	#@sh ./ab_bench.sh 'gohttpd' 'golang/httpd' '$(AB_ARGS)' 1 '$(PLOT_DIR)/ht_go.tsv'
+	#@sh ./ab_bench.sh 'javahttpd' 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.HttpApp 10000' '$(AB_ARGS)' 2 '$(PLOT_DIR)/ht_java.tsv'
+	#@sh ./ab_bench.sh 'scalahttpd' 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.SMain 10000' '$(AB_ARGS)' 2 '$(PLOT_DIR)/ht_scala.tsv'
+	@sh ./ab_bench.sh 'rusthttpd' './rust/target/install/bin/httpd' '$(AB_ARGS)' 1 '$(PLOT_DIR)/ht_rust.tsv'
+	@sh ./ab_bench.sh 'cpphttpd' './cpp/httpd' '$(AB_ARGS)' 1 '$(PLOT_DIR)/ht_cpp.tsv'
 
 
 
@@ -236,8 +237,8 @@ graph_wc_langs:
 
 graph_ht_langs:
 	@for f in $(PLANGS); do \
-		python pmon/graph.py 'cpu%' $${f}_ht_cpu_$(OS).png plot-data/$(OS)/ht_$${f}.tsv; \
-		python pmon/graph.py 'mem(kb)' $${f}_ht_mem_$(OS).png plot-data/$(OS)/ht_$${f}.tsv; \
+		python pmon/graph.py 'cpu%' $${f}_ht_cpu_$(OS).png plot-data/ht_$${f}.tsv; \
+		python pmon/graph.py 'mem(kb)' $${f}_ht_mem_$(OS).png plot-data/ht_$${f}.tsv; \
 	done
 
 
