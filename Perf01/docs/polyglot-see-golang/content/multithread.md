@@ -219,12 +219,12 @@ def mul(m1: Array[Array[Int]], m2: Array[Array[Int]]): Array[Int] = {
 
 |              Lang              | Lines   | libs   | Matrix | Runtime(sec) | CPU(%)   | Mem(mb)  | Point | Rank |
 |:------------------------------:| ------- | ------ | ------ | ------------ | -------- | -------- | ----- | ---- |
-| <i class="icon-cplusplus"></i> | 107 (5) | 🤔(3)  | 🤔(3)  | 11   (5)     | 323  (5) | 263  (2) | 23    | 6    |
-|   <i class="icon-java"></i>    | 64 (3)  | 🦸 (1) | 😀(2)  | 4.9   (3)    | 417 (3)  | 87  (1)  | 13    | 1    |
-|  <i class="icon-python"></i>   | 36 (2)  | 🦸 (1) | 🦸 (1) | 11     (6)   | 180  (6) | 45   (6) | 22    | 5    |
-|   <i class="icon-scala"></i>   | 20 (1)  | 🦸 (1) | 😀(2)  | 1.36  (2)    | 260  (4) | 635  (5) | 15    | 3    |
-|   <i class="icon-rust"></i>    | 87 (4)  | 😀 (2) | 😀(2)  | 1.20 (1)     | 731 (1)  | 518  (4) | 14    | 2    |
-|    <i class="icon-go"></i>     | 89 (6) | 😀 (2) | 😀(2)  | 6.4   (4)    | 425 (2)  | 480  (3) | 19    | 4    |
+| <i class="icon-cplusplus"></i> | 107 (5) | {{< svg fa-ban>}} (3)  | {{< svg fa-ban >}} (3)  | 11   (5)     | 323  (5) | 263  (2) | 23    | 6    |
+|   <i class="icon-java"></i>    | 64 (3)  | {{< svg fa-angellist >}} 1) | {{< svg fa-circle >}} (2)  | 4.9   (3)    | 417 (3)  | 87  (1)  | 13    | 1    |
+|  <i class="icon-python"></i>   | 36 (2)  | {{< svg fa-angellist >}} (1) | 🦸 (1) | 11     (6)   | 180  (6) | 45   (6) | 22    | 5    |
+|   <i class="icon-scala"></i>   | 20 (1)  | {{< svg fa-angellist >}} (1) | {{< svg fa-circle >}} (2)  | 1.36  (2)    | 260  (4) | 635  (5) | 15    | 3    |
+|   <i class="icon-rust"></i>    | 87 (4)  | {{< svg fa-circle >}} (2) | {{< svg fa-circle >}}　(2)  | 1.20 (1)     | 731 (1)  | 518  (4) | 14    | 2    |
+|    <i class="icon-go"></i>     | 89 (6) | {{< svg fa-circle >}} (2) | {{< svg fa-circle >}} (2)  | 6.4   (4)    | 425 (2)  | 480  (3) | 19    | 4    |
 
 ---
 

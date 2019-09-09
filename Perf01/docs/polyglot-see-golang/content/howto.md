@@ -86,7 +86,7 @@ weight: 2
   </tr>
   <tr>
     <td>書き易さ</td>
-    <td>易 🦸 〜 😀 〜 🤔 難</td>
+    <td>易 {{< svg fa-angellist >}}  〜 {{< svg fa-circle >}}  〜 {{< svg fa-ban >}}難</td>
   </tr>
 </table>
 
@@ -116,9 +116,47 @@ weight: 2
   </tr>
   <tr>
     <td>書き易さ</td>
-    <td>易 🦸 〜 😀 〜 🤔 難</td>
+    <td>易 {{< svg fa-angellist >}}  〜 {{< svg fa-circle >}}  〜 {{< svg fa-ban >}}難</td>
   </tr>
 </table>
+
+---
+<!--: .wrap -->
+
+## 手法 :: ワークロード分析
+
+
+<!-- : .aligncenter -->![](/img/workload.png)
+
+---
+<!--: .wrap -->
+
+## ReCap
+
+<ul class="flexblock specs">
+  <li>
+    <div>
+      <h2>{{< svg fa-check >}}
+      known-known
+      </h2>
+      知っていること チェックしなければいけない指標を知っていて、指標の値も知っている
+    </div>
+  </li>
+  <li>
+    <div>
+      <h2>{{< svg fa-check >}}Known-Unknown</h2>
+      知らないことをわかっていること 指標をチェックできること知っていて、指標の値を知らない
+    </div>
+  </li>
+  <li>
+    <div>
+      <h2>{{< svg fa-check >}} Unknown-Unknown</h2>
+      知らないことを知らないこと 指標をチェックできるかもわからないし、値も知らない
+    </div>
+  </li>
+</ul>
+
+
 
 ---
 <!--: .wrap -->
@@ -127,10 +165,12 @@ weight: 2
 
 |||
 
-## known-unknown
-
-
+#### known-known
 
 |||
 
-## unknown-unknown
+#### known-unknown
+
+|||
+
+#### unknown-unknown
