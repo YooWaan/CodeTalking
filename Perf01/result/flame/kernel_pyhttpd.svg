@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" width="1200" height="374" onload="init(evt)" viewBox="0 0 1200 374" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg version="1.1" width="1200" height="2134" onload="init(evt)" viewBox="0 0 1200 2134" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <!-- Flame graph stack visualization. See https://github.com/brendangregg/FlameGraph for latest version, and http://www.brendangregg.com/flamegraphs.html for examples. -->
 <!-- NOTES:  -->
 <defs>
@@ -334,172 +334,1252 @@
 	}
 ]]>
 </script>
-<rect x="0.0" y="0" width="1200.0" height="374.0" fill="url(#background)"  />
+<rect x="0.0" y="0" width="1200.0" height="2134.0" fill="url(#background)"  />
 <text id="title" x="600.00" y="24" >Flame Graph</text>
-<text id="details" x="10.00" y="357" > </text>
+<text id="details" x="10.00" y="2117" > </text>
 <text id="unzoom" x="10.00" y="24" class="hide">Reset Zoom</text>
 <text id="search" x="1090.00" y="24" >Search</text>
-<text id="matched" x="1090.00" y="357" > </text>
+<text id="matched" x="1090.00" y="2117" > </text>
 <g id="frames">
 <g >
-<title>__x64_sys_futex (4 samples, 23.53%)</title><rect x="148.8" y="229" width="277.7" height="15.0" fill="rgb(232,91,35)" rx="2" ry="2" />
-<text  x="151.82" y="239.5" >__x64_sys_futex</text>
+<title>_PyEval_EvalFrameDefault (28 samples, 3.73%)</title><rect x="985.5" y="2005" width="44.0" height="15.0" fill="rgb(239,155,2)" rx="2" ry="2" />
+<text  x="988.47" y="2015.5" >_PyE..</text>
 </g>
 <g >
-<title>__lll_lock_wait (4 samples, 23.53%)</title><rect x="148.8" y="277" width="277.7" height="15.0" fill="rgb(222,179,37)" rx="2" ry="2" />
-<text  x="151.82" y="287.5" >__lll_lock_wait</text>
+<title>try_to_wake_up (1 samples, 0.13%)</title><rect x="897.4" y="1845" width="1.5" height="15.0" fill="rgb(248,109,51)" rx="2" ry="2" />
+<text  x="900.36" y="1855.5" ></text>
 </g>
 <g >
-<title>[unknown] (15 samples, 88.24%)</title><rect x="148.8" y="293" width="1041.2" height="15.0" fill="rgb(244,170,7)" rx="2" ry="2" />
-<text  x="151.82" y="303.5" >[unknown]</text>
+<title>PyUnicode_RichCompare (21 samples, 2.80%)</title><rect x="126.4" y="2037" width="33.1" height="15.0" fill="rgb(217,225,39)" rx="2" ry="2" />
+<text  x="129.43" y="2047.5" >Py..</text>
 </g>
 <g >
-<title>PyUnicode_Contains (1 samples, 5.88%)</title><rect x="10.0" y="293" width="69.4" height="15.0" fill="rgb(231,44,53)" rx="2" ry="2" />
-<text  x="13.00" y="303.5" >PyUnico..</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1077" width="3.2" height="15.0" fill="rgb(239,113,29)" rx="2" ry="2" />
+<text  x="412.63" y="1087.5" ></text>
 </g>
 <g >
-<title>drop_futex_key_refs.isra.19 (1 samples, 5.88%)</title><rect x="565.3" y="197" width="69.4" height="15.0" fill="rgb(247,109,13)" rx="2" ry="2" />
-<text  x="568.29" y="207.5" >drop_fu..</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1765" width="3.2" height="15.0" fill="rgb(235,175,50)" rx="2" ry="2" />
+<text  x="412.63" y="1775.5" ></text>
 </g>
 <g >
-<title>__perf_event_task_sched_in (8 samples, 47.06%)</title><rect x="634.7" y="117" width="555.3" height="15.0" fill="rgb(207,44,19)" rx="2" ry="2" />
-<text  x="637.71" y="127.5" >__perf_event_task_sched_in</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1189" width="3.2" height="15.0" fill="rgb(208,49,51)" rx="2" ry="2" />
+<text  x="412.63" y="1199.5" ></text>
 </g>
 <g >
-<title>futex_wait (8 samples, 47.06%)</title><rect x="634.7" y="197" width="555.3" height="15.0" fill="rgb(250,78,29)" rx="2" ry="2" />
-<text  x="637.71" y="207.5" >futex_wait</text>
+<title>do_syscall_64 (1 samples, 0.13%)</title><rect x="409.6" y="85" width="1.6" height="15.0" fill="rgb(233,144,45)" rx="2" ry="2" />
+<text  x="412.63" y="95.5" ></text>
 </g>
 <g >
-<title>perf_pmu_enable.part.105 (8 samples, 47.06%)</title><rect x="634.7" y="101" width="555.3" height="15.0" fill="rgb(239,140,34)" rx="2" ry="2" />
-<text  x="637.71" y="111.5" >perf_pmu_enable.part.105</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="821" width="3.2" height="15.0" fill="rgb(234,68,51)" rx="2" ry="2" />
+<text  x="412.63" y="831.5" ></text>
 </g>
 <g >
-<title>futex_wait_queue_me (8 samples, 47.06%)</title><rect x="634.7" y="181" width="555.3" height="15.0" fill="rgb(205,9,23)" rx="2" ry="2" />
-<text  x="637.71" y="191.5" >futex_wait_queue_me</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1701" width="3.2" height="15.0" fill="rgb(230,147,32)" rx="2" ry="2" />
+<text  x="412.63" y="1711.5" ></text>
 </g>
 <g >
-<title>finish_task_switch (8 samples, 47.06%)</title><rect x="634.7" y="133" width="555.3" height="15.0" fill="rgb(253,103,46)" rx="2" ry="2" />
-<text  x="637.71" y="143.5" >finish_task_switch</text>
+<title>PyObject_RichCompare (1 samples, 0.13%)</title><rect x="308.9" y="1989" width="1.6" height="15.0" fill="rgb(252,124,39)" rx="2" ry="2" />
+<text  x="311.93" y="1999.5" ></text>
 </g>
 <g >
-<title>__sched_text_start (8 samples, 47.06%)</title><rect x="634.7" y="149" width="555.3" height="15.0" fill="rgb(228,108,21)" rx="2" ry="2" />
-<text  x="637.71" y="159.5" >__sched_text_start</text>
+<title>userfaultfd_unmap_complete (1 samples, 0.13%)</title><rect x="409.6" y="37" width="1.6" height="15.0" fill="rgb(225,189,2)" rx="2" ry="2" />
+<text  x="412.63" y="47.5" ></text>
 </g>
 <g >
-<title>pthread_cond_timedwait@@GLIBC_2.3.2 (10 samples, 58.82%)</title><rect x="495.9" y="277" width="694.1" height="15.0" fill="rgb(241,202,1)" rx="2" ry="2" />
-<text  x="498.88" y="287.5" >pthread_cond_timedwait@@GLIBC_2.3.2</text>
+<title>PyUnicode_Contains (8 samples, 1.07%)</title><rect x="11.6" y="2053" width="12.6" height="15.0" fill="rgb(249,146,0)" rx="2" ry="2" />
+<text  x="14.57" y="2063.5" ></text>
 </g>
 <g >
-<title>syscall_return_via_sysret (1 samples, 5.88%)</title><rect x="426.5" y="261" width="69.4" height="15.0" fill="rgb(237,77,23)" rx="2" ry="2" />
-<text  x="429.47" y="271.5" >syscall..</text>
+<title>do_syscall_64 (1 samples, 0.13%)</title><rect x="947.7" y="1941" width="1.6" height="15.0" fill="rgb(238,213,47)" rx="2" ry="2" />
+<text  x="950.71" y="1951.5" ></text>
 </g>
 <g >
-<title>x86_pmu_enable (8 samples, 47.06%)</title><rect x="634.7" y="85" width="555.3" height="15.0" fill="rgb(219,0,37)" rx="2" ry="2" />
-<text  x="637.71" y="95.5" >x86_pmu_enable</text>
+<title>do_syscall_64 (6 samples, 0.80%)</title><rect x="1180.6" y="2021" width="9.4" height="15.0" fill="rgb(230,61,22)" rx="2" ry="2" />
+<text  x="1183.56" y="2031.5" ></text>
 </g>
 <g >
-<title>python3 (17 samples, 100.00%)</title><rect x="10.0" y="309" width="1180.0" height="15.0" fill="rgb(228,142,34)" rx="2" ry="2" />
-<text  x="13.00" y="319.5" >python3</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1461" width="3.2" height="15.0" fill="rgb(250,176,4)" rx="2" ry="2" />
+<text  x="412.63" y="1471.5" ></text>
 </g>
 <g >
-<title>native_write_msr (4 samples, 23.53%)</title><rect x="148.8" y="37" width="277.7" height="15.0" fill="rgb(207,161,53)" rx="2" ry="2" />
-<text  x="151.82" y="47.5" >native_write_msr</text>
+<title>PyUnicode_Contains (2 samples, 0.27%)</title><rect x="360.9" y="1893" width="3.1" height="15.0" fill="rgb(230,146,33)" rx="2" ry="2" />
+<text  x="363.85" y="1903.5" ></text>
 </g>
 <g >
-<title>x86_pmu_enable (4 samples, 23.53%)</title><rect x="148.8" y="85" width="277.7" height="15.0" fill="rgb(217,198,47)" rx="2" ry="2" />
-<text  x="151.82" y="95.5" >x86_pmu_enable</text>
+<title>unmap_region (1 samples, 0.13%)</title><rect x="411.2" y="101" width="1.6" height="15.0" fill="rgb(212,198,52)" rx="2" ry="2" />
+<text  x="414.20" y="111.5" ></text>
 </g>
 <g >
-<title>finish_task_switch (4 samples, 23.53%)</title><rect x="148.8" y="133" width="277.7" height="15.0" fill="rgb(252,67,13)" rx="2" ry="2" />
-<text  x="151.82" y="143.5" >finish_task_switch</text>
+<title>_PyEval_EvalFrameDefault (27 samples, 3.60%)</title><rect x="762.1" y="1925" width="42.4" height="15.0" fill="rgb(226,0,50)" rx="2" ry="2" />
+<text  x="765.05" y="1935.5" >_PyE..</text>
 </g>
 <g >
-<title>do_syscall_64 (9 samples, 52.94%)</title><rect x="565.3" y="245" width="624.7" height="15.0" fill="rgb(250,85,15)" rx="2" ry="2" />
-<text  x="568.29" y="255.5" >do_syscall_64</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="677" width="3.2" height="15.0" fill="rgb(244,146,54)" rx="2" ry="2" />
+<text  x="412.63" y="687.5" ></text>
 </g>
 <g >
-<title>futex_wait_queue_me (4 samples, 23.53%)</title><rect x="148.8" y="181" width="277.7" height="15.0" fill="rgb(233,183,44)" rx="2" ry="2" />
-<text  x="151.82" y="191.5" >futex_wait_queue_me</text>
+<title>__schedule (1 samples, 0.13%)</title><rect x="1186.9" y="1925" width="1.5" height="15.0" fill="rgb(240,173,28)" rx="2" ry="2" />
+<text  x="1189.85" y="1935.5" ></text>
 </g>
 <g >
-<title>__intel_pmu_enable_all.constprop.25 (4 samples, 23.53%)</title><rect x="148.8" y="53" width="277.7" height="15.0" fill="rgb(251,99,37)" rx="2" ry="2" />
-<text  x="151.82" y="63.5" >__intel_pmu_enable_all.constprop.25</text>
+<title>PyUnicode_Contains (4 samples, 0.53%)</title><rect x="310.5" y="1989" width="6.3" height="15.0" fill="rgb(252,65,17)" rx="2" ry="2" />
+<text  x="313.51" y="1999.5" ></text>
 </g>
 <g >
-<title>__sched_text_start (4 samples, 23.53%)</title><rect x="148.8" y="149" width="277.7" height="15.0" fill="rgb(233,142,3)" rx="2" ry="2" />
-<text  x="151.82" y="159.5" >__sched_text_start</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1621" width="3.2" height="15.0" fill="rgb(247,224,52)" rx="2" ry="2" />
+<text  x="412.63" y="1631.5" ></text>
 </g>
 <g >
-<title>intel_pmu_enable_all (8 samples, 47.06%)</title><rect x="634.7" y="69" width="555.3" height="15.0" fill="rgb(254,118,19)" rx="2" ry="2" />
-<text  x="637.71" y="79.5" >intel_pmu_enable_all</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="437" width="3.2" height="15.0" fill="rgb(239,2,20)" rx="2" ry="2" />
+<text  x="412.63" y="447.5" ></text>
 </g>
 <g >
-<title>schedule (8 samples, 47.06%)</title><rect x="634.7" y="165" width="555.3" height="15.0" fill="rgb(226,214,19)" rx="2" ry="2" />
-<text  x="637.71" y="175.5" >schedule</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1781" width="3.2" height="15.0" fill="rgb(212,202,54)" rx="2" ry="2" />
+<text  x="412.63" y="1791.5" ></text>
 </g>
 <g >
-<title>entry_SYSCALL_64_after_hwframe (9 samples, 52.94%)</title><rect x="565.3" y="261" width="624.7" height="15.0" fill="rgb(215,29,23)" rx="2" ry="2" />
-<text  x="568.29" y="271.5" >entry_SYSCALL_64_after_hwframe</text>
+<title>[python3.6] (1 samples, 0.13%)</title><rect x="340.4" y="1941" width="1.6" height="15.0" fill="rgb(250,43,35)" rx="2" ry="2" />
+<text  x="343.40" y="1951.5" ></text>
 </g>
 <g >
-<title>perf_pmu_enable.part.105 (4 samples, 23.53%)</title><rect x="148.8" y="101" width="277.7" height="15.0" fill="rgb(248,107,18)" rx="2" ry="2" />
-<text  x="151.82" y="111.5" >perf_pmu_enable.part.105</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="341" width="3.2" height="15.0" fill="rgb(206,158,2)" rx="2" ry="2" />
+<text  x="412.63" y="351.5" ></text>
 </g>
 <g >
-<title>intel_pmu_enable_all (4 samples, 23.53%)</title><rect x="148.8" y="69" width="277.7" height="15.0" fill="rgb(238,135,10)" rx="2" ry="2" />
-<text  x="151.82" y="79.5" >intel_pmu_enable_all</text>
+<title>PyUnicode_Contains (1 samples, 0.13%)</title><rect x="346.7" y="1909" width="1.6" height="15.0" fill="rgb(250,123,19)" rx="2" ry="2" />
+<text  x="349.69" y="1919.5" ></text>
 </g>
 <g >
-<title>__lll_unlock_wake (1 samples, 5.88%)</title><rect x="426.5" y="277" width="69.4" height="15.0" fill="rgb(229,44,46)" rx="2" ry="2" />
-<text  x="429.47" y="287.5" >__lll_u..</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1477" width="3.2" height="15.0" fill="rgb(223,149,54)" rx="2" ry="2" />
+<text  x="412.63" y="1487.5" ></text>
 </g>
 <g >
-<title>native_write_msr (8 samples, 47.06%)</title><rect x="634.7" y="37" width="555.3" height="15.0" fill="rgb(244,136,19)" rx="2" ry="2" />
-<text  x="637.71" y="47.5" >native_write_msr</text>
+<title>do_syscall_64 (7 samples, 0.93%)</title><rect x="1169.5" y="2021" width="11.1" height="15.0" fill="rgb(209,95,54)" rx="2" ry="2" />
+<text  x="1172.55" y="2031.5" ></text>
 </g>
 <g >
-<title>__perf_event_task_sched_in (4 samples, 23.53%)</title><rect x="148.8" y="117" width="277.7" height="15.0" fill="rgb(245,197,37)" rx="2" ry="2" />
-<text  x="151.82" y="127.5" >__perf_event_task_sched_in</text>
+<title>smp_apic_timer_interrupt (1 samples, 0.13%)</title><rect x="74.5" y="2021" width="1.6" height="15.0" fill="rgb(250,13,50)" rx="2" ry="2" />
+<text  x="77.51" y="2031.5" ></text>
 </g>
 <g >
-<title>do_futex (9 samples, 52.94%)</title><rect x="565.3" y="213" width="624.7" height="15.0" fill="rgb(253,69,39)" rx="2" ry="2" />
-<text  x="568.29" y="223.5" >do_futex</text>
+<title>generic_exec_single (1 samples, 0.13%)</title><rect x="1141.2" y="1909" width="1.6" height="15.0" fill="rgb(218,86,34)" rx="2" ry="2" />
+<text  x="1144.23" y="1919.5" ></text>
 </g>
 <g >
-<title>do_syscall_64 (4 samples, 23.53%)</title><rect x="148.8" y="245" width="277.7" height="15.0" fill="rgb(251,33,37)" rx="2" ry="2" />
-<text  x="151.82" y="255.5" >do_syscall_64</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1685" width="3.2" height="15.0" fill="rgb(232,188,39)" rx="2" ry="2" />
+<text  x="412.63" y="1695.5" ></text>
 </g>
 <g >
-<title>do_futex (4 samples, 23.53%)</title><rect x="148.8" y="213" width="277.7" height="15.0" fill="rgb(225,20,19)" rx="2" ry="2" />
-<text  x="151.82" y="223.5" >do_futex</text>
+<title>[unknown] (1 samples, 0.13%)</title><rect x="409.6" y="165" width="1.6" height="15.0" fill="rgb(229,52,45)" rx="2" ry="2" />
+<text  x="412.63" y="175.5" ></text>
 </g>
 <g >
-<title>[python3.7] (1 samples, 5.88%)</title><rect x="79.4" y="293" width="69.4" height="15.0" fill="rgb(225,0,6)" rx="2" ry="2" />
-<text  x="82.41" y="303.5" >[python..</text>
+<title>[unknown] (141 samples, 18.80%)</title><rect x="371.9" y="1861" width="221.8" height="15.0" fill="rgb(218,165,23)" rx="2" ry="2" />
+<text  x="374.87" y="1871.5" >[unknown]</text>
 </g>
 <g >
-<title>futex_wait (4 samples, 23.53%)</title><rect x="148.8" y="197" width="277.7" height="15.0" fill="rgb(226,103,37)" rx="2" ry="2" />
-<text  x="151.82" y="207.5" >futex_wait</text>
+<title>smp_apic_timer_interrupt (1 samples, 0.13%)</title><rect x="625.2" y="1829" width="1.5" height="15.0" fill="rgb(246,108,9)" rx="2" ry="2" />
+<text  x="628.17" y="1839.5" ></text>
 </g>
 <g >
-<title>__x64_sys_futex (9 samples, 52.94%)</title><rect x="565.3" y="229" width="624.7" height="15.0" fill="rgb(240,185,25)" rx="2" ry="2" />
-<text  x="568.29" y="239.5" >__x64_sys_futex</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="837" width="3.2" height="15.0" fill="rgb(222,187,30)" rx="2" ry="2" />
+<text  x="412.63" y="847.5" ></text>
 </g>
 <g >
-<title>schedule (4 samples, 23.53%)</title><rect x="148.8" y="165" width="277.7" height="15.0" fill="rgb(218,168,31)" rx="2" ry="2" />
-<text  x="151.82" y="175.5" >schedule</text>
+<title>[unknown] (460 samples, 61.33%)</title><rect x="305.8" y="2021" width="723.7" height="15.0" fill="rgb(218,105,51)" rx="2" ry="2" />
+<text  x="308.79" y="2031.5" >[unknown]</text>
 </g>
 <g >
-<title>entry_SYSCALL_64_after_hwframe (4 samples, 23.53%)</title><rect x="148.8" y="261" width="277.7" height="15.0" fill="rgb(247,7,14)" rx="2" ry="2" />
-<text  x="151.82" y="271.5" >entry_SYSCALL_64_after_hwframe</text>
+<title>prepare_exit_to_usermode (1 samples, 0.13%)</title><rect x="1114.5" y="2005" width="1.6" height="15.0" fill="rgb(249,94,24)" rx="2" ry="2" />
+<text  x="1117.48" y="2015.5" ></text>
 </g>
 <g >
-<title>all (17 samples, 100%)</title><rect x="10.0" y="325" width="1180.0" height="15.0" fill="rgb(232,116,42)" rx="2" ry="2" />
-<text  x="13.00" y="335.5" ></text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="261" width="3.2" height="15.0" fill="rgb(219,200,23)" rx="2" ry="2" />
+<text  x="412.63" y="271.5" ></text>
 </g>
 <g >
-<title>__intel_pmu_enable_all.constprop.25 (8 samples, 47.06%)</title><rect x="634.7" y="53" width="555.3" height="15.0" fill="rgb(214,69,53)" rx="2" ry="2" />
-<text  x="637.71" y="63.5" >__intel_pmu_enable_all.constprop.25</text>
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="549" width="3.2" height="15.0" fill="rgb(230,164,9)" rx="2" ry="2" />
+<text  x="412.63" y="559.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="773" width="3.2" height="15.0" fill="rgb(213,150,52)" rx="2" ry="2" />
+<text  x="412.63" y="783.5" ></text>
+</g>
+<g >
+<title>sys_futex (7 samples, 0.93%)</title><rect x="1169.5" y="2005" width="11.1" height="15.0" fill="rgb(251,73,33)" rx="2" ry="2" />
+<text  x="1172.55" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (32 samples, 4.27%)</title><rect x="398.6" y="1813" width="50.4" height="15.0" fill="rgb(229,128,11)" rx="2" ry="2" />
+<text  x="401.61" y="1823.5" >[unkn..</text>
+</g>
+<g >
+<title>do_syscall_64 (1 samples, 0.13%)</title><rect x="1117.6" y="2005" width="1.6" height="15.0" fill="rgb(224,111,24)" rx="2" ry="2" />
+<text  x="1120.63" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1605" width="3.2" height="15.0" fill="rgb(210,117,29)" rx="2" ry="2" />
+<text  x="412.63" y="1615.5" ></text>
+</g>
+<g >
+<title>free_pgtables (1 samples, 0.13%)</title><rect x="411.2" y="85" width="1.6" height="15.0" fill="rgb(224,136,53)" rx="2" ry="2" />
+<text  x="414.20" y="95.5" ></text>
+</g>
+<g >
+<title>sem_post@@GLIBC_2.2.5 (1 samples, 0.13%)</title><rect x="897.4" y="1957" width="1.5" height="15.0" fill="rgb(244,212,33)" rx="2" ry="2" />
+<text  x="900.36" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1093" width="3.2" height="15.0" fill="rgb(253,142,35)" rx="2" ry="2" />
+<text  x="412.63" y="1103.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.13%)</title><rect x="1141.2" y="2037" width="1.6" height="15.0" fill="rgb(229,52,52)" rx="2" ry="2" />
+<text  x="1144.23" y="2047.5" ></text>
+</g>
+<g >
+<title>swapgs_restore_regs_and_return_to_usermode (1 samples, 0.13%)</title><rect x="290.1" y="2005" width="1.5" height="15.0" fill="rgb(243,48,36)" rx="2" ry="2" />
+<text  x="293.05" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="725" width="3.2" height="15.0" fill="rgb(223,36,50)" rx="2" ry="2" />
+<text  x="412.63" y="735.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1173" width="3.2" height="15.0" fill="rgb(209,177,10)" rx="2" ry="2" />
+<text  x="412.63" y="1183.5" ></text>
+</g>
+<g >
+<title>__madvise (1 samples, 0.13%)</title><rect x="1141.2" y="2053" width="1.6" height="15.0" fill="rgb(220,76,25)" rx="2" ry="2" />
+<text  x="1144.23" y="2063.5" ></text>
+</g>
+<g >
+<title>[python3.6] (4 samples, 0.53%)</title><rect x="403.3" y="1797" width="6.3" height="15.0" fill="rgb(234,214,12)" rx="2" ry="2" />
+<text  x="406.33" y="1807.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1653" width="3.2" height="15.0" fill="rgb(236,124,28)" rx="2" ry="2" />
+<text  x="412.63" y="1663.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="693" width="3.2" height="15.0" fill="rgb(206,145,2)" rx="2" ry="2" />
+<text  x="412.63" y="703.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="293" width="3.2" height="15.0" fill="rgb(213,21,27)" rx="2" ry="2" />
+<text  x="412.63" y="303.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (21 samples, 2.80%)</title><rect x="593.7" y="1861" width="33.0" height="15.0" fill="rgb(235,58,41)" rx="2" ry="2" />
+<text  x="596.71" y="1871.5" >_P..</text>
+</g>
+<g >
+<title>__softirqentry_text_start (1 samples, 0.13%)</title><rect x="625.2" y="1797" width="1.5" height="15.0" fill="rgb(245,217,18)" rx="2" ry="2" />
+<text  x="628.17" y="1807.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1573" width="3.2" height="15.0" fill="rgb(247,71,11)" rx="2" ry="2" />
+<text  x="412.63" y="1583.5" ></text>
+</g>
+<g >
+<title>smp_call_function_many (1 samples, 0.13%)</title><rect x="1141.2" y="1941" width="1.6" height="15.0" fill="rgb(216,200,0)" rx="2" ry="2" />
+<text  x="1144.23" y="1951.5" ></text>
+</g>
+<g >
+<title>sem_trywait@@GLIBC_2.2.5 (1 samples, 0.13%)</title><rect x="1119.2" y="2037" width="1.6" height="15.0" fill="rgb(224,176,4)" rx="2" ry="2" />
+<text  x="1122.20" y="2047.5" ></text>
+</g>
+<g >
+<title>[python3.6] (1 samples, 0.13%)</title><rect x="307.4" y="2005" width="1.5" height="15.0" fill="rgb(226,158,44)" rx="2" ry="2" />
+<text  x="310.36" y="2015.5" ></text>
+</g>
+<g >
+<title>pthread_cond_timedwait@@GLIBC_2.3.2 (6 samples, 0.80%)</title><rect x="1180.6" y="2053" width="9.4" height="15.0" fill="rgb(205,221,1)" rx="2" ry="2" />
+<text  x="1183.56" y="2063.5" ></text>
+</g>
+<g >
+<title>prepare_exit_to_usermode (1 samples, 0.13%)</title><rect x="290.1" y="1989" width="1.5" height="15.0" fill="rgb(234,200,46)" rx="2" ry="2" />
+<text  x="293.05" y="1999.5" ></text>
+</g>
+<g >
+<title>PyObject_GetAttr (4 samples, 0.53%)</title><rect x="80.8" y="2037" width="6.3" height="15.0" fill="rgb(217,29,54)" rx="2" ry="2" />
+<text  x="83.80" y="2047.5" ></text>
+</g>
+<g >
+<title>python3 (750 samples, 100.00%)</title><rect x="10.0" y="2069" width="1180.0" height="15.0" fill="rgb(229,124,51)" rx="2" ry="2" />
+<text  x="13.00" y="2079.5" >python3</text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.13%)</title><rect x="285.3" y="1989" width="1.6" height="15.0" fill="rgb(217,28,2)" rx="2" ry="2" />
+<text  x="288.33" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (1 samples, 0.13%)</title><rect x="409.6" y="133" width="1.6" height="15.0" fill="rgb(231,127,39)" rx="2" ry="2" />
+<text  x="412.63" y="143.5" ></text>
+</g>
+<g >
+<title>[python3.6] (3 samples, 0.40%)</title><rect x="371.9" y="1845" width="4.7" height="15.0" fill="rgb(215,82,7)" rx="2" ry="2" />
+<text  x="374.87" y="1855.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1669" width="3.2" height="15.0" fill="rgb(214,178,41)" rx="2" ry="2" />
+<text  x="412.63" y="1679.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1237" width="3.2" height="15.0" fill="rgb(243,97,47)" rx="2" ry="2" />
+<text  x="412.63" y="1247.5" ></text>
+</g>
+<g >
+<title>__raw_callee_save___pv_queued_spin_unlock (1 samples, 0.13%)</title><rect x="1183.7" y="1941" width="1.6" height="15.0" fill="rgb(217,212,22)" rx="2" ry="2" />
+<text  x="1186.71" y="1951.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (7 samples, 0.93%)</title><rect x="1169.5" y="2037" width="11.1" height="15.0" fill="rgb(225,155,32)" rx="2" ry="2" />
+<text  x="1172.55" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (499 samples, 66.53%)</title><rect x="283.8" y="2037" width="785.1" height="15.0" fill="rgb(244,57,11)" rx="2" ry="2" />
+<text  x="286.76" y="2047.5" >[unknown]</text>
+</g>
+<g >
+<title>sys_madvise (1 samples, 0.13%)</title><rect x="1141.2" y="2005" width="1.6" height="15.0" fill="rgb(222,69,8)" rx="2" ry="2" />
+<text  x="1144.23" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="469" width="3.2" height="15.0" fill="rgb(227,16,27)" rx="2" ry="2" />
+<text  x="412.63" y="479.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (29 samples, 3.87%)</title><rect x="1070.4" y="2037" width="45.7" height="15.0" fill="rgb(249,161,0)" rx="2" ry="2" />
+<text  x="1073.43" y="2047.5" >_PyE..</text>
+</g>
+<g >
+<title>PyUnicode_RichCompare (11 samples, 1.47%)</title><rect x="25.7" y="2053" width="17.3" height="15.0" fill="rgb(238,157,36)" rx="2" ry="2" />
+<text  x="28.73" y="2063.5" ></text>
+</g>
+<g >
+<title>PyObject_RichCompare (1 samples, 0.13%)</title><rect x="283.8" y="2021" width="1.5" height="15.0" fill="rgb(213,113,18)" rx="2" ry="2" />
+<text  x="286.76" y="2031.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (6 samples, 0.80%)</title><rect x="1180.6" y="2037" width="9.4" height="15.0" fill="rgb(231,129,52)" rx="2" ry="2" />
+<text  x="1183.56" y="2047.5" ></text>
+</g>
+<g >
+<title>PyUnicode_Contains (1 samples, 0.13%)</title><rect x="367.1" y="1877" width="1.6" height="15.0" fill="rgb(215,156,14)" rx="2" ry="2" />
+<text  x="370.15" y="1887.5" ></text>
+</g>
+<g >
+<title>do_syscall_64 (1 samples, 0.13%)</title><rect x="1141.2" y="2021" width="1.6" height="15.0" fill="rgb(251,146,34)" rx="2" ry="2" />
+<text  x="1144.23" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1413" width="3.2" height="15.0" fill="rgb(217,13,16)" rx="2" ry="2" />
+<text  x="412.63" y="1423.5" ></text>
+</g>
+<g >
+<title>PyUnicode_Contains (3 samples, 0.40%)</title><rect x="286.9" y="2021" width="4.7" height="15.0" fill="rgb(215,96,36)" rx="2" ry="2" />
+<text  x="289.91" y="2031.5" ></text>
+</g>
+<g >
+<title>try_to_wake_up (1 samples, 0.13%)</title><rect x="1117.6" y="1925" width="1.6" height="15.0" fill="rgb(234,127,52)" rx="2" ry="2" />
+<text  x="1120.63" y="1935.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.13%)</title><rect x="947.7" y="1957" width="1.6" height="15.0" fill="rgb(228,17,39)" rx="2" ry="2" />
+<text  x="950.71" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1541" width="3.2" height="15.0" fill="rgb(222,131,51)" rx="2" ry="2" />
+<text  x="412.63" y="1551.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1157" width="3.2" height="15.0" fill="rgb(229,70,39)" rx="2" ry="2" />
+<text  x="412.63" y="1167.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1365" width="3.2" height="15.0" fill="rgb(246,197,9)" rx="2" ry="2" />
+<text  x="412.63" y="1375.5" ></text>
+</g>
+<g >
+<title>[python3.6] (4 samples, 0.53%)</title><rect x="381.3" y="1829" width="6.3" height="15.0" fill="rgb(249,130,8)" rx="2" ry="2" />
+<text  x="384.31" y="1839.5" ></text>
+</g>
+<g >
+<title>[libgcc_s.so.1] (1 samples, 0.13%)</title><rect x="43.0" y="2053" width="1.6" height="15.0" fill="rgb(232,88,45)" rx="2" ry="2" />
+<text  x="46.04" y="2063.5" ></text>
+</g>
+<g >
+<title>PyThread_start_new_thread (1 samples, 0.13%)</title><rect x="285.3" y="2021" width="1.6" height="15.0" fill="rgb(245,7,8)" rx="2" ry="2" />
+<text  x="288.33" y="2031.5" ></text>
+</g>
+<g >
+<title>wake_up_q (1 samples, 0.13%)</title><rect x="1117.6" y="1941" width="1.6" height="15.0" fill="rgb(239,5,17)" rx="2" ry="2" />
+<text  x="1120.63" y="1951.5" ></text>
+</g>
+<g >
+<title>PyUnicode_Contains (2 samples, 0.27%)</title><rect x="387.6" y="1813" width="3.1" height="15.0" fill="rgb(237,87,6)" rx="2" ry="2" />
+<text  x="390.60" y="1823.5" ></text>
+</g>
+<g >
+<title>rcu_gp_kthread_wake (1 samples, 0.13%)</title><rect x="625.2" y="1749" width="1.5" height="15.0" fill="rgb(222,57,31)" rx="2" ry="2" />
+<text  x="628.17" y="1759.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="501" width="3.2" height="15.0" fill="rgb(216,15,35)" rx="2" ry="2" />
+<text  x="412.63" y="511.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="901" width="3.2" height="15.0" fill="rgb(246,72,19)" rx="2" ry="2" />
+<text  x="412.63" y="911.5" ></text>
+</g>
+<g >
+<title>[unknown] (664 samples, 88.53%)</title><rect x="76.1" y="2053" width="1044.7" height="15.0" fill="rgb(251,135,45)" rx="2" ry="2" />
+<text  x="79.08" y="2063.5" >[unknown]</text>
+</g>
+<g >
+<title>__memcmp_avx2_movbe (16 samples, 2.13%)</title><rect x="1142.8" y="2053" width="25.2" height="15.0" fill="rgb(240,12,15)" rx="2" ry="2" />
+<text  x="1145.80" y="2063.5" >_..</text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1429" width="3.2" height="15.0" fill="rgb(206,89,8)" rx="2" ry="2" />
+<text  x="412.63" y="1439.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="309" width="3.2" height="15.0" fill="rgb(246,54,0)" rx="2" ry="2" />
+<text  x="412.63" y="319.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="709" width="3.2" height="15.0" fill="rgb(221,185,8)" rx="2" ry="2" />
+<text  x="412.63" y="719.5" ></text>
+</g>
+<g >
+<title>[python3.6] (5 samples, 0.67%)</title><rect x="390.7" y="1813" width="7.9" height="15.0" fill="rgb(210,112,20)" rx="2" ry="2" />
+<text  x="393.75" y="1823.5" ></text>
+</g>
+<g >
+<title>sys_futex (1 samples, 0.13%)</title><rect x="897.4" y="1909" width="1.5" height="15.0" fill="rgb(229,213,47)" rx="2" ry="2" />
+<text  x="900.36" y="1919.5" ></text>
+</g>
+<g >
+<title>_raw_spin_unlock_irqrestore (1 samples, 0.13%)</title><rect x="897.4" y="1829" width="1.5" height="15.0" fill="rgb(208,166,41)" rx="2" ry="2" />
+<text  x="900.36" y="1839.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1717" width="3.2" height="15.0" fill="rgb(216,43,51)" rx="2" ry="2" />
+<text  x="412.63" y="1727.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="805" width="3.2" height="15.0" fill="rgb(217,46,5)" rx="2" ry="2" />
+<text  x="412.63" y="815.5" ></text>
+</g>
+<g >
+<title>_PyDict_LoadGlobal (1 samples, 0.13%)</title><rect x="1068.9" y="2037" width="1.5" height="15.0" fill="rgb(250,0,44)" rx="2" ry="2" />
+<text  x="1071.85" y="2047.5" ></text>
+</g>
+<g >
+<title>cfree@GLIBC_2.2.5 (1 samples, 0.13%)</title><rect x="1168.0" y="2053" width="1.5" height="15.0" fill="rgb(211,201,41)" rx="2" ry="2" />
+<text  x="1170.97" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (364 samples, 48.53%)</title><rect x="326.2" y="1973" width="572.7" height="15.0" fill="rgb(211,145,12)" rx="2" ry="2" />
+<text  x="329.24" y="1983.5" >[unknown]</text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1269" width="3.2" height="15.0" fill="rgb(213,142,45)" rx="2" ry="2" />
+<text  x="412.63" y="1279.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="917" width="3.2" height="15.0" fill="rgb(223,95,17)" rx="2" ry="2" />
+<text  x="412.63" y="927.5" ></text>
+</g>
+<g >
+<title>swapgs_restore_regs_and_return_to_usermode (1 samples, 0.13%)</title><rect x="760.5" y="1893" width="1.6" height="15.0" fill="rgb(217,76,49)" rx="2" ry="2" />
+<text  x="763.48" y="1903.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (28 samples, 3.73%)</title><rect x="666.1" y="1893" width="44.0" height="15.0" fill="rgb(227,178,6)" rx="2" ry="2" />
+<text  x="669.08" y="1903.5" >_PyE..</text>
+</g>
+<g >
+<title>pthread_cond_signal@@GLIBC_2.3.2 (7 samples, 0.93%)</title><rect x="1169.5" y="2053" width="11.1" height="15.0" fill="rgb(247,176,12)" rx="2" ry="2" />
+<text  x="1172.55" y="2063.5" ></text>
+</g>
+<g >
+<title>apic_timer_interrupt (1 samples, 0.13%)</title><rect x="625.2" y="1845" width="1.5" height="15.0" fill="rgb(218,132,16)" rx="2" ry="2" />
+<text  x="628.17" y="1855.5" ></text>
+</g>
+<g >
+<title>PyUnicode_Contains (1 samples, 0.13%)</title><rect x="321.5" y="1973" width="1.6" height="15.0" fill="rgb(241,160,3)" rx="2" ry="2" />
+<text  x="324.52" y="1983.5" ></text>
+</g>
+<g >
+<title>all (750 samples, 100%)</title><rect x="10.0" y="2085" width="1180.0" height="15.0" fill="rgb(248,160,49)" rx="2" ry="2" />
+<text  x="13.00" y="2095.5" ></text>
+</g>
+<g >
+<title>_PyObject_GC_New (2 samples, 0.27%)</title><rect x="1138.1" y="2053" width="3.1" height="15.0" fill="rgb(231,179,8)" rx="2" ry="2" />
+<text  x="1141.08" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (294 samples, 39.20%)</title><rect x="342.0" y="1941" width="462.5" height="15.0" fill="rgb(217,96,31)" rx="2" ry="2" />
+<text  x="344.97" y="1951.5" >[unknown]</text>
+</g>
+<g >
+<title>[unknown] (1 samples, 0.13%)</title><rect x="409.6" y="197" width="1.6" height="15.0" fill="rgb(248,225,14)" rx="2" ry="2" />
+<text  x="412.63" y="207.5" ></text>
+</g>
+<g >
+<title>wake_up_q (7 samples, 0.93%)</title><rect x="1169.5" y="1957" width="11.1" height="15.0" fill="rgb(226,182,19)" rx="2" ry="2" />
+<text  x="1172.55" y="1967.5" ></text>
+</g>
+<g >
+<title>PyObject_RichCompare (1 samples, 0.13%)</title><rect x="335.7" y="1941" width="1.6" height="15.0" fill="rgb(226,95,34)" rx="2" ry="2" />
+<text  x="338.68" y="1951.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="645" width="3.2" height="15.0" fill="rgb(220,54,3)" rx="2" ry="2" />
+<text  x="412.63" y="655.5" ></text>
+</g>
+<g >
+<title>[unknown] (224 samples, 29.87%)</title><rect x="357.7" y="1909" width="352.4" height="15.0" fill="rgb(224,145,31)" rx="2" ry="2" />
+<text  x="360.71" y="1919.5" >[unknown]</text>
+</g>
+<g >
+<title>__mprotect (1 samples, 0.13%)</title><rect x="285.3" y="2005" width="1.6" height="15.0" fill="rgb(221,215,14)" rx="2" ry="2" />
+<text  x="288.33" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1301" width="3.2" height="15.0" fill="rgb(240,19,32)" rx="2" ry="2" />
+<text  x="412.63" y="1311.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="373" width="3.2" height="15.0" fill="rgb(216,113,13)" rx="2" ry="2" />
+<text  x="412.63" y="383.5" ></text>
+</g>
+<g >
+<title>[unknown] (1 samples, 0.13%)</title><rect x="409.6" y="149" width="1.6" height="15.0" fill="rgb(207,80,42)" rx="2" ry="2" />
+<text  x="412.63" y="159.5" ></text>
+</g>
+<g >
+<title>[unknown] (1 samples, 0.13%)</title><rect x="409.6" y="181" width="1.6" height="15.0" fill="rgb(210,133,13)" rx="2" ry="2" />
+<text  x="412.63" y="191.5" ></text>
+</g>
+<g >
+<title>PyUnicode_Contains (2 samples, 0.27%)</title><rect x="123.3" y="2037" width="3.1" height="15.0" fill="rgb(209,57,42)" rx="2" ry="2" />
+<text  x="126.28" y="2047.5" ></text>
+</g>
+<g >
+<title>[python3.6] (1 samples, 0.13%)</title><rect x="364.0" y="1893" width="1.6" height="15.0" fill="rgb(207,214,51)" rx="2" ry="2" />
+<text  x="367.00" y="1903.5" ></text>
+</g>
+<g >
+<title>prepare_exit_to_usermode (2 samples, 0.27%)</title><rect x="850.2" y="1909" width="3.1" height="15.0" fill="rgb(209,125,14)" rx="2" ry="2" />
+<text  x="853.16" y="1919.5" ></text>
+</g>
+<g >
+<title>[unknown] (264 samples, 35.20%)</title><rect x="346.7" y="1925" width="415.4" height="15.0" fill="rgb(241,105,2)" rx="2" ry="2" />
+<text  x="349.69" y="1935.5" >[unknown]</text>
+</g>
+<g >
+<title>_raw_spin_unlock_irqrestore (7 samples, 0.93%)</title><rect x="1169.5" y="1925" width="11.1" height="15.0" fill="rgb(248,49,4)" rx="2" ry="2" />
+<text  x="1172.55" y="1935.5" ></text>
+</g>
+<g >
+<title>irq_exit (1 samples, 0.13%)</title><rect x="74.5" y="2005" width="1.6" height="15.0" fill="rgb(243,3,52)" rx="2" ry="2" />
+<text  x="77.51" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="981" width="3.2" height="15.0" fill="rgb(240,1,38)" rx="2" ry="2" />
+<text  x="412.63" y="991.5" ></text>
+</g>
+<g >
+<title>zap_page_range (1 samples, 0.13%)</title><rect x="1141.2" y="1989" width="1.6" height="15.0" fill="rgb(246,44,39)" rx="2" ry="2" />
+<text  x="1144.23" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="565" width="3.2" height="15.0" fill="rgb(243,114,3)" rx="2" ry="2" />
+<text  x="412.63" y="575.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1397" width="3.2" height="15.0" fill="rgb(251,164,48)" rx="2" ry="2" />
+<text  x="412.63" y="1407.5" ></text>
+</g>
+<g >
+<title>PyUnicode_DecodeUTF8Stateful (1 samples, 0.13%)</title><rect x="24.2" y="2053" width="1.5" height="15.0" fill="rgb(226,107,9)" rx="2" ry="2" />
+<text  x="27.16" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="885" width="3.2" height="15.0" fill="rgb(251,93,1)" rx="2" ry="2" />
+<text  x="412.63" y="895.5" ></text>
+</g>
+<g >
+<title>PyFrame_New (1 samples, 0.13%)</title><rect x="76.1" y="2037" width="1.6" height="15.0" fill="rgb(209,139,23)" rx="2" ry="2" />
+<text  x="79.08" y="2047.5" ></text>
+</g>
+<g >
+<title>native_write_msr (1 samples, 0.13%)</title><rect x="1141.2" y="1861" width="1.6" height="15.0" fill="rgb(230,160,14)" rx="2" ry="2" />
+<text  x="1144.23" y="1871.5" ></text>
+</g>
+<g >
+<title>swake_up (1 samples, 0.13%)</title><rect x="625.2" y="1733" width="1.5" height="15.0" fill="rgb(227,212,35)" rx="2" ry="2" />
+<text  x="628.17" y="1743.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (28 samples, 3.73%)</title><rect x="853.3" y="1957" width="44.1" height="15.0" fill="rgb(227,103,33)" rx="2" ry="2" />
+<text  x="856.31" y="1967.5" >_PyE..</text>
+</g>
+<g >
+<title>sys_munmap (1 samples, 0.13%)</title><rect x="411.2" y="149" width="1.6" height="15.0" fill="rgb(247,225,35)" rx="2" ry="2" />
+<text  x="414.20" y="159.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1141" width="3.2" height="15.0" fill="rgb(206,41,24)" rx="2" ry="2" />
+<text  x="412.63" y="1151.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="245" width="3.2" height="15.0" fill="rgb(254,163,35)" rx="2" ry="2" />
+<text  x="412.63" y="255.5" ></text>
+</g>
+<g >
+<title>sem_post@@GLIBC_2.2.5 (1 samples, 0.13%)</title><rect x="1117.6" y="2037" width="1.6" height="15.0" fill="rgb(236,124,53)" rx="2" ry="2" />
+<text  x="1120.63" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1253" width="3.2" height="15.0" fill="rgb(207,68,28)" rx="2" ry="2" />
+<text  x="412.63" y="1263.5" ></text>
+</g>
+<g >
+<title>exit_to_usermode_loop (1 samples, 0.13%)</title><rect x="1114.5" y="1989" width="1.6" height="15.0" fill="rgb(210,49,54)" rx="2" ry="2" />
+<text  x="1117.48" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1557" width="3.2" height="15.0" fill="rgb(254,186,49)" rx="2" ry="2" />
+<text  x="412.63" y="1567.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="869" width="3.2" height="15.0" fill="rgb(244,1,7)" rx="2" ry="2" />
+<text  x="412.63" y="879.5" ></text>
+</g>
+<g >
+<title>[unknown] (430 samples, 57.33%)</title><rect x="308.9" y="2005" width="676.6" height="15.0" fill="rgb(223,135,22)" rx="2" ry="2" />
+<text  x="311.93" y="2015.5" >[unknown]</text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (25 samples, 3.33%)</title><rect x="626.7" y="1877" width="39.4" height="15.0" fill="rgb(223,124,49)" rx="2" ry="2" />
+<text  x="629.75" y="1887.5" >_Py..</text>
+</g>
+<g >
+<title>exit_to_usermode_loop (1 samples, 0.13%)</title><rect x="664.5" y="1829" width="1.6" height="15.0" fill="rgb(248,46,16)" rx="2" ry="2" />
+<text  x="667.51" y="1839.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1797" width="3.2" height="15.0" fill="rgb(236,31,25)" rx="2" ry="2" />
+<text  x="412.63" y="1807.5" ></text>
+</g>
+<g >
+<title>PyUnicode_Contains (2 samples, 0.27%)</title><rect x="337.3" y="1941" width="3.1" height="15.0" fill="rgb(249,175,8)" rx="2" ry="2" />
+<text  x="340.25" y="1951.5" ></text>
+</g>
+<g >
+<title>PyUnicode_Contains (2 samples, 0.27%)</title><rect x="326.2" y="1957" width="3.2" height="15.0" fill="rgb(206,210,25)" rx="2" ry="2" />
+<text  x="329.24" y="1967.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (27 samples, 3.60%)</title><rect x="499.3" y="1829" width="42.5" height="15.0" fill="rgb(218,175,51)" rx="2" ry="2" />
+<text  x="502.31" y="1839.5" >_PyE..</text>
+</g>
+<g >
+<title>kmem_cache_free (1 samples, 0.13%)</title><rect x="411.2" y="37" width="1.6" height="15.0" fill="rgb(209,75,0)" rx="2" ry="2" />
+<text  x="414.20" y="47.5" ></text>
+</g>
+<g >
+<title>_raw_spin_unlock_irqrestore (1 samples, 0.13%)</title><rect x="1117.6" y="1909" width="1.6" height="15.0" fill="rgb(213,58,33)" rx="2" ry="2" />
+<text  x="1120.63" y="1919.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1333" width="3.2" height="15.0" fill="rgb(232,148,25)" rx="2" ry="2" />
+<text  x="412.63" y="1343.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1317" width="3.2" height="15.0" fill="rgb(237,64,2)" rx="2" ry="2" />
+<text  x="412.63" y="1327.5" ></text>
+</g>
+<g >
+<title>[unknown] (329 samples, 43.87%)</title><rect x="335.7" y="1957" width="517.6" height="15.0" fill="rgb(220,81,39)" rx="2" ry="2" />
+<text  x="338.68" y="1967.5" >[unknown]</text>
+</g>
+<g >
+<title>__munmap (1 samples, 0.13%)</title><rect x="409.6" y="117" width="1.6" height="15.0" fill="rgb(215,173,4)" rx="2" ry="2" />
+<text  x="412.63" y="127.5" ></text>
+</g>
+<g >
+<title>flush_tlb_mm_range (1 samples, 0.13%)</title><rect x="1141.2" y="1973" width="1.6" height="15.0" fill="rgb(223,129,50)" rx="2" ry="2" />
+<text  x="1144.23" y="1983.5" ></text>
+</g>
+<g >
+<title>[python3.6] (4 samples, 0.53%)</title><rect x="329.4" y="1957" width="6.3" height="15.0" fill="rgb(221,159,4)" rx="2" ry="2" />
+<text  x="332.39" y="1967.5" ></text>
+</g>
+<g >
+<title>futex_wake (1 samples, 0.13%)</title><rect x="897.4" y="1877" width="1.5" height="15.0" fill="rgb(248,193,7)" rx="2" ry="2" />
+<text  x="900.36" y="1887.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1525" width="3.2" height="15.0" fill="rgb(234,40,46)" rx="2" ry="2" />
+<text  x="412.63" y="1535.5" ></text>
+</g>
+<g >
+<title>exit_to_usermode_loop (1 samples, 0.13%)</title><rect x="947.7" y="1925" width="1.6" height="15.0" fill="rgb(249,210,52)" rx="2" ry="2" />
+<text  x="950.71" y="1935.5" ></text>
+</g>
+<g >
+<title>hrtimer_start_range_ns (1 samples, 0.13%)</title><rect x="1185.3" y="1941" width="1.6" height="15.0" fill="rgb(235,17,11)" rx="2" ry="2" />
+<text  x="1188.28" y="1951.5" ></text>
+</g>
+<g >
+<title>PyObject_RichCompare (1 samples, 0.13%)</title><rect x="365.6" y="1877" width="1.5" height="15.0" fill="rgb(212,209,6)" rx="2" ry="2" />
+<text  x="368.57" y="1887.5" ></text>
+</g>
+<g >
+<title>__put_anon_vma (1 samples, 0.13%)</title><rect x="411.2" y="53" width="1.6" height="15.0" fill="rgb(214,203,54)" rx="2" ry="2" />
+<text  x="414.20" y="63.5" ></text>
+</g>
+<g >
+<title>sys_futex (6 samples, 0.80%)</title><rect x="1180.6" y="2005" width="9.4" height="15.0" fill="rgb(249,141,25)" rx="2" ry="2" />
+<text  x="1183.56" y="2015.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (25 samples, 3.33%)</title><rect x="1029.5" y="2021" width="39.4" height="15.0" fill="rgb(209,65,38)" rx="2" ry="2" />
+<text  x="1032.52" y="2031.5" >_Py..</text>
+</g>
+<g >
+<title>PyObject_RichCompare (1 samples, 0.13%)</title><rect x="376.6" y="1829" width="1.6" height="15.0" fill="rgb(219,128,2)" rx="2" ry="2" />
+<text  x="379.59" y="1839.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (23 samples, 3.07%)</title><rect x="949.3" y="1989" width="36.2" height="15.0" fill="rgb(227,199,35)" rx="2" ry="2" />
+<text  x="952.28" y="1999.5" >_Py..</text>
+</g>
+<g >
+<title>swapgs_restore_regs_and_return_to_usermode (1 samples, 0.13%)</title><rect x="1114.5" y="2021" width="1.6" height="15.0" fill="rgb(218,139,20)" rx="2" ry="2" />
+<text  x="1117.48" y="2031.5" ></text>
+</g>
+<g >
+<title>prepare_exit_to_usermode (2 samples, 0.27%)</title><rect x="280.6" y="2005" width="3.2" height="15.0" fill="rgb(235,220,11)" rx="2" ry="2" />
+<text  x="283.61" y="2015.5" ></text>
+</g>
+<g >
+<title>schedule (1 samples, 0.13%)</title><rect x="947.7" y="1909" width="1.6" height="15.0" fill="rgb(251,98,1)" rx="2" ry="2" />
+<text  x="950.71" y="1919.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (32 samples, 4.27%)</title><rect x="449.0" y="1813" width="50.3" height="15.0" fill="rgb(241,61,5)" rx="2" ry="2" />
+<text  x="451.96" y="1823.5" >_PyEv..</text>
+</g>
+<g >
+<title>futex_wait_queue_me (3 samples, 0.40%)</title><rect x="1183.7" y="1957" width="4.7" height="15.0" fill="rgb(239,184,44)" rx="2" ry="2" />
+<text  x="1186.71" y="1967.5" ></text>
+</g>
+<g >
+<title>vm_munmap (1 samples, 0.13%)</title><rect x="411.2" y="133" width="1.6" height="15.0" fill="rgb(216,96,49)" rx="2" ry="2" />
+<text  x="414.20" y="143.5" ></text>
+</g>
+<g >
+<title>PyNumber_InPlaceAdd (2 samples, 0.27%)</title><rect x="77.7" y="2037" width="3.1" height="15.0" fill="rgb(210,190,42)" rx="2" ry="2" />
+<text  x="80.65" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="453" width="3.2" height="15.0" fill="rgb(226,134,10)" rx="2" ry="2" />
+<text  x="412.63" y="463.5" ></text>
+</g>
+<g >
+<title>do_futex (1 samples, 0.13%)</title><rect x="897.4" y="1893" width="1.5" height="15.0" fill="rgb(229,165,20)" rx="2" ry="2" />
+<text  x="900.36" y="1903.5" ></text>
+</g>
+<g >
+<title>exit_to_usermode_loop (2 samples, 0.27%)</title><rect x="850.2" y="1893" width="3.1" height="15.0" fill="rgb(205,90,10)" rx="2" ry="2" />
+<text  x="853.16" y="1903.5" ></text>
+</g>
+<g >
+<title>[python3.6] (3 samples, 0.40%)</title><rect x="342.0" y="1925" width="4.7" height="15.0" fill="rgb(234,63,47)" rx="2" ry="2" />
+<text  x="344.97" y="1935.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1221" width="3.2" height="15.0" fill="rgb(250,193,4)" rx="2" ry="2" />
+<text  x="412.63" y="1231.5" ></text>
+</g>
+<g >
+<title>__resolv_context_freeres (1 samples, 0.13%)</title><rect x="1116.1" y="2037" width="1.5" height="15.0" fill="rgb(221,229,3)" rx="2" ry="2" />
+<text  x="1119.05" y="2047.5" ></text>
+</g>
+<g >
+<title>sys_futex (1 samples, 0.13%)</title><rect x="1117.6" y="1989" width="1.6" height="15.0" fill="rgb(229,103,28)" rx="2" ry="2" />
+<text  x="1120.63" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1445" width="3.2" height="15.0" fill="rgb(233,187,49)" rx="2" ry="2" />
+<text  x="412.63" y="1455.5" ></text>
+</g>
+<g >
+<title>[python3.6] (6 samples, 0.80%)</title><rect x="348.3" y="1909" width="9.4" height="15.0" fill="rgb(224,56,4)" rx="2" ry="2" />
+<text  x="351.27" y="1919.5" ></text>
+</g>
+<g >
+<title>sem_post@@GLIBC_2.2.5 (1 samples, 0.13%)</title><rect x="947.7" y="1973" width="1.6" height="15.0" fill="rgb(237,180,17)" rx="2" ry="2" />
+<text  x="950.71" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1029" width="3.2" height="15.0" fill="rgb(215,43,14)" rx="2" ry="2" />
+<text  x="412.63" y="1039.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (23 samples, 3.07%)</title><rect x="412.8" y="1797" width="36.2" height="15.0" fill="rgb(214,75,2)" rx="2" ry="2" />
+<text  x="415.77" y="1807.5" >_Py..</text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="389" width="3.2" height="15.0" fill="rgb(230,54,53)" rx="2" ry="2" />
+<text  x="412.63" y="399.5" ></text>
+</g>
+<g >
+<title>schedule (1 samples, 0.13%)</title><rect x="1186.9" y="1941" width="1.5" height="15.0" fill="rgb(207,226,37)" rx="2" ry="2" />
+<text  x="1189.85" y="1951.5" ></text>
+</g>
+<g >
+<title>PyObject_RichCompare (2 samples, 0.27%)</title><rect x="357.7" y="1893" width="3.2" height="15.0" fill="rgb(248,16,53)" rx="2" ry="2" />
+<text  x="360.71" y="1903.5" ></text>
+</g>
+<g >
+<title>do_futex (7 samples, 0.93%)</title><rect x="1169.5" y="1989" width="11.1" height="15.0" fill="rgb(249,138,22)" rx="2" ry="2" />
+<text  x="1172.55" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1013" width="3.2" height="15.0" fill="rgb(233,129,26)" rx="2" ry="2" />
+<text  x="412.63" y="1023.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.13%)</title><rect x="1117.6" y="2021" width="1.6" height="15.0" fill="rgb(225,46,13)" rx="2" ry="2" />
+<text  x="1120.63" y="2031.5" ></text>
+</g>
+<g >
+<title>futex_wake (1 samples, 0.13%)</title><rect x="1117.6" y="1957" width="1.6" height="15.0" fill="rgb(237,43,11)" rx="2" ry="2" />
+<text  x="1120.63" y="1967.5" ></text>
+</g>
+<g >
+<title>do_syscall_64 (1 samples, 0.13%)</title><rect x="411.2" y="165" width="1.6" height="15.0" fill="rgb(219,116,42)" rx="2" ry="2" />
+<text  x="414.20" y="175.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (31 samples, 4.13%)</title><rect x="804.5" y="1941" width="48.8" height="15.0" fill="rgb(228,53,23)" rx="2" ry="2" />
+<text  x="807.53" y="1951.5" >_PyE..</text>
+</g>
+<g >
+<title>exit_to_usermode_loop (2 samples, 0.27%)</title><rect x="280.6" y="1989" width="3.2" height="15.0" fill="rgb(215,64,4)" rx="2" ry="2" />
+<text  x="283.61" y="1999.5" ></text>
+</g>
+<g >
+<title>apic_timer_interrupt (1 samples, 0.13%)</title><rect x="74.5" y="2037" width="1.6" height="15.0" fill="rgb(246,49,14)" rx="2" ry="2" />
+<text  x="77.51" y="2047.5" ></text>
+</g>
+<g >
+<title>rcu_process_callbacks (1 samples, 0.13%)</title><rect x="625.2" y="1781" width="1.5" height="15.0" fill="rgb(242,164,15)" rx="2" ry="2" />
+<text  x="628.17" y="1791.5" ></text>
+</g>
+<g >
+<title>PyObject_RichCompare (1 samples, 0.13%)</title><rect x="319.9" y="1973" width="1.6" height="15.0" fill="rgb(209,86,46)" rx="2" ry="2" />
+<text  x="322.95" y="1983.5" ></text>
+</g>
+<g >
+<title>hrtimer_cancel (1 samples, 0.13%)</title><rect x="1188.4" y="1957" width="1.6" height="15.0" fill="rgb(245,14,4)" rx="2" ry="2" />
+<text  x="1191.43" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="933" width="3.2" height="15.0" fill="rgb(242,46,5)" rx="2" ry="2" />
+<text  x="412.63" y="943.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="581" width="3.2" height="15.0" fill="rgb(218,71,11)" rx="2" ry="2" />
+<text  x="412.63" y="591.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="229" width="3.2" height="15.0" fill="rgb(244,104,4)" rx="2" ry="2" />
+<text  x="412.63" y="239.5" ></text>
+</g>
+<g >
+<title>mprotect_fixup (1 samples, 0.13%)</title><rect x="285.3" y="1925" width="1.6" height="15.0" fill="rgb(244,84,48)" rx="2" ry="2" />
+<text  x="288.33" y="1935.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="741" width="3.2" height="15.0" fill="rgb(233,207,22)" rx="2" ry="2" />
+<text  x="412.63" y="751.5" ></text>
+</g>
+<g >
+<title>do_mprotect_pkey (1 samples, 0.13%)</title><rect x="285.3" y="1941" width="1.6" height="15.0" fill="rgb(210,13,1)" rx="2" ry="2" />
+<text  x="288.33" y="1951.5" ></text>
+</g>
+<g >
+<title>[python3.6] (2 samples, 0.27%)</title><rect x="323.1" y="1973" width="3.1" height="15.0" fill="rgb(219,106,27)" rx="2" ry="2" />
+<text  x="326.09" y="1983.5" ></text>
+</g>
+<g >
+<title>finish_task_switch (1 samples, 0.13%)</title><rect x="1186.9" y="1909" width="1.5" height="15.0" fill="rgb(250,65,26)" rx="2" ry="2" />
+<text  x="1189.85" y="1919.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="629" width="3.2" height="15.0" fill="rgb(219,74,2)" rx="2" ry="2" />
+<text  x="412.63" y="639.5" ></text>
+</g>
+<g >
+<title>[python3.6] (20 samples, 2.67%)</title><rect x="44.6" y="2053" width="31.5" height="15.0" fill="rgb(207,19,21)" rx="2" ry="2" />
+<text  x="47.61" y="2063.5" >[p..</text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1205" width="3.2" height="15.0" fill="rgb(209,31,1)" rx="2" ry="2" />
+<text  x="412.63" y="1215.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1637" width="3.2" height="15.0" fill="rgb(212,152,2)" rx="2" ry="2" />
+<text  x="412.63" y="1647.5" ></text>
+</g>
+<g >
+<title>_raw_spin_unlock_irqrestore (1 samples, 0.13%)</title><rect x="625.2" y="1717" width="1.5" height="15.0" fill="rgb(239,210,13)" rx="2" ry="2" />
+<text  x="628.17" y="1727.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="965" width="3.2" height="15.0" fill="rgb(227,27,47)" rx="2" ry="2" />
+<text  x="412.63" y="975.5" ></text>
+</g>
+<g >
+<title>[python3.6] (2 samples, 0.27%)</title><rect x="316.8" y="1989" width="3.1" height="15.0" fill="rgb(242,33,17)" rx="2" ry="2" />
+<text  x="319.80" y="1999.5" ></text>
+</g>
+<g >
+<title>rcu_report_qs_rnp (1 samples, 0.13%)</title><rect x="625.2" y="1765" width="1.5" height="15.0" fill="rgb(237,143,26)" rx="2" ry="2" />
+<text  x="628.17" y="1775.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="997" width="3.2" height="15.0" fill="rgb(237,139,13)" rx="2" ry="2" />
+<text  x="412.63" y="1007.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1125" width="3.2" height="15.0" fill="rgb(223,12,4)" rx="2" ry="2" />
+<text  x="412.63" y="1135.5" ></text>
+</g>
+<g >
+<title>futex_wait (5 samples, 0.67%)</title><rect x="1182.1" y="1973" width="7.9" height="15.0" fill="rgb(237,219,38)" rx="2" ry="2" />
+<text  x="1185.13" y="1983.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.13%)</title><rect x="897.4" y="1941" width="1.5" height="15.0" fill="rgb(208,20,22)" rx="2" ry="2" />
+<text  x="900.36" y="1951.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1493" width="3.2" height="15.0" fill="rgb(216,174,12)" rx="2" ry="2" />
+<text  x="412.63" y="1503.5" ></text>
+</g>
+<g >
+<title>PyUnicode_Contains (3 samples, 0.40%)</title><rect x="398.6" y="1797" width="4.7" height="15.0" fill="rgb(225,108,17)" rx="2" ry="2" />
+<text  x="401.61" y="1807.5" ></text>
+</g>
+<g >
+<title>do_munmap (1 samples, 0.13%)</title><rect x="411.2" y="117" width="1.6" height="15.0" fill="rgb(244,176,20)" rx="2" ry="2" />
+<text  x="414.20" y="127.5" ></text>
+</g>
+<g >
+<title>vm_munmap (1 samples, 0.13%)</title><rect x="409.6" y="53" width="1.6" height="15.0" fill="rgb(253,95,30)" rx="2" ry="2" />
+<text  x="412.63" y="63.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="421" width="3.2" height="15.0" fill="rgb(220,169,45)" rx="2" ry="2" />
+<text  x="412.63" y="431.5" ></text>
+</g>
+<g >
+<title>sys_munmap (1 samples, 0.13%)</title><rect x="409.6" y="69" width="1.6" height="15.0" fill="rgb(246,120,28)" rx="2" ry="2" />
+<text  x="412.63" y="79.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1061" width="3.2" height="15.0" fill="rgb(223,154,53)" rx="2" ry="2" />
+<text  x="412.63" y="1071.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.13%)</title><rect x="409.6" y="101" width="1.6" height="15.0" fill="rgb(228,139,41)" rx="2" ry="2" />
+<text  x="412.63" y="111.5" ></text>
+</g>
+<g >
+<title>PyObject_SetAttr (1 samples, 0.13%)</title><rect x="121.7" y="2037" width="1.6" height="15.0" fill="rgb(251,115,25)" rx="2" ry="2" />
+<text  x="124.71" y="2047.5" ></text>
+</g>
+<g >
+<title>[python3.6] (1 samples, 0.13%)</title><rect x="368.7" y="1877" width="1.6" height="15.0" fill="rgb(235,67,26)" rx="2" ry="2" />
+<text  x="371.72" y="1887.5" ></text>
+</g>
+<g >
+<title>_raw_spin_unlock_irqrestore (1 samples, 0.13%)</title><rect x="1185.3" y="1925" width="1.6" height="15.0" fill="rgb(232,20,17)" rx="2" ry="2" />
+<text  x="1188.28" y="1935.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1749" width="3.2" height="15.0" fill="rgb(220,13,41)" rx="2" ry="2" />
+<text  x="412.63" y="1759.5" ></text>
+</g>
+<g >
+<title>do_futex (6 samples, 0.80%)</title><rect x="1180.6" y="1989" width="9.4" height="15.0" fill="rgb(233,54,14)" rx="2" ry="2" />
+<text  x="1183.56" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="357" width="3.2" height="15.0" fill="rgb(246,216,7)" rx="2" ry="2" />
+<text  x="412.63" y="367.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="757" width="3.2" height="15.0" fill="rgb(225,104,13)" rx="2" ry="2" />
+<text  x="412.63" y="767.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="613" width="3.2" height="15.0" fill="rgb(223,6,34)" rx="2" ry="2" />
+<text  x="412.63" y="623.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="213" width="3.2" height="15.0" fill="rgb(253,8,13)" rx="2" ry="2" />
+<text  x="412.63" y="223.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="949" width="3.2" height="15.0" fill="rgb(245,194,12)" rx="2" ry="2" />
+<text  x="412.63" y="959.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1733" width="3.2" height="15.0" fill="rgb(223,0,12)" rx="2" ry="2" />
+<text  x="412.63" y="1743.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1109" width="3.2" height="15.0" fill="rgb(234,19,11)" rx="2" ry="2" />
+<text  x="412.63" y="1119.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="277" width="3.2" height="15.0" fill="rgb(211,153,47)" rx="2" ry="2" />
+<text  x="412.63" y="287.5" ></text>
+</g>
+<g >
+<title>futex_wake (7 samples, 0.93%)</title><rect x="1169.5" y="1973" width="11.1" height="15.0" fill="rgb(241,184,18)" rx="2" ry="2" />
+<text  x="1172.55" y="1983.5" ></text>
+</g>
+<g >
+<title>native_flush_tlb_others (1 samples, 0.13%)</title><rect x="1141.2" y="1957" width="1.6" height="15.0" fill="rgb(240,219,41)" rx="2" ry="2" />
+<text  x="1144.23" y="1967.5" ></text>
+</g>
+<g >
+<title>PyUnicode_Contains (1 samples, 0.13%)</title><rect x="305.8" y="2005" width="1.6" height="15.0" fill="rgb(237,82,44)" rx="2" ry="2" />
+<text  x="308.79" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="325" width="3.2" height="15.0" fill="rgb(216,97,29)" rx="2" ry="2" />
+<text  x="412.63" y="335.5" ></text>
+</g>
+<g >
+<title>swapgs_restore_regs_and_return_to_usermode (2 samples, 0.27%)</title><rect x="850.2" y="1925" width="3.1" height="15.0" fill="rgb(211,100,50)" rx="2" ry="2" />
+<text  x="853.16" y="1935.5" ></text>
+</g>
+<g >
+<title>irq_exit (1 samples, 0.13%)</title><rect x="625.2" y="1813" width="1.5" height="15.0" fill="rgb(233,121,12)" rx="2" ry="2" />
+<text  x="628.17" y="1823.5" ></text>
+</g>
+<g >
+<title>exit_to_usermode_loop (1 samples, 0.13%)</title><rect x="290.1" y="1973" width="1.5" height="15.0" fill="rgb(227,24,54)" rx="2" ry="2" />
+<text  x="293.05" y="1983.5" ></text>
+</g>
+<g >
+<title>_raw_spin_unlock_irqrestore (1 samples, 0.13%)</title><rect x="1188.4" y="1925" width="1.6" height="15.0" fill="rgb(217,78,36)" rx="2" ry="2" />
+<text  x="1191.43" y="1935.5" ></text>
+</g>
+<g >
+<title>unlink_anon_vmas (1 samples, 0.13%)</title><rect x="411.2" y="69" width="1.6" height="15.0" fill="rgb(230,156,32)" rx="2" ry="2" />
+<text  x="414.20" y="79.5" ></text>
+</g>
+<g >
+<title>PyObject_CallFunctionObjArgs (1 samples, 0.13%)</title><rect x="10.0" y="2053" width="1.6" height="15.0" fill="rgb(213,15,32)" rx="2" ry="2" />
+<text  x="13.00" y="2063.5" ></text>
+</g>
+<g >
+<title>hrtimer_try_to_cancel (1 samples, 0.13%)</title><rect x="1188.4" y="1941" width="1.6" height="15.0" fill="rgb(209,70,17)" rx="2" ry="2" />
+<text  x="1191.43" y="1951.5" ></text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (1 samples, 0.13%)</title><rect x="411.2" y="181" width="1.6" height="15.0" fill="rgb(238,34,31)" rx="2" ry="2" />
+<text  x="414.20" y="191.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (33 samples, 4.40%)</title><rect x="710.1" y="1909" width="52.0" height="15.0" fill="rgb(217,123,36)" rx="2" ry="2" />
+<text  x="713.13" y="1919.5" >_PyEv..</text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1045" width="3.2" height="15.0" fill="rgb(205,63,40)" rx="2" ry="2" />
+<text  x="412.63" y="1055.5" ></text>
+</g>
+<g >
+<title>smp_call_function_single (1 samples, 0.13%)</title><rect x="1141.2" y="1925" width="1.6" height="15.0" fill="rgb(242,76,23)" rx="2" ry="2" />
+<text  x="1144.23" y="1935.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="405" width="3.2" height="15.0" fill="rgb(249,31,13)" rx="2" ry="2" />
+<text  x="412.63" y="415.5" ></text>
+</g>
+<g >
+<title>__softirqentry_text_start (1 samples, 0.13%)</title><rect x="74.5" y="1989" width="1.6" height="15.0" fill="rgb(237,164,32)" rx="2" ry="2" />
+<text  x="77.51" y="1999.5" ></text>
+</g>
+<g >
+<title>[python3.6] (1 samples, 0.13%)</title><rect x="370.3" y="1861" width="1.6" height="15.0" fill="rgb(253,75,36)" rx="2" ry="2" />
+<text  x="373.29" y="1871.5" ></text>
+</g>
+<g >
+<title>prepare_exit_to_usermode (1 samples, 0.13%)</title><rect x="664.5" y="1845" width="1.6" height="15.0" fill="rgb(250,213,3)" rx="2" ry="2" />
+<text  x="667.51" y="1855.5" ></text>
+</g>
+<g >
+<title>[unknown] (400 samples, 53.33%)</title><rect x="319.9" y="1989" width="629.4" height="15.0" fill="rgb(222,128,43)" rx="2" ry="2" />
+<text  x="322.95" y="1999.5" >[unknown]</text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="853" width="3.2" height="15.0" fill="rgb(221,61,5)" rx="2" ry="2" />
+<text  x="412.63" y="863.5" ></text>
+</g>
+<g >
+<title>[unknown] (71 samples, 9.47%)</title><rect x="387.6" y="1829" width="111.7" height="15.0" fill="rgb(246,144,25)" rx="2" ry="2" />
+<text  x="390.60" y="1839.5" >[unknown]</text>
+</g>
+<g >
+<title>prepare_exit_to_usermode (1 samples, 0.13%)</title><rect x="760.5" y="1877" width="1.6" height="15.0" fill="rgb(230,27,6)" rx="2" ry="2" />
+<text  x="763.48" y="1887.5" ></text>
+</g>
+<g >
+<title>wake_up_q (1 samples, 0.13%)</title><rect x="897.4" y="1861" width="1.5" height="15.0" fill="rgb(245,91,3)" rx="2" ry="2" />
+<text  x="900.36" y="1871.5" ></text>
+</g>
+<g >
+<title>[python3.6] (9 samples, 1.20%)</title><rect x="291.6" y="2021" width="14.2" height="15.0" fill="rgb(233,76,4)" rx="2" ry="2" />
+<text  x="294.63" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="789" width="3.2" height="15.0" fill="rgb(217,62,28)" rx="2" ry="2" />
+<text  x="412.63" y="799.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1285" width="3.2" height="15.0" fill="rgb(248,72,17)" rx="2" ry="2" />
+<text  x="412.63" y="1295.5" ></text>
+</g>
+<g >
+<title>x2apic_send_IPI (1 samples, 0.13%)</title><rect x="1141.2" y="1877" width="1.6" height="15.0" fill="rgb(248,218,38)" rx="2" ry="2" />
+<text  x="1144.23" y="1887.5" ></text>
+</g>
+<g >
+<title>[unknown] (163 samples, 21.73%)</title><rect x="370.3" y="1877" width="256.4" height="15.0" fill="rgb(222,125,20)" rx="2" ry="2" />
+<text  x="373.29" y="1887.5" >[unknown]</text>
+</g>
+<g >
+<title>__munmap (1 samples, 0.13%)</title><rect x="411.2" y="197" width="1.6" height="15.0" fill="rgb(249,223,16)" rx="2" ry="2" />
+<text  x="414.20" y="207.5" ></text>
+</g>
+<g >
+<title>[unknown] (191 samples, 25.47%)</title><rect x="365.6" y="1893" width="300.5" height="15.0" fill="rgb(211,218,35)" rx="2" ry="2" />
+<text  x="368.57" y="1903.5" >[unknown]</text>
+</g>
+<g >
+<title>native_send_call_func_single_ipi (1 samples, 0.13%)</title><rect x="1141.2" y="1893" width="1.6" height="15.0" fill="rgb(238,225,40)" rx="2" ry="2" />
+<text  x="1144.23" y="1903.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (33 samples, 4.40%)</title><rect x="541.8" y="1845" width="51.9" height="15.0" fill="rgb(251,195,4)" rx="2" ry="2" />
+<text  x="544.79" y="1855.5" >_PyEv..</text>
+</g>
+<g >
+<title>_PyLong_New (11 samples, 1.47%)</title><rect x="1120.8" y="2053" width="17.3" height="15.0" fill="rgb(214,203,35)" rx="2" ry="2" />
+<text  x="1123.77" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1589" width="3.2" height="15.0" fill="rgb(208,207,13)" rx="2" ry="2" />
+<text  x="412.63" y="1599.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1381" width="3.2" height="15.0" fill="rgb(219,120,31)" rx="2" ry="2" />
+<text  x="412.63" y="1391.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="597" width="3.2" height="15.0" fill="rgb(244,148,42)" rx="2" ry="2" />
+<text  x="412.63" y="607.5" ></text>
+</g>
+<g >
+<title>do_syscall_64 (1 samples, 0.13%)</title><rect x="285.3" y="1973" width="1.6" height="15.0" fill="rgb(248,210,20)" rx="2" ry="2" />
+<text  x="288.33" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1349" width="3.2" height="15.0" fill="rgb(226,97,33)" rx="2" ry="2" />
+<text  x="412.63" y="1359.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="1509" width="3.2" height="15.0" fill="rgb(218,27,1)" rx="2" ry="2" />
+<text  x="412.63" y="1519.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (31 samples, 4.13%)</title><rect x="898.9" y="1973" width="48.8" height="15.0" fill="rgb(217,223,18)" rx="2" ry="2" />
+<text  x="901.93" y="1983.5" >_PyE..</text>
+</g>
+<g >
+<title>[unknown] (105 samples, 14.00%)</title><rect x="376.6" y="1845" width="165.2" height="15.0" fill="rgb(228,77,16)" rx="2" ry="2" />
+<text  x="379.59" y="1855.5" >[unknown]</text>
+</g>
+<g >
+<title>swapgs_restore_regs_and_return_to_usermode (1 samples, 0.13%)</title><rect x="664.5" y="1861" width="1.6" height="15.0" fill="rgb(250,67,50)" rx="2" ry="2" />
+<text  x="667.51" y="1871.5" ></text>
+</g>
+<g >
+<title>PyUnicode_Contains (2 samples, 0.27%)</title><rect x="378.2" y="1829" width="3.1" height="15.0" fill="rgb(239,155,0)" rx="2" ry="2" />
+<text  x="381.16" y="1839.5" ></text>
+</g>
+<g >
+<title>sys_mprotect (1 samples, 0.13%)</title><rect x="285.3" y="1957" width="1.6" height="15.0" fill="rgb(248,1,25)" rx="2" ry="2" />
+<text  x="288.33" y="1967.5" ></text>
+</g>
+<g >
+<title>PyObject_RichCompare (22 samples, 2.93%)</title><rect x="87.1" y="2037" width="34.6" height="15.0" fill="rgb(253,74,34)" rx="2" ry="2" />
+<text  x="90.09" y="2047.5" >Py..</text>
+</g>
+<g >
+<title>do_syscall_64 (1 samples, 0.13%)</title><rect x="897.4" y="1925" width="1.5" height="15.0" fill="rgb(250,32,41)" rx="2" ry="2" />
+<text  x="900.36" y="1935.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="517" width="3.2" height="15.0" fill="rgb(209,53,40)" rx="2" ry="2" />
+<text  x="412.63" y="527.5" ></text>
+</g>
+<g >
+<title>[python3.6] (79 samples, 10.53%)</title><rect x="159.5" y="2037" width="124.3" height="15.0" fill="rgb(254,18,28)" rx="2" ry="2" />
+<text  x="162.47" y="2047.5" >[python3.6]</text>
+</g>
+<g >
+<title>do_futex (1 samples, 0.13%)</title><rect x="1117.6" y="1973" width="1.6" height="15.0" fill="rgb(224,144,26)" rx="2" ry="2" />
+<text  x="1120.63" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="661" width="3.2" height="15.0" fill="rgb(252,196,4)" rx="2" ry="2" />
+<text  x="412.63" y="671.5" ></text>
+</g>
+<g >
+<title>swapgs_restore_regs_and_return_to_usermode (2 samples, 0.27%)</title><rect x="280.6" y="2021" width="3.2" height="15.0" fill="rgb(236,47,33)" rx="2" ry="2" />
+<text  x="283.61" y="2031.5" ></text>
+</g>
+<g >
+<title>try_to_wake_up (7 samples, 0.93%)</title><rect x="1169.5" y="1941" width="11.1" height="15.0" fill="rgb(253,95,15)" rx="2" ry="2" />
+<text  x="1172.55" y="1951.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="485" width="3.2" height="15.0" fill="rgb(222,42,39)" rx="2" ry="2" />
+<text  x="412.63" y="495.5" ></text>
+</g>
+<g >
+<title>exit_to_usermode_loop (1 samples, 0.13%)</title><rect x="760.5" y="1861" width="1.6" height="15.0" fill="rgb(221,25,31)" rx="2" ry="2" />
+<text  x="763.48" y="1871.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 0.27%)</title><rect x="409.6" y="533" width="3.2" height="15.0" fill="rgb(248,83,31)" rx="2" ry="2" />
+<text  x="412.63" y="543.5" ></text>
 </g>
 </g>
 </svg>

@@ -7,6 +7,13 @@ weight = 1
 
 <!-- : .text-intro -->Call for Proposals / Golang Performance / Overview:
 
+
+---
+<!-- : .wrap -->
+
+
+# 昔Blog書くために、調べていたものがあった
+
 ---
 <!-- : .wrap -->
 
@@ -52,6 +59,8 @@ weight = 1
 - {{< flexblock "Cfp" 2 >}}
 <span>call for proposals</span>
 ネタを消化しないと
+
+昔Blog書くために、調べていたものがあった
 {{< /flexblock >}}
 
 - {{< flexblock "Golang" 2 >}}

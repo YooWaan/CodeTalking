@@ -153,8 +153,8 @@ flame:
 	#@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 100 -c 4 -p ./test-data/500kb.txt' 0
 
 flame_http:
-	#@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 100 -c 4 -p ./test-data/500kb.txt' 1 yes
-	#@sh ./ab_bench.sh 'gohttpd' 'golang/httpd' '$(AB_ARGS)' 1 yes
+	@sh ./ab_bench.sh 'pyhttpd' 'python3 python/httpd.py' '-n 100 -c 4 -p ./test-data/500kb.txt' 1 yes
+	@sh ./ab_bench.sh 'gohttpd' 'golang/httpd' '$(AB_ARGS)' 1 yes
 	@sh ./ab_bench.sh 'javahttpd' 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.HttpApp 10000' '$(AB_ARGS)' 2 yes
 	@sh ./ab_bench.sh 'scalahttpd' 'java -cp ./java-scala/target/scala-2.12/java-scala.jar example.SMain 10000' '$(AB_ARGS)' 2 yes
 	@sh ./ab_bench.sh 'rusthttpd' 'rust/target/install/bin/httpd' '$(AB_ARGS)' 1 yes
@@ -237,8 +237,8 @@ graph_wc_langs:
 
 graph_ht_langs:
 	@for f in $(PLANGS); do \
-		python pmon/graph.py 'cpu%' $${f}_ht_cpu_$(OS).png plot-data/ht_$${f}.tsv; \
-		python pmon/graph.py 'mem(kb)' $${f}_ht_mem_$(OS).png plot-data/ht_$${f}.tsv; \
+		python pmon/graph.py 'cpu%' $${f}_ht_cpu_$(OS).png plot-data/$(OS)/ht_$${f}.tsv; \
+		python pmon/graph.py 'mem(kb)' $${f}_ht_mem_$(OS).png plot-data/$(OS)/ht_$${f}.tsv; \
 	done
 
 

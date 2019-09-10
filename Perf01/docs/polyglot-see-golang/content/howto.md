@@ -77,8 +77,8 @@ weight: 2
 
 <table class="no-border">
   <tr>
-    <th>結果</th>
     <th>指標</th>
+    <th>値</th>
   </tr>
   <tr>
     <td>ステップ数</td>
@@ -107,16 +107,24 @@ weight: 2
 
 <table class="no-border">
   <tr>
-    <th>結果</th>
     <th>指標</th>
+    <th>値</th>
   </tr>
   <tr>
-    <td>ステップ数</td>
-    <td>短いは正</td>
+    <td>実行時間</td>
+    <td>sec(秒)</td>
   </tr>
   <tr>
-    <td>書き易さ</td>
-    <td>易 {{< svg fa-angellist >}}  〜 {{< svg fa-circle >}}  〜 {{< svg fa-ban >}}難</td>
+    <td>CPU</td>
+    <td>利用率</td>
+  </tr>
+  <tr>
+    <td>Memory</td>
+    <td>利用MByte</td>
+  </tr>
+  <tr>
+    <td>CPU Stack</td>
+    <td>FlameGraph</td>
   </tr>
 </table>
 
@@ -167,10 +175,18 @@ weight: 2
 
 #### known-known
 
+・CPU/Memory
+
+・実行時間
+
 |||
 
 #### known-unknown
 
+・CPU Stack
+
 |||
 
 #### unknown-unknown
+
+・各言語の定性的な評価

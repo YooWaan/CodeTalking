@@ -148,7 +148,8 @@ for (auto& ft : futures) {
 
 ### Flame graph
 
-![](/img/result/flame/kernel_cpp-wc.svg)
+
+<embed type="image/svg+xml" src="/img/result/flame/kernel_cpp-wc.svg" />
 
 ---
 
@@ -203,7 +204,8 @@ public void count(String filename) throws IOException, InterruptedException {
 
 ### Flame graph
 
-![](/img/result/flame/kernel_java-wc.svg)
+<embed type="image/svg+xml" src="/img/result/flame/kernel_java-wc.svg" />
+
 
 
 ---
@@ -323,7 +325,8 @@ def count(filename: String): (Int,Int,Int) = {
 
 ### Flame graph
 
-![](/img/result/flame/kernel_scala-wc.svg)
+<embed type="image/svg+xml" src="/img/result/flame/kernel_scala-wc.svg" />
+
 
 
 ---
