@@ -1,0 +1,19 @@
+languageCode    = "en-us"
+title = "Momomomomomo"
+baseurl         = "/"
+
+theme           = "hugo-webslides"
+
+[markup.goldmark.renderer]
+unsafe= true
+
+[params]
+customCss = ["css/style.css"]
+
+
+[params.webslides]
+  slideshow = true
+  minWheelDelta = 40
+  disableNavigateOnScroll = true
+  scrollWait = 450
+  autoslide = false
