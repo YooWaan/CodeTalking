@@ -4,23 +4,39 @@ date: 2020-10-03T14:36:27+09:00
 weight: 20
 ---
 
-## Monolish to Microservice
+<div class="content-left">
+<h2>Monolish to Microservice</h2>
+</div>
+
+<div class="content-right">
+<img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80" alt="">
+</div>
+
+---
+<!-- : .wrap -->
+
+<p class="text-data">Monolith to Microservices への移行の Planing しよう！！</p>
 
 
 ---
+<!-- : .wrap ..aligncenter -->
 
-## 1. Monolith to Microservices への移行の Planing しよう！！
+<h2>💥 Caution 💥</h2>
 
-**💥 Caution 💥**
 
-目的が Microservices ではなく、何にを成し遂げるのか？が大事です
+<p class="text-data">目的が Microservices ではなく、何にを成し遂げるのか？が大事です</p>
 
-**Key Questions**
+---
+<!-- : .wrap -->
+
+### Key Questions
 
 - What are you hoping to achieve ?
-- Have you condidered alternatives to using microserives ?
+   - 何したいんでゲスか？（ギョギョギョギョ）
+- Have you considered alternatives to using microserives ?
+   - Micro じゃないとダメなんでゲスか？（ギョギョギョギョ）
 - How will you know if the transition is working ?
-
+   - 移行出来るんでヤンスカ？
 
 ### Why might you choose microsevices ?
 
@@ -31,6 +47,9 @@ weight: 20
 - 開発者のスケール (Scale the Number of Developers)
 - 新しい技術利用の機会創出 (Embrace New Technollogy)
 
+---
+<!--: .wrap -->
+
 ### Be a Bad Idea? & Trade-Off
 
 Bad Idea
@@ -39,6 +58,7 @@ Bad Idea
 
 
 ---
+<!--: .wrap -->
 
 ### Trade-Off
 
@@ -66,20 +86,31 @@ Bad Idea
 
 - Cost of change
 
+---
+<!--: .wrap -->
+
+
 ### So Where Do we Start ?
 
-- domain driven design
-    - Event Storm
-    - Using a Domain Model for Prioritization
-
-- Combine model
-
-- Reorganizing Teams
+* domain driven design
+  * Event Storm
+  * Using a Domain Model for Prioritization
+* Combine model
+* Reorganizing Teams
 
 
-### Comparition others 
+### Comparition others
 
 🚧 TODO WRITE
 
 
 ![](https://res.infoq.com/presentations/microservices-benefits/en/slides/sl38.jpg)
+
+
+---
+<!-- : .aligncenter -->
+
+<div>
+<p class="text-landing">目的が Microservices ではなく、</p>
+<p class="text-data">何にを成し遂げるのか？が大事です</p>
+</div>

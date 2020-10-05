@@ -1,0 +1,3 @@
+[submodule "Arch01/mono-to-micro/themes/hugo-webslides"]
+	path = Arch01/mono-to-micro/themes/hugo-webslides
+	url = https://github.com/rcjach/hugo-webslides.git
