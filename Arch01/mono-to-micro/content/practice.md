@@ -52,6 +52,7 @@ https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies
 - Decorating Collaborator
 - Change Data Capture
 
+[Change Data Streaming Patterns for Microservices With Debezium ](https://www.slideshare.net/ConfluentInc/change-data-streaming-patterns-for-microservices-with-debezium)
 
 [](https://www.slideshare.net/ToruMakabe/zozotowncloud-native-journey)
 
