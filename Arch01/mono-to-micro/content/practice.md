@@ -61,11 +61,16 @@ https://paulhammant.com/2013/07/14/legacy-application-strangulation-case-studies
 
 ### 2-2. Decomposing the Database
 
-- Shared Database
-- DB View
-- DB wrapper service
-- DB as Service Interface
-- Synchronize Data in App
-- Trace write
-- Split table
-- Move to FK key to Code
+* Shared Database
+* DB View
+   * ![](img/db-view.png)
+* DB wrapper service
+   * ![](img/db-wrap-service.png)
+* DB as Service Interface
+* Synchronize Data in App
+* Trace write
+* Split table
+* Move to FK key to Code
+* Transaction
+  * 2 phase commit
+  * Sagas

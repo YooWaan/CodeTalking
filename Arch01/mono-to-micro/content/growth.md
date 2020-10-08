@@ -7,7 +7,7 @@ weight: 40
 
 
 
-## Growth Pain (成長のツラミ)
+## Growing Pain (成長のツラミ)
 
 
 ---
@@ -15,21 +15,30 @@ weight: 40
 
 ## More Services, More Pain
 
+| 2-10 Service               | 10-50 Services | 50+ Services          |
+| -------------------------- | -------------- | --------------------- |
+| Single - a few Team        |                | More teams/developers |
+| Breaking Changes,Reporting | Ownership at scale, DevExperience, Running to many Things               |  Global vs local optimizaiton, Orphaned Service                     |
+
+
+---
+<!--: .wrap -->
+
 <hr/>
 
 <div class="toc">
 
 <ol>
 <li><span class="chapter">Ownership at Scale</span>
-  aaaa
+  独立性を高めるー
 </li>
 
 <li><span class="chapter">Breaking Changes</span>
-  aaaa
+  けど、関係し合うから、気をつけて
 </li>
 
 <li><span class="chapter">Reporting</span>
-  aaaa
+  Schemaとか変更すると事故るから、参照されているものは独立化した方が
 </li>
 
 
@@ -38,23 +47,23 @@ weight: 40
 </li>
 
 <li><span class="chapter">Local Developer Experience</span>
-  aaaa
+  分散されていくとローカル環境がカオスに。。。
 </li>
 
 <li><span class="chapter">Running Too Many Things</span>
-  aaaa
+  そして、いろんなツールとかやってきて、カオスがカオスに・・。
 </li>
 
 <li><span class="chapter">End-to-End Testing</span>
-  aaaa
+  境界のテスト自動化しとけ
 </li>
 
 <li><span class="chapter">Global Versus Local Optimization</span>
-  aaaa
+  ディレクションセンス が試される環境に。。。
 </li>
 
 <li><span class="chapter">Robustness and Resiliency</span>
-  aaaa
+  ネットワークが分散していくので、通信できなかったも普通な世界になるよねぇ
 </li>
 
 <li><span class="chapter">Orphaned Services</span>

@@ -54,7 +54,10 @@ weight: 20
 
 Bad Idea
 
-- Unclear Domain, Startup, Customer-Installed and Managed Software, No Having a Good Reason!
+- Unclear Domain
+- Startup
+- Customer-Installed and Managed Software
+- No Having a Good Reason!
 
 
 ---
@@ -86,6 +89,8 @@ Bad Idea
 
 - Cost of change
 
+🚧 TODO WRITE
+
 ---
 <!--: .wrap -->
 
@@ -98,14 +103,11 @@ Bad Idea
 * Combine model
 * Reorganizing Teams
 
+<img class="aligncenter" src="https://res.infoq.com/presentations/microservices-benefits/en/slides/sl38.jpg" width="50%" />
 
 ### Comparition others
 
 🚧 TODO WRITE
-
-
-![](https://res.infoq.com/presentations/microservices-benefits/en/slides/sl38.jpg)
-
 
 ---
 <!-- : .aligncenter -->

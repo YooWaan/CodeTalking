@@ -22,23 +22,6 @@ weight: 10
 
 <hr/>
 
-### What Advantages Can Microservices Bring ?
-
-独立性から得れるもの
-
-- 堅牢性と規模の向上
-- 技術要素の組み合わせ最適化
-- 依存関係の解決が必要となる開発が不要
-- システム理解の容易性
-- lang, deploy, style, platform の柔軟性が上がる
-
-🚧 TODO WRITE
-
-TODO 補足 別の本
-
-
-<hr/>
-
 ### from 📖マ
 
 🚧 TODO WRITE
@@ -53,22 +36,17 @@ TODO 補足 別の本
 - Microservice are focused on replaceablity
    - 既存コンポーネントを維持ではなく、換えていくことに焦点を当ててます
 
----
-<!-- : wrap -->
-
-## 0-1. Monolith とは
-
->  ... referring to a unit of deployment. When all functionality in a system had to be deployed together, we consider via monolith.
-
-- Single process monolith
-- Distributed monolith
-
 <hr/>
 
-### Advantages of Monoliths
+### What Advantages Can Microservices Bring ?
 
-TODO
+独立性から得れるもの
 
+- 堅牢性と規模の向上
+- 技術要素の組み合わせ最適化
+- 依存関係の解決が必要となる開発が不要
+- システム理解の容易性
+- lang, deploy, style, platform の柔軟性が上がる
 
 <hr/>
 
@@ -90,10 +68,34 @@ TODO
 - Promote ease of innovation through disposable code - it is easy to fail and move on
    - コードを捨て易くなるので、失敗に対してのリカバリが容易になります
 
+
+
+
+
+---
+<!-- : wrap -->
+
+## 0-1. Monolith とは
+
+>  ... referring to a unit of deployment. When all functionality in a system had to be deployed together, we consider via monolith.
+
+- Single process monolith
+- Distributed monolith
+
+<hr/>
+
+### Advantages of Monoliths
+
+TODO
+
+
+
+
 ---
 <!-- : .wrap ..aligncenter -->
 
 *Biz*
 
+🚧 TODO WRITE
 
 <img src="https://www.oreilly.com/content/wp-content/uploads/sites/2/2020/01/msar_0201-a762ef3efa52bf559517ac80e291c64a.png" width="50%" />
