@@ -8,6 +8,7 @@ import (
 	"errors"
 	"strconv"
 	"sync"
+	"sync/atomic"
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
@@ -33,6 +34,7 @@ type Config struct {
 }
 
 type ResolverRoot interface {
+	Page() PageResolver
 	Query() QueryResolver
 }
 
@@ -42,18 +44,26 @@ type DirectiveRoot struct {
 type ComplexityRoot struct {
 	Note struct {
 		Name  func(childComplexity int) int
-		Notes func(childComplexity int, depth *int) int
 		Text  func(childComplexity int) int
 		Title func(childComplexity int) int
 	}
 
+	Page struct {
+		Note  func(childComplexity int) int
+		Notes func(childComplexity int, depth *int) int
+		Path  func(childComplexity int) int
+	}
+
 	Query struct {
-		Notes func(childComplexity int, path *string) int
+		Wiki func(childComplexity int, path *string) int
 	}
 }
 
+type PageResolver interface {
+	Notes(ctx context.Context, obj *Page, depth *int) ([]*Page, error)
+}
 type QueryResolver interface {
-	Notes(ctx context.Context, path *string) ([]*Note, error)
+	Wiki(ctx context.Context, path *string) (*Page, error)
 }
 
 type executableSchema struct {
@@ -71,50 +81,64 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	_ = ec
 	switch typeName + "." + field {
 
-	case "Note.Name":
+	case "Note.name":
 		if e.complexity.Note.Name == nil {
 			break
 		}
 
 		return e.complexity.Note.Name(childComplexity), true
 
-	case "Note.notes":
-		if e.complexity.Note.Notes == nil {
-			break
-		}
-
-		args, err := ec.field_Note_notes_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Note.Notes(childComplexity, args["depth"].(*int)), true
-
-	case "Note.Text":
+	case "Note.text":
 		if e.complexity.Note.Text == nil {
 			break
 		}
 
 		return e.complexity.Note.Text(childComplexity), true
 
-	case "Note.Title":
+	case "Note.title":
 		if e.complexity.Note.Title == nil {
 			break
 		}
 
 		return e.complexity.Note.Title(childComplexity), true
 
-	case "Query.notes":
-		if e.complexity.Query.Notes == nil {
+	case "Page.note":
+		if e.complexity.Page.Note == nil {
 			break
 		}
 
-		args, err := ec.field_Query_notes_args(context.TODO(), rawArgs)
+		return e.complexity.Page.Note(childComplexity), true
+
+	case "Page.notes":
+		if e.complexity.Page.Notes == nil {
+			break
+		}
+
+		args, err := ec.field_Page_notes_args(context.TODO(), rawArgs)
 		if err != nil {
 			return 0, false
 		}
 
-		return e.complexity.Query.Notes(childComplexity, args["path"].(*string)), true
+		return e.complexity.Page.Notes(childComplexity, args["depth"].(*int)), true
+
+	case "Page.path":
+		if e.complexity.Page.Path == nil {
+			break
+		}
+
+		return e.complexity.Page.Path(childComplexity), true
+
+	case "Query.wiki":
+		if e.complexity.Query.Wiki == nil {
+			break
+		}
+
+		args, err := ec.field_Query_wiki_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Wiki(childComplexity, args["path"].(*string)), true
 
 	}
 	return 0, false
@@ -170,23 +194,28 @@ var sources = []*ast.Source{
 # Data schema
 
 type Note {
-    Name: String
-    Title: String
-    Text: String
-    notes(depth: Int): [Note]
+    name: String!
+    title: String!
+    text: String!
+}
+
+type Page {
+    path: String!
+    note: Note!
+    notes(depth: Int): [Page]
 }
 
 # mutation
 
 input Article {
-    Path: String
-    Title: String
-    Text: String
+    path: String!
+    title: String!
+    text: String!
 }
 `, BuiltIn: false},
 	{Name: "ql/query.graphqls", Input: `type Query {
 
-  notes(path: String): [Note]
+  wiki(path: String): Page
 
 }
 `, BuiltIn: false},
@@ -197,7 +226,7 @@ var parsedSchema = gqlparser.MustLoadSchema(sources...)
 
 // region    ***************************** args.gotpl *****************************
 
-func (ec *executionContext) field_Note_notes_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+func (ec *executionContext) field_Page_notes_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
 	var arg0 *int
@@ -227,7 +256,7 @@ func (ec *executionContext) field_Query___type_args(ctx context.Context, rawArgs
 	return args, nil
 }
 
-func (ec *executionContext) field_Query_notes_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+func (ec *executionContext) field_Query_wiki_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
 	var arg0 *string
@@ -280,7 +309,7 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 
 // region    **************************** field.gotpl *****************************
 
-func (ec *executionContext) _Note_Name(ctx context.Context, field graphql.CollectedField, obj *Note) (ret graphql.Marshaler) {
+func (ec *executionContext) _Note_name(ctx context.Context, field graphql.CollectedField, obj *Note) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -305,14 +334,17 @@ func (ec *executionContext) _Note_Name(ctx context.Context, field graphql.Collec
 		return graphql.Null
 	}
 	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.(*string)
+	res := resTmp.(string)
 	fc.Result = res
-	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Note_Title(ctx context.Context, field graphql.CollectedField, obj *Note) (ret graphql.Marshaler) {
+func (ec *executionContext) _Note_title(ctx context.Context, field graphql.CollectedField, obj *Note) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -337,14 +369,17 @@ func (ec *executionContext) _Note_Title(ctx context.Context, field graphql.Colle
 		return graphql.Null
 	}
 	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.(*string)
+	res := resTmp.(string)
 	fc.Result = res
-	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Note_Text(ctx context.Context, field graphql.CollectedField, obj *Note) (ret graphql.Marshaler) {
+func (ec *executionContext) _Note_text(ctx context.Context, field graphql.CollectedField, obj *Note) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -369,14 +404,17 @@ func (ec *executionContext) _Note_Text(ctx context.Context, field graphql.Collec
 		return graphql.Null
 	}
 	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.(*string)
+	res := resTmp.(string)
 	fc.Result = res
-	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Note_notes(ctx context.Context, field graphql.CollectedField, obj *Note) (ret graphql.Marshaler) {
+func (ec *executionContext) _Page_path(ctx context.Context, field graphql.CollectedField, obj *Page) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -384,7 +422,7 @@ func (ec *executionContext) _Note_notes(ctx context.Context, field graphql.Colle
 		}
 	}()
 	fc := &graphql.FieldContext{
-		Object:     "Note",
+		Object:     "Page",
 		Field:      field,
 		Args:       nil,
 		IsMethod:   false,
@@ -392,8 +430,78 @@ func (ec *executionContext) _Note_notes(ctx context.Context, field graphql.Colle
 	}
 
 	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Path, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Page_note(ctx context.Context, field graphql.CollectedField, obj *Page) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Page",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Note, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*Note)
+	fc.Result = res
+	return ec.marshalNNote2ᚖnoteᚗmemᚋwikiᚋqlᚐNote(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Page_notes(ctx context.Context, field graphql.CollectedField, obj *Page) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Page",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   true,
+		IsResolver: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
 	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Note_notes_args(ctx, rawArgs)
+	args, err := ec.field_Page_notes_args(ctx, rawArgs)
 	if err != nil {
 		ec.Error(ctx, err)
 		return graphql.Null
@@ -401,7 +509,7 @@ func (ec *executionContext) _Note_notes(ctx context.Context, field graphql.Colle
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Notes, nil
+		return ec.resolvers.Page().Notes(rctx, obj, args["depth"].(*int))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -410,12 +518,12 @@ func (ec *executionContext) _Note_notes(ctx context.Context, field graphql.Colle
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*Note)
+	res := resTmp.([]*Page)
 	fc.Result = res
-	return ec.marshalONote2ᚕᚖnoteᚗmemᚋwikiᚋqlᚐNote(ctx, field.Selections, res)
+	return ec.marshalOPage2ᚕᚖnoteᚗmemᚋwikiᚋqlᚐPage(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Query_notes(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+func (ec *executionContext) _Query_wiki(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -432,7 +540,7 @@ func (ec *executionContext) _Query_notes(ctx context.Context, field graphql.Coll
 
 	ctx = graphql.WithFieldContext(ctx, fc)
 	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Query_notes_args(ctx, rawArgs)
+	args, err := ec.field_Query_wiki_args(ctx, rawArgs)
 	if err != nil {
 		ec.Error(ctx, err)
 		return graphql.Null
@@ -440,7 +548,7 @@ func (ec *executionContext) _Query_notes(ctx context.Context, field graphql.Coll
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Notes(rctx, args["path"].(*string))
+		return ec.resolvers.Query().Wiki(rctx, args["path"].(*string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -449,9 +557,9 @@ func (ec *executionContext) _Query_notes(ctx context.Context, field graphql.Coll
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*Note)
+	res := resTmp.(*Page)
 	fc.Result = res
-	return ec.marshalONote2ᚕᚖnoteᚗmemᚋwikiᚋqlᚐNote(ctx, field.Selections, res)
+	return ec.marshalOPage2ᚖnoteᚗmemᚋwikiᚋqlᚐPage(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -1618,27 +1726,27 @@ func (ec *executionContext) unmarshalInputArticle(ctx context.Context, obj inter
 
 	for k, v := range asMap {
 		switch k {
-		case "Path":
+		case "path":
 			var err error
 
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("Path"))
-			it.Path, err = ec.unmarshalOString2ᚖstring(ctx, v)
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("path"))
+			it.Path, err = ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
 			}
-		case "Title":
+		case "title":
 			var err error
 
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("Title"))
-			it.Title, err = ec.unmarshalOString2ᚖstring(ctx, v)
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("title"))
+			it.Title, err = ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
 			}
-		case "Text":
+		case "text":
 			var err error
 
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("Text"))
-			it.Text, err = ec.unmarshalOString2ᚖstring(ctx, v)
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("text"))
+			it.Text, err = ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -1667,14 +1775,64 @@ func (ec *executionContext) _Note(ctx context.Context, sel ast.SelectionSet, obj
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("Note")
-		case "Name":
-			out.Values[i] = ec._Note_Name(ctx, field, obj)
-		case "Title":
-			out.Values[i] = ec._Note_Title(ctx, field, obj)
-		case "Text":
-			out.Values[i] = ec._Note_Text(ctx, field, obj)
+		case "name":
+			out.Values[i] = ec._Note_name(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "title":
+			out.Values[i] = ec._Note_title(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "text":
+			out.Values[i] = ec._Note_text(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var pageImplementors = []string{"Page"}
+
+func (ec *executionContext) _Page(ctx context.Context, sel ast.SelectionSet, obj *Page) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, pageImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("Page")
+		case "path":
+			out.Values[i] = ec._Page_path(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&invalids, 1)
+			}
+		case "note":
+			out.Values[i] = ec._Page_note(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&invalids, 1)
+			}
 		case "notes":
-			out.Values[i] = ec._Note_notes(ctx, field, obj)
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Page_notes(ctx, field, obj)
+				return res
+			})
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -1701,7 +1859,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("Query")
-		case "notes":
+		case "wiki":
 			field := field
 			out.Concurrently(i, func() (res graphql.Marshaler) {
 				defer func() {
@@ -1709,7 +1867,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
-				res = ec._Query_notes(ctx, field)
+				res = ec._Query_wiki(ctx, field)
 				return res
 			})
 		case "__type":
@@ -1985,6 +2143,16 @@ func (ec *executionContext) marshalNBoolean2bool(ctx context.Context, sel ast.Se
 		}
 	}
 	return res
+}
+
+func (ec *executionContext) marshalNNote2ᚖnoteᚗmemᚋwikiᚋqlᚐNote(ctx context.Context, sel ast.SelectionSet, v *Note) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	return ec._Note(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNString2string(ctx context.Context, v interface{}) (string, error) {
@@ -2270,7 +2438,7 @@ func (ec *executionContext) marshalOInt2ᚖint(ctx context.Context, sel ast.Sele
 	return graphql.MarshalInt(*v)
 }
 
-func (ec *executionContext) marshalONote2ᚕᚖnoteᚗmemᚋwikiᚋqlᚐNote(ctx context.Context, sel ast.SelectionSet, v []*Note) graphql.Marshaler {
+func (ec *executionContext) marshalOPage2ᚕᚖnoteᚗmemᚋwikiᚋqlᚐPage(ctx context.Context, sel ast.SelectionSet, v []*Page) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -2297,7 +2465,7 @@ func (ec *executionContext) marshalONote2ᚕᚖnoteᚗmemᚋwikiᚋqlᚐNote(ctx
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalONote2ᚖnoteᚗmemᚋwikiᚋqlᚐNote(ctx, sel, v[i])
+			ret[i] = ec.marshalOPage2ᚖnoteᚗmemᚋwikiᚋqlᚐPage(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -2310,11 +2478,11 @@ func (ec *executionContext) marshalONote2ᚕᚖnoteᚗmemᚋwikiᚋqlᚐNote(ctx
 	return ret
 }
 
-func (ec *executionContext) marshalONote2ᚖnoteᚗmemᚋwikiᚋqlᚐNote(ctx context.Context, sel ast.SelectionSet, v *Note) graphql.Marshaler {
+func (ec *executionContext) marshalOPage2ᚖnoteᚗmemᚋwikiᚋqlᚐPage(ctx context.Context, sel ast.SelectionSet, v *Page) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
-	return ec._Note(ctx, sel, v)
+	return ec._Page(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalOString2string(ctx context.Context, v interface{}) (string, error) {

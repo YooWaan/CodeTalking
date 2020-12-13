@@ -5,11 +5,14 @@ package ql
 
 import (
 	"context"
-	"fmt"
 )
 
-func (r *queryResolver) Notes(ctx context.Context, path *string) ([]*Note, error) {
-	panic(fmt.Errorf("not implemented"))
+func (r *queryResolver) Wiki(ctx context.Context, path *string) (*Page, error) {
+	searchPath := "/"
+	if path != nil {
+		searchPath = *path
+	}
+	return Search(ctx, searchPath), nil
 }
 
 // Query returns QueryResolver implementation.

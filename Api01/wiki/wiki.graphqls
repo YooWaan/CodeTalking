@@ -2,16 +2,21 @@
 # Data schema
 
 type Note {
-    Name: String
-    Title: String
-    Text: String
-    notes(depth: Int): [Note]
+    name: String!
+    title: String!
+    text: String!
+}
+
+type Page {
+    path: String!
+    note: Note!
+    notes(depth: Int): [Page]
 }
 
 # mutation
 
 input Article {
-    Path: String
-    Title: String
-    Text: String
+    path: String!
+    title: String!
+    text: String!
 }

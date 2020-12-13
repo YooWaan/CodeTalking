@@ -3,14 +3,19 @@
 package ql
 
 type Article struct {
-	Path  *string `json:"Path"`
-	Title *string `json:"Title"`
-	Text  *string `json:"Text"`
+	Path  string `json:"path"`
+	Title string `json:"title"`
+	Text  string `json:"text"`
 }
 
 type Note struct {
-	Name  *string `json:"Name"`
-	Title *string `json:"Title"`
-	Text  *string `json:"Text"`
-	Notes []*Note `json:"notes"`
+	Name  string `json:"name"`
+	Title string `json:"title"`
+	Text  string `json:"text"`
+}
+
+type Page struct {
+	Path  string  `json:"path"`
+	Note  *Note   `json:"note"`
+	Notes []*Page `json:"notes"`
 }

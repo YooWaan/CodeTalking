@@ -35,6 +35,44 @@ func (n *Note) Unlink(name string) {
 	n.Children = n.Children.Unlink(name)
 }
 
+func (n *Note) Tree(depth int) *Note {
+	var parent *Note
+	if n.Parent != nil {
+		parent = n.Parent.copyNote(nil)
+	}
+	tree := n.copyNote(parent)
+	buildTree(n, tree, 0, depth)
+	return tree
+}
+
+func (n *Note) copyNote(p *Note) *Note{
+	return &Note{
+		Parent: p,
+		Name: n.Name,
+		Title: n.Title,
+		Body: n.Body,
+	}
+}
+
+func buildTree(n, parent *Note, depth, limit int) {
+	if depth == limit {
+		return
+	}
+	if len(n.Children) == 0 {
+		return
+	}
+	ch := make(Children, len(n.Children))
+	for i, c := range n.Children {
+		child := c.copyNote(parent)
+		ch[i] = child
+		if len(c.Children) > 0 {
+			ch := n.Children[i]
+			buildTree(ch, child, depth+1, limit)
+		}
+	}
+	parent.Children = ch
+}
+
 func (ch Children) Find(name string) *Note {
 	for _, c := range ch {
 		if c.Name == name {
@@ -91,10 +129,11 @@ func (bk *Book) Find(path string) *Note {
 
 	n := bk.Root
 	for _, nm := range strings.Split(path, "/") {
-		n = n.Find(nm)
-		if n == nil {
+		found := n.Children.Find(nm)
+		if found == nil {
 			return nil
 		}
+		n = found
 	}
 	return n
 }

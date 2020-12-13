@@ -20,6 +20,10 @@ resolver:
 
 
 models:
+  Page:
+    fields:
+      notes:
+        resolver: true
   ID:
     model:
       - github.com/99designs/gqlgen/graphql.ID

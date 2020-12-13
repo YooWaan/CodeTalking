@@ -1,5 +1,5 @@
 type Query {
 
-  notes(path: String): [Note]
+  wiki(path: String): Page
 
 }

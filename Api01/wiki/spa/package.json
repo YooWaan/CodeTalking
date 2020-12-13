@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt-ts",
-    "dev-wsl": "nuxt-ts -H 172.28.100.47",
+    "dev-wsl": "nuxt-ts -H 172.20.111.134",
     "build": "nuxt-ts build",
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate"
