@@ -1,0 +1,17 @@
+
+# Data schema
+
+type Note {
+    Name: String
+    Title: String
+    Text: String
+    notes(depth: Int): [Note]
+}
+
+# mutation
+
+input Article {
+    Path: String
+    Title: String
+    Text: String
+}

@@ -1,0 +1,5 @@
+type Query {
+
+  notes(path: String): [Note]
+
+}
