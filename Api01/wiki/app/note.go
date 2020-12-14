@@ -128,7 +128,7 @@ func (bk *Book) Find(path string) *Note {
 	}
 
 	n := bk.Root
-	for _, nm := range strings.Split(path, "/") {
+	for _, nm := range strings.Split(path, "/")[1:] {
 		found := n.Children.Find(nm)
 		if found == nil {
 			return nil

@@ -7,14 +7,19 @@
     "dev-wsl": "nuxt-ts -H 172.20.111.134",
     "build": "nuxt-ts build",
     "start": "nuxt-ts start",
+    "codegen": "graphql-codegen --config codegen.yml",
     "generate": "nuxt-ts generate"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
+    "@nuxtjs/apollo": "^4.0.1-rc.5",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6"
+    "nuxt": "^2.14.6",
+    "nuxt-property-decorator": "^2.8.8"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.19.4",
+    "@graphql-codegen/typescript-operations": "^1.17.12",
     "@nuxt/types": "^2.14.6",
     "@nuxt/typescript-build": "^2.0.3"
   }

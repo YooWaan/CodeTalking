@@ -22,11 +22,13 @@ func main() {
 
 	ctx := ql.WithBook(context.Background())
 	srv := handler.NewDefaultServer(ql.NewExecutableSchema(ql.Config{Resolvers: &ql.Resolver{}}))
+	fs := http.FileServer(http.Dir("./pg"))
 
-	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
+	http.Handle("/playground", playground.Handler("GraphQL playground", "/query"))
 	http.HandleFunc("/query", func(w http.ResponseWriter, r *http.Request) {
 		srv.ServeHTTP(w, r.WithContext(ctx))
 	})
+	http.Handle("/", fs)
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))

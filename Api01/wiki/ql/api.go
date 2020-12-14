@@ -2,12 +2,14 @@ package ql
 
 import (
 	"context"
+	"log"
+	"encoding/json"
 
 	"note.mem/wiki/app"
 )
 
 var (
-	keyBook = struct{Name string}{"key_book"}
+	keyBook = struct{ Name string }{"key_book"}
 )
 
 func Book(c context.Context) *app.Book {
@@ -16,13 +18,16 @@ func Book(c context.Context) *app.Book {
 }
 
 func WithBook(c context.Context) context.Context {
-	b := &app.Book{
-		Root: &app.Note{
-			Name: "/",
-			Title: "Wiki",
-			Body: "Hello",
-		},
-	}
+
+	root := fromJSON(`{"name": "/", "title": "Wiki", "text": "Hello",
+"children": [
+  {"name": "one", "title": "one", "text": "one", "children": [
+    {"name": "three", "title": "three", "text": "three"}
+  ]},
+  {"name": "two", "title": "two", "text": "two"}
+]}`)
+
+	b := &app.Book{Root: root}
 	return context.WithValue(c, keyBook, b)
 }
 
@@ -38,7 +43,9 @@ func Tree(c context.Context, page *Page, depth *int) []*Page {
 	}
 
 	book := Book(c)
-	note := book.Find(page.Path).Tree(*depth)
+	note := book.Find(page.Path)
+	log.Printf("Tree ==> %v", page.Path)
+	note = note.Tree(*depth)
 
 	ret := make([]*Page, len(note.Children))
 	for i, ch := range note.Children {
@@ -48,7 +55,6 @@ func Tree(c context.Context, page *Page, depth *int) []*Page {
 	//page.Notes = ret
 	return ret
 }
-
 
 func toPage(path string, note *app.Note) *Page {
 	n := newPage(path, note)
@@ -60,7 +66,7 @@ func tree(note *app.Note, n *Page) {
 	if len(note.Children) == 0 {
 		return
 	}
-	ch := make([]*Page, 0, len(note.Children))
+	ch := make([]*Page, len(note.Children))
 	for i, c := range note.Children {
 		child := newPage(n.Path, c)
 		ch[i] = child
@@ -84,8 +90,44 @@ func newPage(path string, note *app.Note) *Page {
 
 func newNote(note *app.Note) *Note {
 	return &Note{
-		Name: note.Name,
+		Name:  note.Name,
 		Title: note.Title,
-		Text: note.Body,
+		Text:  note.Body,
+	}
+}
+
+func fromJSON(jsonStr string) *app.Note {
+	root := &app.Note{
+		Name:  "/",
+		Title: "Wiki",
+		Body:  "Hello",
+	}
+
+	//data := map[string]string{}
+	data := make(map[string]interface{})
+	_ = json.Unmarshal([]byte(jsonStr), &data)
+	mapToNote(root, data)
+	return root
+}
+
+func mapToNote(parent *app.Note, val map[string]interface{}) {
+	title := val["title"].(string)
+	text := val["text"].(string)
+	name := val["name"].(string)
+
+	parent.Title = title
+	parent.Body = text
+	parent.Name = name
+
+	if v, ok := val["children"]; ok {
+		nodes := v.([]interface{})
+		cs := make(app.Children, len(nodes))
+		for i, node := range nodes {
+			data := node.(map[string]interface{})
+			child := &app.Note{Parent: parent}
+			mapToNote(child, data)
+			cs[i] = child
+		}
+		parent.Children = cs
 	}
 }
