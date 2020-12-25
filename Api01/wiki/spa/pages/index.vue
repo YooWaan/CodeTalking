@@ -12,7 +12,7 @@
               <a v-on:click="loadPage(child.path)" class="pure-menu-link">&nbsp;&gt;{{child.note.name}}</a>
             </li>
           </ul>
-        <li>
+        </li>
 
       </ul>
     </div>
@@ -23,7 +23,12 @@
           <h1>Title: {{ this.page.title }}</h1>
         </div>
         <div class="pure-u-2-5">
-          {{page.path}}
+          <span href="#" class="pure-menu-link pure-menu-heading">Child</sapn>
+          <ul class="pure-menu-list">
+            <li v-for="path in page.links" class="pure-menu-item">
+              <a v-on:click="loadPage(path)" class="pure-menu-link">&nbsp;&gt;{{path}}</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -47,6 +52,9 @@ query page($path: String) {
     note {
       title
       text
+    }
+    notes(depth: -1) {
+       path
     }
   }
 } `
@@ -85,6 +93,7 @@ type WikiPage = {
   title: string;
   text: string;
   path: string;
+  links: Array<string>;
 }
 
 
@@ -92,7 +101,7 @@ type WikiPage = {
 export default Vue.extend({
 
   data() {
-    const pg: WikiPage = {title: '', text: '', path: '/'};
+    const pg: WikiPage = {title: '', text: '', path: '/'} as WikiPage;
     const tree: Page = {path: '/', note:{title:'Wiki', text:'Top'}} as Page;
     return {
       page: pg,
@@ -128,7 +137,10 @@ export default Vue.extend({
 
     loadPage(path: String) {
       this.fetchPage(path).then((data) => {
-        this.page = {title:data.note.title, text: data.note.text, path:data.path} as WikiPage;
+        const links: Array<string|undefined> = data.notes ? data.notes.map((n) => {
+          return n?.path;
+        }) : [];
+        this.page = {title:data.note.title, text: data.note.text, path:data.path, links: links} as WikiPage;
       });
     }
   }

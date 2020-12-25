@@ -1,32 +1,44 @@
 %title: GraphQL Live
 %author: YooWaan
-%date: 2020-12-12
+%date: 2020-12-14
 
 
 -> # Title <-
 
 -> # GraphQL どうでしょう
 
+-> Schema first にどこまで迫れるか 会
+
+memo https://www.npmjs.com/package/@nuxtjs/markdownit
 
 ----------------------------------------
 -> # Index <-
 =============
 
 
-* What is GraphQL
+1. What is GraphQL
    * Eco System
-* a little Comparsion
-* Live (semi)
-* Tips
-* Recap
+2. 📡 Rest vs 🔮 GraphQL (casual)
+3. Demo (semi)
+4. Tips
+5. Recap
 
 
 ----------------------------------------
--> # What is GraphQL <-
+-> # 1.What is GraphQL <-
 
 * Language
-* API
+   * API code
+   * Client code
 * Eco System
+
+
+```
+  [Client] --- [API] ---  [Data]
+            A
+             `-- ここの言語
+```
+
 
 see [graphql.org](https://graphql.org/)
     [faq](https://graphql.org/faq/)
@@ -37,6 +49,16 @@ see [graphql.org](https://graphql.org/)
 
 [Intoroduction](https://reactjs.org/blog/2015/05/01/graphql-introduction.html)
 
+design principles:
+
+* Hierarchical
+* Product-centric            ... frontend driven
+* Client-sepcified queries   ... Client うれしい
+* Backwords Compatible       ... 下位互換しやすいらしい
+* Structured, Arbitrary Code ... 構造化できつつ、いろいろできる
+* Application-Layer Protocol
+* Strongly-typed             ... 型好きやん
+* Introspective
 
 ----------------------------------------
 -> # Eco System <-
@@ -71,22 +93,14 @@ see [graphql.org](https://graphql.org/)
 
 
 ----------------------------------------
--> # Compare <-
 
-| Item  | GraphQL  | Rest   |
-| ----- | -------- | ------ |
-| Query | Flexible | Stable |
-
-
-
-https://www.npmjs.com/package/@nuxtjs/markdownit
-
+-> # 2. Rest vs GraphQL (casual)
 
 ----------------------------------------
 -> # UI & API Server Building Steps <-
 
 
-[1]. Define Payload (Resource)
+[1]. Define Payload (Resource schema)
 
 [2]. Design endpoint
 
@@ -100,7 +114,7 @@ https://www.npmjs.com/package/@nuxtjs/markdownit
 
 
 ----------------------------------------
--> # Rest Flow <-
+-> # 📡 Rest Flow <-
 
 (1) use tool eg. swagger
   [1]. Define Payload (Resource)
@@ -111,17 +125,17 @@ https://www.npmjs.com/package/@nuxtjs/markdownit
 
 (3) use tool eg. swagger
   [3-1]. (API) Build API Server (or mock)
-    → routing each endpoint
+    ▶️  routing each endpoint
 
   [3-2]. (UI) API Communication code
-         → write each endpoing commucation code
+         ▶️  write each endpoing commucation code
        (UI) JSON Binding code
-         → use defined class or plain json
+         ▶️  use defined class or plain json
        (UI) Apply UI component
-         ➡️ use js framework
+         ▶️  use js framework
 
 ----------------------------------------
--> # Graph QL Flow <-
+-> # 🔮 Graph QL Flow <-
 
 (1) Write GraphQL Schema
   [1]. Define Payload (Resource)
@@ -132,17 +146,32 @@ https://www.npmjs.com/package/@nuxtjs/markdownit
 
 (3) use tool eg. swagger
   [3-1]. (API) Build API Server (or mock)
-    → implement query and mutation
+    ▶️  implement query and mutation
 
   [3-2]. (UI) API Communication code
          (UI) JSON Binding code
-          → generate by GraphQL Schema
+          ▶️  generate by GraphQL Schema
          (UI) Apply UI component
-           ➡️ use js framework
+          ▶️  use js framework
 
+----------------------------------------
+-> # Compare <-
 
 [code first vs schema first](https://blog.logrocket.com/code-first-vs-schema-first-development-graphql/)
 [GraphQL Code-First and SDL-First, the Current Landscape in Mid-2019](https://dev.to/novvum/graphql-code-first-and-sdl-first-the-current-landscape-in-mid-2019-547h)
+
+
+個人の見解
+
+| Item        | GraphQL      | Rest               |
+| ----------- | ------------ | ------------------ |
+| Schema      | GraphQL      | OpenAPI(swagger)   |
+| API mock    | GraphQL tool | swagger or another |
+| Client Data | GraphQL tool | ???                |
+| Easy?       | same Rest    | same GraphQL       |
+
+----------------------------------------
+-> # 3. Demo
 
 ----------------------------------------
 -> # Make GraphQL API #1 <-
@@ -150,8 +179,8 @@ https://www.npmjs.com/package/@nuxtjs/markdownit
 setup
 
 * langs
-  * golang
-  * node
+  * golang (backend)
+  * node   (frontend)
 * libs
   * nuxt.js (js)
   * gqlgen  (golang)
@@ -159,40 +188,86 @@ setup
 ----------------------------------------
 -> # Make GraphQL API #2 <-
 
+いろいろ作り込まれちゃってます（サーセン）
 
 ```
-├── public   ... application distribution
+├── public   ... application distribution(嘘 WIP)
 ├── app      ... application code
 ├── ql       ... graphql & generated code
 └── spa      ... single page application
-    ├── components
     ├── layouts
-    ├── middleware
-    ├── plugins
-    └── pages
+    ├── plugins   ... apollo
+    └── pages     ... index.vue
 ```
 
-
-
 ----------------------------------------
--> # Server <-
+-> # Server Steps <-
+
+1. define graphql
+2. generate code
 
 
+```
+less gqlgen.yml
+github.com/99designs/gqlgen gen
+playground http://localhost:8080/playground
+DL SDL -> vscode
+```
 
 
 ----------------------------------------
 -> # UI <-
 
+1. write codegen.yml
+2. genrate code
+3. edit vue
+
+```
+npm run codegen
+```
+
+----------------------------------------
+-> # 3. Tips
 
 
 ----------------------------------------
 -> # つらみ <-
 
+Multiple Request
 - Error Handle
 - Transaction
 - DataLoader (N+1 Problem)
+
+Computed
 - Infra Scaleout
-- File Upload
+
+No Specification
+- File Upload  ... base64 and decode
 
 
 https://note.com/konpyu/n/nc4fd122644a1
+
+----------------------------------------
+
+- それぞれで、エラーとTransaction の単位どうするの？がある
+- N+1 がついてまわるので、query の設計を気をつける必要がある
+
+```
+ UserAgent -- query/mutation[] -+---> query/mutation #1
+  Request                       |
+                                |---> query/mutation #2
+                                |
+                                |---> query/mutation #3
+                                |
+                                `---> query/mutation #4
+```
+
+※ query と mutation の混在は仕様でNGになってます
+
+----------------------------------------
+-> # 4. Recap
+
+- サーバーサイドは Rest も GraphQL もあんまり変わらない
+  - GraphQL の方がクセがある感じ
+- フロントエンドは ちょっと便利感がある
+  - 型も守られているよ

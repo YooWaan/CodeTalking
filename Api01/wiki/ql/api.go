@@ -2,8 +2,8 @@ package ql
 
 import (
 	"context"
-	"log"
 	"encoding/json"
+	"log"
 
 	"note.mem/wiki/app"
 )
@@ -34,7 +34,10 @@ func WithBook(c context.Context) context.Context {
 func Search(c context.Context, path string) *Page {
 	book := Book(c)
 	note := book.Find(path)
-	return newPage(path, note)
+	return &Page{
+		Path: path,
+		Note: newNote(note),
+	}
 }
 
 func Tree(c context.Context, page *Page, depth *int) []*Page {
