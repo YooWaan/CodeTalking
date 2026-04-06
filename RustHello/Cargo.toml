@@ -1,0 +1,33 @@
+[package]
+name = "slidev-example"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rand = "0.10.0"
+
+
+[[bin]]
+name = "main-bin"
+path = "src/main.rs"
+
+[[bin]]
+name = "hello"
+path = "src/hello.rs"
+
+[[bin]]
+name = "bor"
+path = "src/borrow.rs"
+
+[[bin]]
+name = "bor2"
+path = "src/borrow-2.rs"
+
+[[bin]]
+name = "ex-trait"
+path = "src/trait.rs"
+
+
+[[bin]]
+name = "dice"
+path = "src/patterns.rs"

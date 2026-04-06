@@ -1,0 +1,25 @@
+[book]
+title = "Hello Rust"
+authors = ["Uncle Nobody"]
+language = "en"
+src = "pages"
+
+
+[rust]
+edition = "2024"
+
+[build]
+build-dir = "book"
+
+[output.html]
+additional-css = ["custom.css"]
+
+#[output.html.playpen]
+#editable = true
+#line-numbers = true
+
+#[preprocessor.svgbob]
+#renderers = ["html"]
+#background_color = "transparent"
+#class = "bob"
+
