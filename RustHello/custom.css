@@ -1,4 +1,9 @@
 
+.language-bash {
+    color: #DFDFDF;
+    background: #3A3A3A;
+    border-radius: 4px;
+}
 
 .red {
     color: coral;

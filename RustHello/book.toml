@@ -14,6 +14,15 @@ build-dir = "book"
 [output.html]
 additional-css = ["custom.css"]
 
+#[output.pdf]
+#margin-top = 0.5
+#margin-bottom = 0.5
+#margin-left = 0.5
+#margin-right = 0.5
+
+[output.html.print]
+enable = true
+
 #[output.html.playpen]
 #editable = true
 #line-numbers = true

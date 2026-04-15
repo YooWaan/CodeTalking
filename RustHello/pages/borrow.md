@@ -46,8 +46,6 @@ fn primitive_case() {
 ### Immutable and Mutable
 
 
-
-
 <kbd>Rust</kbd>
 
 <ul class="text-xs">
@@ -115,7 +113,17 @@ struct Number {
     }
 ```
 
+<kbd>Snippet Result</kbd>
 
+```bash
+❯ g++ -o bor1 ./borrow.cpp && ./bor1
+--- print_string:: --------------------------------------------------
+hi, ss: hello world
+hi, tmp: hello world
+ borrowed value is no there
+ ss => Stack addr: 0x7ff7bac4ec18, Heap addr: 0x1052b0660,value: hello world
+tmp => Stack addr: 0x7ff7bac4ec10, Heap addr: 0x1052b0660,value: hello world
+```
 
 ---
 
@@ -151,6 +159,29 @@ struct Number {
     }
 ```
 
+<kbd>Snippet Result</kbd>
+
+```bash
+❯ cargo run --bin bor2
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.03s
+     Running `target/debug/bor2`
+--- let Number:: --------------------------------------------------
+     let Number: 0x7ff7b56ff18c, Value: [0x7ff7b56ff18c]: 10
+Dropping Number [0x7ff7b56ff18c] with value: 10
+--- let mut Number:: --------------------------------------------------
+Mutable  Number: 0x7ff7b56ff21c, Value: [0x7ff7b56ff21c]: 25
+Mutable  Number: 0x7ff7b56ff21c, Value: [0x7ff7b56ff21c]: 35
+Dropping Number [0x7ff7b56ff21c] with value: 35
+--- RefCall Number with reference:: --------------------------------------------------
+Mutable  Number: 0x7ff7b56ff330, Value: [0x7ff7b56ff338]: 35
+Mutable  Number: 0x7ff7b56ff330, Value: [0x7ff7b56ff338]: 45
+Dropping Number [0x7ff7b56ff338] with value: 45
+--- Rc<Number>:: --------------------------------------------------
+Rc<Number>: 0x6000027851b0
+Rc<Number> Clone: 0x6000027851b0 40, Strong Count: 2
+Rc<Number> Clone: 0x6000027851b0 40, Strong Count: 2
+Dropping Number [0x6000027851b0] with value: 40
+```
 
 <kbd>C++</kbd>
 
@@ -183,4 +214,29 @@ struct Number {
         }
 
     }
+```
+
+
+<kbd>Snippet Result</kbd>
+
+```bash
+❯ g++ -o bor2 ./borrow-2.cpp && ./bor2
+--- const Number:: --------------------------------------------------
+Number:  [0x7ff7ba259c38] [value: 0x7ff7ba259c38] 10
+Destruct:[0x7ff7ba259c38] [value: 0x7ff7ba259c38] 10
+--- Number Variable:: --------------------------------------------------
+Number:  [0x7ff7ba259c28] [value: 0x7ff7ba259c28] 20
+Number:  [0x7ff7ba259c28] [value: 0x7ff7ba259c28] 25
+Number:  [0x7ff7ba259c28] [value: 0x7ff7ba259c28] 35
+Destruct:[0x7ff7ba259c28] [value: 0x7ff7ba259c28] 35
+--- unique ptr Number*:: --------------------------------------------------
+Number:  [0x60000342c010] [value: 0x60000342c010] 30
+Number:  [0x60000342c010] [value: 0x60000342c010] 35
+Number:  [0x60000342c010] [value: 0x60000342c010] 45
+Destruct:[0x60000342c010] [value: 0x60000342c010] 45
+--- shared ptr Number*:: --------------------------------------------------
+Shared_ptr<Number>: [0x600003620038] [value: 0x600003620038] 40, Use Count: 1
+Shared_ptr<Number> Clone: [0x600003620038] [value: 0x600003620038] 40, Use Count: 2
+Shared_ptr<Number> Clone: [0x600003620038] [value: 0x600003620038] 40, Use Count: 2
+Destruct:[0x600003620038] [value: 0x600003620038] 40
 ```

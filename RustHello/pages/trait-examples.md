@@ -77,6 +77,18 @@ fn main() {
 }
 ```
 
+<kbd>Snippet Result</kbd>
+
+```bash
+❯ cargo run --bin ex-trait
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/ex-trait`
+Display=Value { name: v1, num: 10 } value=v1, 10 ptr[0x7ff7b7edd1e0, 0x7ff7b7edd1e0, 0x7ff7b7edd1f8]
+Cloned value=v1, 10 ptr[0x7ff7b7edd320, 0x7ff7b7edd320, 0x7ff7b7edd338]
+pretty 1=Pretty { name: "p1", num: 30 } ptr[0x7ff7b7edd420, 0x7ff7b7edd420, 0x7ff7b7edd420, 0x7ff7b7edd430]
+pretty 2=Pretty { name: "p1", num: 30 } ptr[0x7ff7b7edd520, 0x7ff7b7edd520, 0x7ff7b7edd520, 0x7ff7b7edd530]
+```
+
 ---
 
 <kbd>Golang</kbd>
@@ -104,6 +116,7 @@ func main() {
 }
 ```
 
+<kbd>Snippet Result</kbd>
 
 ```bash
 ❯ go run snippets/trait.go

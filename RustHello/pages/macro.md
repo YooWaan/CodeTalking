@@ -43,3 +43,16 @@ mod tests {
     }
 }
 ```
+
+<kbd>Snippet Result</kbd>
+
+
+```bash
+❯ cargo test
+   Compiling xxx v0.1.0 ( ... RustHello)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.63s
+     Running unittests src/lib.rs (target/debug/deps/....)
+
+running 1 test
+test tests::test_add ... ok
+```

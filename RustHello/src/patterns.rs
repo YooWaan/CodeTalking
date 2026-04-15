@@ -76,6 +76,10 @@ fn show(head: Box<Dice>) -> String {
     s.join(", ")
 }
 
+fn get_at_3rd(head: Box<Dice>) -> Option<Number> {
+    Some(head.next?.next?.number)
+}
+
 fn main() {
     let hand = Hand::new();
     match hand.roll() {
@@ -88,5 +92,38 @@ fn main() {
             println!("Dices: {}", show(dice))
         }
         Err(e) => println!("Error: {}", e),
+    }
+
+    let dice1 = Box::new(Dice {
+        number: Number::One,
+        next: Some(Box::new(Dice {
+            number: Number::Two,
+            next: Some(Box::new(Dice {
+                number: Number::Three,
+                next: Some(Box::new(Dice {
+                    number: Number::Four,
+                    next: None,
+                })),
+            })),
+        })),
+    });
+
+    let dice2 = Box::new(Dice {
+        number: Number::One,
+        next: Some(Box::new(Dice {
+            number: Number::Two,
+            next: None,
+        })),
+    });
+
+    if let Some(n) = get_at_3rd(dice1) {
+        println!("3rd dice number: {:?}", n);
+    } else {
+        println!("3rd dice not found");
+    }
+    if let Some(n) = get_at_3rd(dice2) {
+        println!("3rd dice number: {:?}", n);
+    } else {
+        println!("3rd dice not found");
     }
 }
